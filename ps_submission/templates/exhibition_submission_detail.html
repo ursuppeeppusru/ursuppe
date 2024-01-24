@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+<div class="col-12">
+        <h3>{{ submission.artists }}</h3>
+</div>
+<div class="col-12">
+        <h1>{{ submission.project_title }}</h1>
+        <h2>{{ submission.subtitle }}</h2>
+    <br/>
+</div>
+<div class="col-12"></div>
+<div class="col-12">
+    <h5><b>INFORMATION</b></h5>
+    <br/>
+    <p><b>Artists:</b> {{ submission.artists }}</p>
+    <p><b>Curators:</b> {{ submission.curators }}</p>
+    <p><b>Type:</b> {{ submission.event_type }}</p>
+    <p><b>Location:</b> <a href="{{ submission.link_to_location }}">{{ submission.location }}</a></p>
+    <p><b>Dates:</b> {{ submission.exhibition_opening }} – {{ submission.exhibition_end }}</p>
+    <p><b>Photographer:</b> {{ submission.photographer }}</p>
+    <br/>
+</div>
+{% if submission.link_to_video %}
+<div class="col-12 text-center">
+    <div>
+    <h5><b>VIDEO</b></h5>
+    </div>
+    <br/>
+    <!-- Display existing images for the exhibition -->
+    <p><b>External link</b>: <a href="{{ submission.link_to_video }}">{{ submission.link_to_video }}</a></p>
+    <br/>
+</div>
+{% endif %}
+<div class="col-12">
+    <div>
+    <h5><b>IMAGES</b></h5>
+    </div>
+    <!-- Display existing images for the exhibition -->
+    <div class="image-container text-center">
+        {% for image in submission.images.all %}
+        <img class="submission-image-detail" src="{{ image.image.url }}" alt="{{ image.caption }}">
+        <div class="submission-image-caption">
+            <p><small>{{ image.caption }}</small></p>
+        </div>
+        <br/>
+        {% endfor %}
+    </div>
+</div>
+<div class="col-12">
+    <div>
+    <h5><b>TEXT</b></h5>
+    </div>
+    <br/>
+    <p class="submission-description">{{ submission.description }}</p>
+    <br/>
+    <p><b>Author:</b> {{ submission.text_author }}</p>
+</div>
+{% endblock content %}
+

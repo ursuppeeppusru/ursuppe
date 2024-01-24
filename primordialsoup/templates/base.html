@@ -1,0 +1,245 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %} - {{ current_site.site_name }}{% endif %}
+            {% endblock %}
+        </title>
+        {% if page.search_description %}
+        <meta name="description" content="{{ page.search_description }}" />
+        {% endif %}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Force all links in the live preview panel to be opened in a new tab #}
+        {% if request.in_preview_panel %}
+        <base target="_blank">
+        {% endif %}
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/chota.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/primordialsoup.css' %}">
+
+        {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body onload="startTime()">
+        {% wagtailuserbar %}
+
+        <header class="row">
+            <div class="col-9">
+                     <a href="/">
+                        <div class="rain-body">
+                            <div class="rain-container">
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rain">
+                                        <div class="drop"></div>
+                                        <div class="waves">
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                        <div class="splash"></div>
+                                        <div class="particles">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <!-- <img src="{% static 'svg/ursuppe-3-fill.svg' %}" /> -->
+                     </a>
+            </div>
+            <div class="col-3 text-right">
+                    <a href="/about"><p>An artist-run and power-defiant platform for contemporary art in Denmark</p></a>
+                    <br/>
+                    <a href="/search">
+                        <p><b>SEARCH</b></p>
+                        <hr/>
+                    </a>
+            </div>
+        </header>
+
+        <hr/>
+
+        <nav class="row nav-left">
+                <a href="{% url 'exhibition_list' %}">archive</a>
+                <a href="{% url 'exhibition_submission_create' %}">submit</a>
+        </nav>
+
+        <hr/>
+
+        <nav class="row nav-left">
+                <a href="{% url 'event_list' %}">events</a>
+                <a href="{% url 'calendar_submission_create' %}">submit</a>
+        </nav>
+
+        <hr/>
+
+        <div class="row content">
+        {% include 'messages.html' %}
+
+        {% block content %}{% endblock %}
+        </div>
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/primordialsoup.js' %}"></script>
+
+        {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+        <hr/>
+
+        <nav class="row nav-left">
+                <a href="/artists">artists</a>
+                <a href="/curators">curators</a>
+                <a href="/spaces">spaces</a>
+                <a href="/pinboard">pinboard</a>
+                <a href="/about">about</a>
+        </nav>
+
+        <hr/>
+
+        <footer class="row">
+            <div class="col-4">
+                2024 ursuppe. Licenses: GPL, CC4r.<br/><br/>
+
+                Ursuppe is hosted on a server running in a medicine cabinet on the re-configured network of Funen Art Academy, therefore the stability of ursuppe is in an extreme precarious state until 01/07/2024.
+            </div>
+            <div class="col-4 text-center"><div id="time"></div></div>
+            <div class="col-4 text-right">
+                <a href="https://www.instagram.com/ursuppeeppusru/">Instagram</a>
+            </div>
+        </footer>
+    </body>
+</html>
