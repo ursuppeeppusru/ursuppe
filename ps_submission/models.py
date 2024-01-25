@@ -37,7 +37,7 @@ class ExhibitionSubmission(models.Model):
         verbose_name="Exhibition End", help_text="e.g., 16/10/2023<br/>Required *", blank=False
     )
     description = models.TextField(
-        verbose_name="Text", help_text="Required *", blank=False
+        verbose_name="Text/Description/Press Release", help_text="Required *", blank=False
     )
     text_author = models.CharField(
         max_length=255, verbose_name="Text Author", help_text="Required *", blank=False

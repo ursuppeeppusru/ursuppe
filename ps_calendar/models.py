@@ -24,7 +24,13 @@ class CalendarSubmission(models.Model):
     )
     link_to_location = models.URLField(verbose_name="Link to Location", blank=True)
     location_address = models.TextField(
-        verbose_name="Location Address", help_text="Required *<br/><br/>Format:<br/>[street name] [street number], [town/city], [postcode], Denmark<br/><br/>Example:<br/>Halmtorvet 11D, København V, 1700, Denmark", blank=False
+        verbose_name="Location Address", help_text="Required *<br/><br/>Format:<br/>[street name] [street number], [town/city], [postcode], Denmark<br/><br/>Example:<br/>Halmtorvet 11D, København V, 1700, Denmark", blank=False, null=True
+    )
+    opening_hours = models.TextField(
+        verbose_name="Opening Hours", help_text="Required *<br/><br/>Format:<br/>[weekday(s) and interval]: [timeslot]<br/><br/>Examples:<br/>- Wednesday-Saturday, except Thursday: 16:00-20:00<br/>- Thursday, Friday: 19:00-22:00<br/>- By appointment, Saturday: 12:00-16:00<br/>- Wednesday-Friday: 16:00-20:00,<br/>  Saturday: 12:00-17:00,<br/>  Sunday: 12:00-14:00,<br/>  Closed from 30.12.23 until 06.01.24", blank=False, null=True
+    )
+    admission = models.CharField(
+        max_length=255, verbose_name="Admission", help_text="Required *<br/><br/>Format:<br/>[value] [valuta] or free<br/><br/>Examples:<br/>- 80 DKK<br/>- Free", blank=False, null=True
     )
     exhibition_opening = models.DateField(
         verbose_name="Exhibition Opening", help_text="eg. 2024-01-01 Required *", blank=False
