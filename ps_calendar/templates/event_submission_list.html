@@ -11,36 +11,35 @@
 {% block content %}
 
 <div class="col-12">
-    <h3>Events</h3>
+    <h5><b>EVENTS</b></h5><br/>
 </div>
 {% for submission in event_submissions %}
-<div class="col-4">
-<a href="">
-    <!-- <p>Artists: {{ submission.artists }}</p>
-    <p>Curators: {{ submission.curators }}</p>
-    <p>Location: {{ submission.location }}</p>
-    <p>Link to Location: <a href="{{ submission.link_to_location }}">{{ submission.link_to_location }}</a></p>
-    <p>Exhibition Opening: {{ submission.exhibition_opening }}</p>
-    <p>Exhibition End: {{ submission.exhibition_end }}</p>
-    <p>Description: {{ submission.description }}</p>
-    <p>Text Author: {{ submission.text_author }}</p>
-    <p>Photographer: {{ submission.photographer }}</p>
-    <p>Link to Video: <a href="{{ submission.link_to_video }}">{{ submission.link_to_video }}</a></p>
-    <p>Social Media Info: {{ submission.social_media_info }}</p>
-    <p>Email: {{ submission.email }}</p>
-    <p>Consent to Collect Info: {{ submission.get_consent_to_collect_info_display }}</p>
-    <p>Highlight: {{ submission.highlight }}</p> -->
-    <!-- Add other fields as needed -->
-
-    <!-- Display existing images for the exhibition -->
-    <div class="image-container-list">
-        <img class="submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+    <div class="col-4">
+        <h4>{{ submission.location }}</h4>
+        <p>{{ submission.location_address }}</p>
+        <br/>
+        <p><small><a href="{{ submission.link_to_location }}" target="_blank">{{ submission.link_to_location }}</a></small></p>
     </div>
-    <small>
-        <b>{{ submission.project_title }}</b>, {{ submission.artists }}, <i>{{ submission.exhibition_opening }}</i> 
-    </small>
-</a>
-</div>
+    <div class="col-4 text-center">
+        <p>{{ submission.artists }}</p>
+        <a class="event_project_title_link" href="#">
+            <h2 class="text-uppercase is-large event_project_title">{{ submission.project_title }}</h2>
+            <img class="event-submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+        </a>
+        <br/>
+        <p>Curated by {{ submission.curators }}</p>
+        <br/>
+        <p><small>{{ submission.event_type }}</small></p>
+    </div>
+    <div class="col-4 text-right">
+        <h4>{{ submission.exhibition_opening }} – {{ submission.exhibition_end }}</h4>
+        <br/>
+        <p>Opening hours:</p>
+        <p>{{ submission.opening_hours }}</p>
+        <br/>
+        <p><small>Admission:</small></p>
+        <p><small>{{ submission.admission }}</small></p>
+    </div>
 {% endfor %}
 
 {% endblock content %}

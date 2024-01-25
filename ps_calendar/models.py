@@ -13,6 +13,14 @@ class CalendarSubmission(models.Model):
     subtitle = models.CharField(
         max_length=255, verbose_name="Subtitle", blank=True
     )
+    event_type = models.CharField(
+        verbose_name="Type",
+        help_text="Required *",
+        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Screening", "Screening"), ("Other", "Other")],
+        default="Exhibition",
+        max_length=500,
+        blank=False
+    )
     artists = models.CharField(
         max_length=255, verbose_name="Artist(s)", help_text="Required *", blank=False
     )

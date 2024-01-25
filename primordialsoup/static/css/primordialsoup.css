@@ -199,13 +199,43 @@ img.submission-image-list:hover {
 
 }
 
+img.event-submission-image-list {
+    z-index: 1;
+    display: none;
+
+    opacity: 0.8;
+
+    position: fixed;
+    top: 25%;
+    left: 25%;
+
+    width: 50%;
+    height: auto;
+}
+
+a.event_project_title_link {
+    z-index: 2;
+}
+
+a.event_project_title_link>img { display: none; }
+a.event_project_title_link:hover>img { display: block; }
+
+h2.event_project_title:hover img.event-submission-image-list {
+    display: block;
+}
+
+/* detail */
+
 div.submission-image-detail-wrapper {
 
 }
 
-img.submission-image-detail {
-    max-height: 740px;
-    object-fit: contain;
+@media only screen and (min-width: 1028px) {
+    img.submission-image-detail {
+        max-width: 80%;
+        max-height: 900px;
+        object-fit: contain;
+    }
 }
 
 .submission-description {
@@ -233,13 +263,15 @@ img.submission-image-detail {
 
 /* ADD MORE CSS HERE */
 
-img.highlight-stars {
-    height: 50px;
+/* highlight index */
+
+div.events-highlight {
+
 }
 
 /* soup animation */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1028px) {
     .rain-body{
         overflow: hidden;
     }

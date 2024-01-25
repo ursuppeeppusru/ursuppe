@@ -19,6 +19,7 @@ class ExhibitionSubmission(models.Model):
         choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Screening", "Screening"), ("Other", "Other")],
         default="Exhibition",
         max_length=500,
+        blank=False
     )
     artists = models.CharField(
         max_length=255, verbose_name="Artist(s)", help_text="Required *", blank=False
@@ -102,6 +103,7 @@ class ExhibitionImages(models.Model):
     image = models.ImageField(
         upload_to=get_image_filename, 
         verbose_name="Exhibition Image",
-        validators=[validate_image_size, validate_image_extension]
+        validators=[validate_image_size, validate_image_extension],
+        max_length=500
     )
-    caption = models.CharField(max_length=255, verbose_name='Image Caption', help_text='Caption for the image', blank=False)
+    caption = models.CharField(max_length=1000, verbose_name='Image Caption', help_text='Caption for the image', blank=False)
