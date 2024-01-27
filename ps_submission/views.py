@@ -58,7 +58,7 @@ def exhibition_submission_create(request):
 
 def exhibition_list(request):
     # Only object which are marked as published
-    submissions = ExhibitionSubmission.objects.filter(published=True)
+    submissions = ExhibitionSubmission.objects.filter(published=True).order_by('-exhibition_end')
     return render(request, 'submission_list.html', {'submissions': submissions})
 
 def exhibition_submission_detail(request, submission_id, submission_project_title):
