@@ -11,34 +11,36 @@
 
 {% block content %}
 
-<div class="col-8">
-    <h5><b>SUBMIT EVENT</b></h5>
-    <br/>
-    <h5>If you would like to submit an event for our map please fill out our form below. Critera for submissions is that the event is being held in Denmark or with artists whom resides in Denmark, and that the information aligns with the IRL dates of the event. When you submit the event, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
-  <br>
-  </h5>
-</div>
-<div class="col-4">
-    <h5><b>DISCLAIMER</b></h5><br/>
-    <h5>ursuppe does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5><br/>
-    <h5>ursuppe encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, and other sociopolitical markers.</h5>
-</div>
-
-<div class="col-12"><br/></div>
-
-<div class="col-12">
-  <form method="post" enctype="multipart/form-data" class="calendar-form">
-
-    {% csrf_token %}
-    {{ submission_form.as_p }}
-    
-    {{ formset.management_form }}
-    {% for form in formset %}
-      {{ form.as_table }}
+<div class="row content">
+  <div class="col-8">
+      <h5><b>SUBMIT EVENT</b></h5>
       <br/>
-    {% endfor %}
+      <h5>If you would like to submit an event for our map please fill out our form below. Critera for submissions is that the event is being held in Denmark or with artists whom resides in Denmark, and that the information aligns with the IRL dates of the event. When you submit the event, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
+    <br>
+    </h5>
+  </div>
+  <div class="col-4">
+      <h5><b>DISCLAIMER</b></h5><br/>
+      <h5>ursuppe does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5><br/>
+      <h5>ursuppe encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, and other sociopolitical markers.</h5>
+  </div>
 
-    <button type="submit" class="btn-submit">Submit event</button>
-  </form>
+  <div class="col-12"><br/></div>
+
+  <div class="col-12">
+    <form method="post" enctype="multipart/form-data" class="calendar-form">
+
+      {% csrf_token %}
+      {{ submission_form.as_p }}
+      
+      {{ formset.management_form }}
+      {% for form in formset %}
+        {{ form.as_table }}
+        <br/>
+      {% endfor %}
+
+      <button type="submit" class="btn-submit">Submit event</button>
+    </form>
+  </div>
 </div>
 {% endblock content %}

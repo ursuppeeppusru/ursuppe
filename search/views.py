@@ -4,7 +4,10 @@ from django.template.response import TemplateResponse
 from wagtail.models import Page
 from wagtail.search.models import Query
 
-# from ps_submission.models import ExhibitionSubmission
+from django.db.models import Q
+
+from ps_submission.models import ExhibitionSubmission
+from ps_calendar.models import CalendarSubmission
 
 def search(request):
     search_query = request.GET.get("query", None)
@@ -12,14 +15,19 @@ def search(request):
 
     # Search
     if search_query:
-        # exhibition_search_results = ExhibitionSubmission.objects.filter(name__contains=search_query)
+        
+        archive_results = ExhibitionSubmission.objects.filter(Q(project_title__icontains=search_query) | Q(subtitle__icontains=search_query) | Q(artists__icontains=search_query) | Q(curators__icontains=search_query) | Q(location__icontains=search_query) | Q(photographer__icontains=search_query)).order_by('-exhibition_end')
+        events_results = CalendarSubmission.objects.filter(Q(project_title__icontains=search_query) | Q(subtitle__icontains=search_query) | Q(artists__icontains=search_query) | Q(curators__icontains=search_query) | Q(location__icontains=search_query)).order_by('-exhibition_opening')
         search_results = Page.objects.live().search(search_query)
+        
         query = Query.get(search_query)
 
         # Record hit
         query.add_hit()
     else:
         search_results = Page.objects.none()
+        archive_results = ExhibitionSubmission.objects.none()
+        events_results = CalendarSubmission.objects.none()
 
     # Pagination
     paginator = Paginator(search_results, 10)
@@ -34,8 +42,9 @@ def search(request):
         request,
         "search/search.html",
         {
-            # "exhibition_search_results": exhibition_search_results,
             "search_query": search_query,
             "search_results": search_results,
+            "archive_results": archive_results,
+            "events_results": events_results,
         },
     )

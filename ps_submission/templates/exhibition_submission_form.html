@@ -95,64 +95,63 @@
     // Return the count of matching elements
     return elements.length;
   }
-
-  
-  
   </script>
-  <div class="col-8">
-    <h5><b>SUBMIT ARCHIVE</b></h5>
-    <br/>
-    <h5>If you would like to submit an exhibition for our archive please fill out our form below. Critera for submissions is that the exhibition has been held in Denmark or with artists whom resides in Denmark, that you have the rights to publish the exhibition, and that the exhibition is well-documented*. When you submit the exhibition, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
-  <br>
-  <br>
-  * Well-documented means:<br>
-  - A minimum of 5 images and a maximum of 20 images.<br>
-  - Images should have a minimum of 150 dpi and 2000px in width, and a maximum of 3 mb per image.<br>
-  - Allowed image file extensions are: png, jpg, jpeg, webp.<br>
-  - Remember to credit artist(s) and photographer(s) in captions. <br>
-  <br>
-Please note, we do not have the capacity to correct errors, typos, rearrange images etc. after your submission has been published. If you find an error in your post, please re-submit, and we will delete the previous post.
-  </h5>
-</div>
-<div class="col-4">
-    <h5><b>DISCLAIMER</b></h5><br/>
-    <h5>ursuppe does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5><br/>
-    <h5>ursuppe encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, and other sociopolitical markers.</h5>
-</div>
+  <div class="row content">
+    <div class="col-8">
+      <h5><b>SUBMIT ARCHIVE</b></h5>
+      <br/>
+      <h5>If you would like to submit an exhibition for our archive please fill out our form below. Critera for submissions is that the exhibition has been held in Denmark or with artists whom resides in Denmark, that you have the rights to publish the exhibition, and that the exhibition is well-documented*. When you submit the exhibition, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
+    <br>
+    <br>
+    * Well-documented means:<br>
+    - A minimum of 5 images and a maximum of 20 images.<br>
+    - Images should have a minimum of 150 dpi and 2000px in width, and a maximum of 3 mb per image.<br>
+    - Allowed image file extensions are: png, jpg, jpeg, webp.<br>
+    - Remember to credit artist(s) and photographer(s) in captions. <br>
+    <br>
+  Please note, we do not have the capacity to correct errors, typos, rearrange images etc. after your submission has been published. If you find an error in your post, please re-submit, and we will delete the previous post.
+    </h5>
+  </div>
+  <div class="col-4">
+      <h5><b>DISCLAIMER</b></h5><br/>
+      <h5>ursuppe does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5><br/>
+      <h5>ursuppe encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, and other sociopolitical markers.</h5>
+  </div>
 
-<div class="col-12"><br/></div>
+  <div class="col-12"><br/></div>
 
-<div class="col-12">
-  <form method="post" enctype="multipart/form-data" class="exhibition-form">
-    
-    {% if errors %}
-      <div class="error-message">
-          <p>Please fix the following errors:</p>
-          <ul>
-              {% for field, error in errors.items %}
-               <li>{{ field }}: {{ error }}</li>    
-              {% endfor %}
-          </ul>
+  <div class="col-12">
+    <form method="post" enctype="multipart/form-data" class="exhibition-form">
+      
+      {% if errors %}
+        <div class="error-message">
+            <p>Please fix the following errors:</p>
+            <ul>
+                {% for field, error in errors.items %}
+                 <li>{{ field }}: {{ error }}</li>    
+                {% endfor %}
+            </ul>
+        </div>
+      {% endif %}
+
+      {% csrf_token %}
+      {{ submission_form.as_p }}
+      
+      {{ formset.management_form }}
+      Images:<br/><br/>
+      <small>For image criteria please refer to the description of well-documented* above.</small><br/><br/>
+      <!-- Image field container -->
+      <div id="imageFieldsContainer">
+        <!-- Initially, there are no image fields here -->
       </div>
-    {% endif %}
 
-    {% csrf_token %}
-    {{ submission_form.as_p }}
+      <!-- Button to add image field -->
+      <button type="button" onclick="addImageField()" id="addImageClick">Add more images +</button>
+      <br/><br/>
+      <button type="submit" class="btn-submit">Submit exhibition</button>
+    </form>
     
-    {{ formset.management_form }}
-    Images:<br/><br/>
-    <small>For image criteria please refer to the description of well-documented* above.</small><br/><br/>
-    <!-- Image field container -->
-    <div id="imageFieldsContainer">
-      <!-- Initially, there are no image fields here -->
-    </div>
-
-    <!-- Button to add image field -->
-    <button type="button" onclick="addImageField()" id="addImageClick">Add more images +</button>
-    <br/><br/>
-    <button type="submit" class="btn-submit">Submit exhibition</button>
-  </form>
-  
+   </div>
  </div>
 
 <script>

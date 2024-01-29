@@ -10,60 +10,61 @@
 
 {% block content %}
 
-<div class="col-10">
-    <h3>Archive highlight</h3>
-    <br/>
-    {% for submission in highlighted_submissions %}
-    <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
-        <!-- <p>Artists: {{ submission.artists }}</p>
-        <p>Curators: {{ submission.curators }}</p>
-        <p>Location: {{ submission.location }}</p>
-        <p>Link to Location: <a href="{{ submission.link_to_location }}">{{ submission.link_to_location }}</a></p>
-        <p>Exhibition Opening: {{ submission.exhibition_opening }}</p>
-        <p>Exhibition End: {{ submission.exhibition_end }}</p>
-        <p>Description: {{ submission.description }}</p>
-        <p>Text Author: {{ submission.text_author }}</p>
-        <p>Photographer: {{ submission.photographer }}</p>
-        <p>Link to Video: <a href="{{ submission.link_to_video }}">{{ submission.link_to_video }}</a></p>
-        <p>Social Media Info: {{ submission.social_media_info }}</p>
-        <p>Email: {{ submission.email }}</p>
-        <p>Consent to Collect Info: {{ submission.get_consent_to_collect_info_display }}</p>
-        <p>Highlight: {{ submission.highlight }}</p> -->
-        <!-- Add other fields as needed -->
+<div class="row content">
+    <div class="col-10">
+        <h5><b>ARCHIVE HIGHLIGHTS</b></h5><br/>
+        {% for submission in highlighted_submissions %}
+        <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
+            <!-- <p>Artists: {{ submission.artists }}</p>
+            <p>Curators: {{ submission.curators }}</p>
+            <p>Location: {{ submission.location }}</p>
+            <p>Link to Location: <a href="{{ submission.link_to_location }}">{{ submission.link_to_location }}</a></p>
+            <p>Exhibition Opening: {{ submission.exhibition_opening }}</p>
+            <p>Exhibition End: {{ submission.exhibition_end }}</p>
+            <p>Description: {{ submission.description }}</p>
+            <p>Text Author: {{ submission.text_author }}</p>
+            <p>Photographer: {{ submission.photographer }}</p>
+            <p>Link to Video: <a href="{{ submission.link_to_video }}">{{ submission.link_to_video }}</a></p>
+            <p>Social Media Info: {{ submission.social_media_info }}</p>
+            <p>Email: {{ submission.email }}</p>
+            <p>Consent to Collect Info: {{ submission.get_consent_to_collect_info_display }}</p>
+            <p>Highlight: {{ submission.highlight }}</p> -->
+            <!-- Add other fields as needed -->
 
-        <!-- Display existing images for the exhibition -->
-        <div class="image-container-list">
-            <img class="submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
-        </div>
-        <small>
-            <b>{{ submission.project_title }}</b>, {{ submission.artists }}, <i>{{ submission.exhibition_opening }}</i>
-        </small>
-    </a>
-    <br/><br/>
-    {% endfor %}
-</div>
+            <!-- Display existing images for the exhibition -->
+            <div class="image-container-list">
+                <img class="submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+            </div>
+            <small>
+                <b>{{ submission.project_title }}</b>, {{ submission.artists }}, <i>{{ submission.exhibition_opening }}</i>
+            </small>
+        </a>
+        <br/><br/>
+        {% endfor %}
+    </div>
 
-<div class="col-2 text-right events-highlight">
-    <h3>Events highlight</h3>
-    <br/>
-    <!-- calendar highlights goes here -->
-    {% for event_submission in highlighted_event_submissions %}
-    <a href="">
-        <!-- Display existing images for the exhibition -->
-        <p>{{ event_submission.project_title }}</p>
-        <p>{{ event_submission.artists }}</p>
-        <p>{{ event_submission.curators }}</p>
+    <div class="col-2 text-right events-highlight">
+        <h5><b>EVENT HIGHLIGHTS</b></h5><br/>
         <br/>
-        <p>{{ event_submission.type }}</p>
-        <p>{{ event_submission.location }}</p>
-        <p>{{ event_submission.location_address }}</p>
-        <br/>
-        <p>{{ event_submission.exhibition_opening }} – {{ event_submission.exhibition_end }}</p>
-        <p>{{ event_submission.opening_hours }}</p>
-        <p>{{ event_submission.admission }}</p>
+        <!-- calendar highlights goes here -->
+        {% for event_submission in highlighted_event_submissions %}
+        <a href="">
+            <!-- Display existing images for the exhibition -->
+            <p>{{ event_submission.project_title }}</p>
+            <p>{{ event_submission.artists }}</p>
+            <p>{{ event_submission.curators }}</p>
+            <br/>
+            <p>{{ event_submission.type }}</p>
+            <p>{{ event_submission.location }}</p>
+            <p>{{ event_submission.location_address }}</p>
+            <br/>
+            <p>{{ event_submission.exhibition_opening }} – {{ event_submission.exhibition_end }}</p>
+            <p>{{ event_submission.opening_hours }}</p>
+            <p>{{ event_submission.admission }}</p>
 
-    </a>
-    {% endfor %}
+        </a>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
 
