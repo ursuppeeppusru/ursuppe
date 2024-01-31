@@ -5,6 +5,10 @@ from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 from django.utils.translation import gettext_lazy as _
 
+# GeoPy libraries
+from geopy.geocoders import Nominatim
+from decimal import Decimal
+
 
 class CalendarSubmission(models.Model):
     project_title = models.CharField(
@@ -28,12 +32,14 @@ class CalendarSubmission(models.Model):
         max_length=255, verbose_name="Curator(s)", help_text="Required *", blank=False
     )
     location = models.CharField(
-        max_length=255, verbose_name="Location", help_text="Required *", blank=False
+        max_length=255, verbose_name="Location name", help_text="Required *", blank=False
     )
-    link_to_location = models.URLField(verbose_name="Link to Location", blank=True)
-    location_address = models.TextField(
-        verbose_name="Location Address", help_text="Required *<br/><br/>Format:<br/>[street name] [street number], [town/city], [postcode], Denmark<br/><br/>Example:<br/>Halmtorvet 11D, København V, 1700, Denmark", blank=False, null=True
+    link_to_location = models.URLField(verbose_name="Location link/URL", help_text="URL e.g., https://ladder.dk", blank=True)
+    location_address = models.CharField(
+        max_length=1000, verbose_name="Location Address", help_text="Required *<br/><br/>Format:<br/>[street name] [street number], [town/city], [postcode], Denmark<br/><br/>Example:<br/>Halmtorvet 11D, København V, 1700, Denmark", blank=False, null=True
     )
+    latitude = models.DecimalField(verbose_name="Latitude", max_digits=18, decimal_places=10, null=True)
+    longitude = models.DecimalField(verbose_name="Longitude", max_digits=18, decimal_places=10, null=True)
     opening_hours = models.TextField(
         verbose_name="Opening Hours", help_text="Required *<br/><br/>Format:<br/>[weekday(s) and interval]: [timeslot]<br/><br/>Examples:<br/>- Wednesday-Saturday, except Thursday: 16:00-20:00<br/>- Thursday, Friday: 19:00-22:00<br/>- By appointment, Saturday: 12:00-16:00<br/>- Wednesday-Friday: 16:00-20:00,<br/>  Saturday: 12:00-17:00,<br/>  Sunday: 12:00-14:00,<br/>  Closed from 30.12.23 until 06.01.24", blank=False, null=True
     )
@@ -67,8 +73,12 @@ class CalendarSubmission(models.Model):
     slug = models.SlugField(max_length=255, unique=False, blank=True)
     
     def save(self, *args, **kwargs):
+        # Generate latitude longitude when saving the object
+        self.latitude, self.longitude = geocoder(self.location_address)
+
         # Generate a slug when saving the object
         self.slug = slugify(self.project_title)
+
         super().save(*args, **kwargs)
         
     def __str__(self):
@@ -80,6 +90,13 @@ class CalendarSubmission(models.Model):
                 _("Exhibition end date should not be before the opening date")
             )
 
+def geocoder(address):
+    # Add logic to try again if error from api and set blank if no return
+    geolocator = Nominatim(user_agent="ursuppe-geocoder")
+    location_variable = geolocator.geocode(address, country_codes=["dk"], exactly_one=False)
+    lat, lng = location_variable[0][1]
+
+    return Decimal(lat), Decimal(lng)
 
 def get_image_filename(instance, filename):
     calendar_title = instance.calendar.project_title
@@ -97,7 +114,6 @@ def validate_image_extension(value):
     extension = value.name.split('.')[-1].lower()
     if extension not in valid_extensions:
         raise ValidationError("Invalid file extension. Allowed extensions are: png, jpg, jpeg, webp.")
-
 
 class CalendarImages(models.Model):
     calendar = models.ForeignKey(
