@@ -11,7 +11,7 @@
     <div class="col-12">
     <h5><b>SEARCH</b></h5><br/>
     <form action="{% url 'search' %}" method="get">
-        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %} autofocus>
         <br/>
         <!-- <input type="submit" value="Search ursuppe" class="button-submit"> -->
         <button type="submit" class="btn-submit button-submit">Search ursuppe</button>
@@ -64,7 +64,9 @@
     <div class="col-12">
         <h5><b>EVENT(S) WAS FOUND</b></h5><br/>
     </div>
+</div>
     {% for submission in events_results %}
+    <div class="row content">
         <div class="col-4">
             <h4>{{ submission.location }}</h4>
             <p>{{ submission.location_address }}</p>
@@ -91,8 +93,12 @@
             <p><small>Admission:</small></p>
             <p><small>{{ submission.admission }}</small></p>
         </div>
+    </div>
+    {% if forloop.last == 0 %}
+       <hr/>
+       <br/><br/>
+    {% endif %}
     {% endfor %}
-</div>
 {% endif %}
 
 <!--

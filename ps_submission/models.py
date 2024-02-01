@@ -28,9 +28,9 @@ class ExhibitionSubmission(models.Model):
         max_length=255, verbose_name="Curator(s)", help_text="Required *", blank=False
     )
     location = models.CharField(
-        max_length=255, verbose_name="Location", help_text="Required *", blank=False
+        max_length=255, verbose_name="Location name", help_text="Required *", blank=False
     )
-    link_to_location = models.URLField(verbose_name="Link to Location", blank=True)
+    link_to_location = models.URLField(verbose_name="Location link/URL", help_text="URL e.g., https://ladder.dk", blank=True)
     exhibition_opening = models.DateField(
         verbose_name="Exhibition Opening", help_text="e.g., 14/10/2023<br/>Required *", blank=False
     )

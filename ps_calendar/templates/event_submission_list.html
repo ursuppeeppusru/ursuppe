@@ -44,6 +44,11 @@
         <p><small>{{ submission.admission }}</small></p>
     </div>
 </div>
+{% if forloop.last == 0 %}
+   <hr/>
+   <br/><br/>
+{% endif %}
+
 {% endfor %}
 
 {% endblock content %}
