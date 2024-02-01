@@ -11,6 +11,8 @@ __pycache__
 *.bak 
 
 # If you are using PyCharm # 
+.idea/
+.idea/*
 idea/
 idea/*
 

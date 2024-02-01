@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %} {{ event.project_title }} - Archive {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+<div class="row content">
+    <div class="col-12"></div>
+    <div class="col-4">
+        <h4>{{ event.location }}</h4>
+        <p>{{ event.location_address }}</p>
+        <br/>
+        <p><small><a href="{{ submission.link_to_location }}" target="_blank">{{ event.link_to_location }}</a></small></p>
+    </div>
+    <div class="col-4 text-center">
+        <p>{{ event.artists }}</p>
+        <a class="event_project_title_link" href="#">
+            <h2 class="text-uppercase is-large event_project_title">{{ event.project_title }}</h2>
+        </a>
+        <br/>
+        <p>Curated by {{ event.curators }}</p>
+        <br/>
+        <p><small>{{ event.event_type }}</small></p>
+    </div>
+    <div class="col-4 text-right">
+        <h4>{{ event.exhibition_opening }} – {{ event.exhibition_end }}</h4>
+        <br/>
+        <p>Opening hours:</p>
+        <p>{{ event.opening_hours }}</p>
+        <br/>
+        <p><small>Admission:</small></p>
+        <p><small>{{ event.admission }}</small></p>
+    </div>
+</div>
+<hr/>
+<br/>
+<div class="row content">
+    <div class="col-6">
+        <h5><b>IMAGE</b></h5>
+        <br/>
+        <img src="{{ event.images.all.0.image.url }}" alt="{{ event.images.all.0.image.caption }}">
+        <h6>
+            {{ event.images.all.0.caption }}
+        </h6>
+    </div>
+    <div class="col-6">
+        <h5><b>TEXT</b></h5>
+        <br/>
+        <h4>
+        {{ event.description }}
+        </h4>
+    </div>    
+</div>
+{% endblock content %}
