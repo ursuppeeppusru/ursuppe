@@ -11,7 +11,7 @@
     <div class="col-12">
     <h5><b>SEARCH</b></h5><br/>
     <form action="{% url 'search' %}" method="get">
-        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %} autofocus>
         <br/>
         <!-- <input type="submit" value="Search ursuppe" class="button-submit"> -->
         <button type="submit" class="btn-submit button-submit">Search ursuppe</button>

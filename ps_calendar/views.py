@@ -7,6 +7,8 @@ from django.contrib import messages
 
 from .models import CalendarSubmission
 
+from django.http import JsonResponse
+
 def calendar_submission_create(request):
     ImageFormSet = modelformset_factory(CalendarImages, form=CalendarImagesForm, extra=1)
 
@@ -40,3 +42,9 @@ def event_list(request):
     # Only object which are marked as published
     event_submissions = CalendarSubmission.objects.filter(published=True)
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
+
+def event_list_json(request):
+    # JSON
+    fields = ['slug', 'latitude', 'longitude']
+    event_submissions_json = CalendarSubmission.objects.filter(published=True).values()
+    return JsonResponse({"event_submissions_json": list(event_submissions_json)})

@@ -73,7 +73,7 @@ class CalendarSubmission(models.Model):
     slug = models.SlugField(max_length=255, unique=False, blank=True)
     
     def save(self, *args, **kwargs):
-        # Generate latitude longitude when saving the object
+        # Generate latitude longitude coordinates for the map when saving the object
         self.latitude, self.longitude = geocoder(self.location_address)
 
         # Generate a slug when saving the object
@@ -91,10 +91,14 @@ class CalendarSubmission(models.Model):
             )
 
 def geocoder(address):
-    # Add logic to try again if error from api and set blank if no return
     geolocator = Nominatim(user_agent="ursuppe-geocoder")
-    location_variable = geolocator.geocode(address, country_codes=["dk"], exactly_one=False)
-    lat, lng = location_variable[0][1]
+    
+    try:
+        place, (lat, lng) = geolocator.geocode(address, country_codes=["dk"], exactly_one=True)
+    except ValueError:
+        # print("Error: geocode failed on input %s with message %s"%(a, error_message))
+        # Instead of catching and printing the error, just set lat, lng to 0 and set later in admin
+        lat, lng = (0,0)
 
     return Decimal(lat), Decimal(lng)
 

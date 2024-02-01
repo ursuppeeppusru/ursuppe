@@ -16,8 +16,21 @@ def search(request):
     # Search
     if search_query:
         
-        archive_results = ExhibitionSubmission.objects.filter(Q(project_title__icontains=search_query) | Q(subtitle__icontains=search_query) | Q(artists__icontains=search_query) | Q(curators__icontains=search_query) | Q(location__icontains=search_query) | Q(photographer__icontains=search_query)).order_by('-exhibition_end')
-        events_results = CalendarSubmission.objects.filter(Q(project_title__icontains=search_query) | Q(subtitle__icontains=search_query) | Q(artists__icontains=search_query) | Q(curators__icontains=search_query) | Q(location__icontains=search_query)).order_by('-exhibition_opening')
+        archive_results = ExhibitionSubmission.objects.filter(published=True).filter(
+            Q(project_title__icontains=search_query) | 
+            Q(subtitle__icontains=search_query) | 
+            Q(artists__icontains=search_query) | 
+            Q(curators__icontains=search_query) | 
+            Q(location__icontains=search_query) | 
+            Q(photographer__icontains=search_query)) \
+            .order_by('-exhibition_end')
+        events_results = CalendarSubmission.objects.filter(published=True).filter(
+            Q(project_title__icontains=search_query) | 
+            Q(subtitle__icontains=search_query) | 
+            Q(artists__icontains=search_query) | 
+            Q(curators__icontains=search_query) | 
+            Q(location__icontains=search_query)) \
+            .order_by('-exhibition_opening')
         search_results = Page.objects.live().search(search_query)
         
         query = Query.get(search_query)
