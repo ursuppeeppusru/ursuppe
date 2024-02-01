@@ -12,7 +12,7 @@
 {% block content %}
 
 <div class="row content">
-    <div class="col-10">
+    <div class="col-9">
         <h5><b>ARCHIVE HIGHLIGHTS</b></h5><br/>
         {% for submission in highlighted_submissions %}
         <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
@@ -44,27 +44,28 @@
         {% endfor %}
     </div>
 
-    <div class="col-2 text-right events-highlight">
-        <h5><b>EVENT HIGHLIGHTS</b></h5><br/>
-        <br/>
-        <!-- calendar highlights goes here -->
-        {% for event_submission in highlighted_event_submissions %}
-        <a href="">
-            <!-- Display existing images for the exhibition -->
-            <p>{{ event_submission.project_title }}</p>
-            <p>{{ event_submission.artists }}</p>
-            <p>{{ event_submission.curators }}</p>
-            <br/>
-            <p>{{ event_submission.type }}</p>
-            <p>{{ event_submission.location }}</p>
-            <p>{{ event_submission.location_address }}</p>
-            <br/>
-            <p>{{ event_submission.exhibition_opening }} – {{ event_submission.exhibition_end }}</p>
-            <p>{{ event_submission.opening_hours }}</p>
-            <p>{{ event_submission.admission }}</p>
-
-        </a>
-        {% endfor %}
+    <div class="col-3 text-center events-highlight">
+        <div class="text-left">
+            <h5><b>EVENT HIGHLIGHTS</b></h5><br/>
+        </div>
+            <!-- calendar highlights goes here -->
+            {% for event_submission in highlighted_event_submissions %}
+            <a class="event_project_title_link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
+                <div class="events-highlight-card">
+                    <p>{{ event_submission.artists }}</p>
+                        <h2 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h2>
+                    <!-- <img class="stars" src="{% static 'image/stars.png' %}" /> -->
+                    <p><small>{{ event_submission.event_type }}</small></p>
+                    <br/>
+                    <p>Curated by {{ event_submission.curators }}</p>
+                    <br/>
+                    <h4>{{ event_submission.exhibition_opening }} – {{ event_submission.exhibition_end }}</h4>
+                    <br/>
+                    <h4>{{ event_submission.location }}</h4>
+                    <p><small>{{ event_submission.location_address }}</small></p>
+                </div>
+            </a>
+            {% endfor %}
     </div>
 </div>
 {% endblock content %}

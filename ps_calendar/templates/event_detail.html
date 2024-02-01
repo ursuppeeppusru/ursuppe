@@ -45,9 +45,7 @@
         <h5><b>IMAGE</b></h5>
         <br/>
         <img src="{{ event.images.all.0.image.url }}" alt="{{ event.images.all.0.image.caption }}">
-        <h6>
-            {{ event.images.all.0.caption }}
-        </h6>
+        <p><small>{{ event.images.all.0.caption }}</small></p>
     </div>
     <div class="col-6">
         <h5><b>TEXT</b></h5>

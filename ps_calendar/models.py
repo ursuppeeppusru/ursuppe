@@ -26,10 +26,10 @@ class CalendarSubmission(models.Model):
         blank=False
     )
     artists = models.CharField(
-        max_length=255, verbose_name="Artist(s)", help_text="Required *", blank=False
+        max_length=255, verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
     )
     curators = models.CharField(
-        max_length=255, verbose_name="Curator(s)", help_text="Required *", blank=False
+        max_length=255, verbose_name="Curator(s)", help_text="Required *<br/><br/>Divide multiple curators with comma (,)", blank=False
     )
     location = models.CharField(
         max_length=255, verbose_name="Location name", help_text="Required *", blank=False
@@ -47,10 +47,10 @@ class CalendarSubmission(models.Model):
         max_length=255, verbose_name="Admission", help_text="Required *<br/><br/>Format:<br/>[value] [valuta] or free<br/><br/>Examples:<br/>- 80 DKK<br/>- Free", blank=False, null=True
     )
     exhibition_opening = models.DateField(
-        verbose_name="Exhibition Opening", help_text="eg. 2024-01-01 Required *", blank=False
+        verbose_name="Exhibition Opening", help_text="Required*<br/><br/>e.g., 14/10/2023", blank=False
     )
     exhibition_end = models.DateField(
-        verbose_name="Exhibition End",  help_text="eg. 2024-01-02 Required *", blank=False
+        verbose_name="Exhibition End",  help_text="Required*<br/><br/>e.g., 16/10/2023", blank=False
     )
     description = models.TextField(
         verbose_name="Text/Description/Press Release", help_text="Required *", blank=False

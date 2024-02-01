@@ -78,6 +78,10 @@ header img.logo {
 
 }
 
+img.stars {
+    width: 40px;
+}
+
 /* nav */
 
 nav {
@@ -267,6 +271,20 @@ div.submission-image-detail-wrapper {
 
 div.events-highlight {
 
+}
+
+div.events-highlight-card {
+    position: relative;
+    border: 2px solid black;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+div.events-highlight-card img.stars {
+    position: absolute;
+    width: 40px;
+    top: 15px;
+    right: 15px;
 }
 
 /* soup animation */
