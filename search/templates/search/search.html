@@ -75,7 +75,7 @@
         </div>
         <div class="col-4 text-center">
             <p>{{ submission.artists }}</p>
-            <a class="event_project_title_link" href="#">
+            <a class="event_project_title_link" href="{% url 'event_detail' event_id=submission.id event_project_title=submission.slug %}">
                 <h2 class="text-uppercase is-large event_project_title">{{ submission.project_title }}</h2>
                 <img class="event-submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
             </a>
