@@ -14,9 +14,11 @@
 <div class="row content">
     <div class="col-12">
         <h5><b>LOCATIONS</b></h5><br/>
+        <p><small>This is a generated list in alphabetical order.</small></p><br/>
 
-        {{ list }}
-
+        {% for location in list %}
+        <a href="/search/?query={{ location }}"><h3>{{ location }}</h3></a>
+        {% endfor %}
     </div>
 </div>
 {% endblock content %}

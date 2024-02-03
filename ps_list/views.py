@@ -32,6 +32,7 @@ def compile_list(list_type):
     combined = list(chain(submissions, events))
 
     result = []
+    # loop through, split by comma and join into one list
     for i in combined:
         if ',' in i[list_type]:
             i_split_by_comma = i[list_type].split(',')
@@ -41,6 +42,8 @@ def compile_list(list_type):
 
     result = trim_whitespaces(result)
     result = unique(result)
+    # sort alphabetically
+    result = sorted(result,key=str.lower)
 
     return result
 

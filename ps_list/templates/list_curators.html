@@ -14,9 +14,11 @@
 <div class="row content">
     <div class="col-12">
         <h5><b>CURATORS</b></h5><br/>
+        <p><small>This is a generated list in alphabetical order.</small></p><br/>
 
-        {{ list }}
-
+        {% for curator in list %}
+        <a href="/search/?query={{ curator }}"><h3>{{ curator }}</h3></a>
+        {% endfor %}
     </div>
 </div>
 {% endblock content %}
