@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Artists {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+    <div class="col-12">
+        <h5><b>ARTISTS</b></h5><br/>
+
+        {{ list }}
+
+    </div>
+</div>
+{% endblock content %}
+

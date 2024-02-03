@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # primordialsoup apps
     "ps_calendar",
     "ps_submission",
+    "ps_list",
     # other apps
     "home",
     "search",
