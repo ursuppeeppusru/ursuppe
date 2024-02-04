@@ -62,11 +62,11 @@
 {% if events_results %}
 <div class="row content">
     <div class="col-12">
-        <h5><b>EVENT(S) WAS FOUND</b></h5><br/>
+        <h5><b>EVENT(S) WAS FOUND</b></h5>
     </div>
 </div>
     {% for submission in events_results %}
-    <div class="row content">
+    <div class="row content events-list-card">
         <div class="col-4">
             <h4>{{ submission.location }}</h4>
             <p>{{ submission.location_address }}</p>
@@ -94,10 +94,12 @@
             <p><small>{{ submission.admission }}</small></p>
         </div>
     </div>
+    <!--
     {% if forloop.last == 0 %}
        <hr/>
        <br/><br/>
     {% endif %}
+    -->
     {% endfor %}
 {% endif %}
 

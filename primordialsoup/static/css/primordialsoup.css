@@ -225,6 +225,14 @@ div.events-detail-card {
     div.events-list-card div.text-right {
         text-align: center;
     }
+
+    div.events-detail-card {
+        text-align: center;
+    }
+
+    div.events-detail-card div.text-right {
+        text-align: center;
+    }
 }
 
 
