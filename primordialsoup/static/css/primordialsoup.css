@@ -243,10 +243,10 @@ img.event-submission-image-list {
     opacity: 0.8;
 
     position: fixed;
-    top: 10%;
-    left: 32.5%;
+    top: 15%; 
+    left: 35%;
 
-    width: 500px;
+    width: 30%;
 }
 
 a.event_project_title_link {
