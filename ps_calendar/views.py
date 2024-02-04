@@ -4,10 +4,10 @@ from django.forms import modelformset_factory
 from .forms import CalendarSubmissionForm, CalendarImagesForm
 from .models import CalendarImages
 from django.contrib import messages
+from django.utils import timezone
+from django.http import JsonResponse
 
 from .models import CalendarSubmission
-
-from django.http import JsonResponse
 
 
 def calendar_submission_create(request):
@@ -39,15 +39,19 @@ def calendar_submission_create(request):
         'formset': formset,
     })
 
+def today():
+    today = timezone.now().date()
+    return today
+
 def event_list(request):
-    # Only object which are marked as published
-    event_submissions = CalendarSubmission.objects.filter(published=True)
+    # Only objects which are marked as published and where end date has not exceeded
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today())
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
 
 def event_list_json(request):
     # JSON
-    fields = ['slug', 'latitude', 'longitude']
-    event_submissions_json = CalendarSubmission.objects.filter(published=True).values()
+    # fields = ['slug', 'latitude', 'longitude']
+    event_submissions_json = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).values()
     return JsonResponse({"event_submissions_json": list(event_submissions_json)})
 
 def event_detail(request, event_id, event_project_title):
