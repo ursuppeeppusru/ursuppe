@@ -34,7 +34,7 @@ body {
 }
 
 hr {
-  border: 0.80px solid #000;
+  border: 1px solid #000;
   width: 100%;
 }
 
@@ -203,6 +203,24 @@ img.submission-image-list:hover {
 
 }
 
+div.events-list-card {
+    position: relative;
+    border: 2px solid black;
+    margin: 0 20px 20px 20px;
+    padding: 20px 10px 10px 10px;
+}
+
+@media only screen and (max-width: 599px) {
+    div.events-list-card {
+        text-align: center;
+    }
+
+    div.events-list-card div.text-right {
+        text-align: center;
+    }
+}
+
+
 img.event-submission-image-list {
     z-index: 1;
     display: none;
@@ -210,15 +228,15 @@ img.event-submission-image-list {
     opacity: 0.8;
 
     position: fixed;
-    top: 25%;
-    left: 25%;
+    top: 10%;
+    left: 32.5%;
 
-    width: 50%;
-    height: auto;
+    width: 500px;
 }
 
 a.event_project_title_link {
-    z-index: 2;
+    position: relative;
+    z-index: 99;
 }
 
 a.event_project_title_link>img { display: none; }
@@ -264,8 +282,6 @@ div.submission-image-detail-wrapper {
     /* margin-bottom: 20px; */
     width: 100% !important;
 }
-
-/* ADD MORE CSS HERE */
 
 /* highlight index */
 
