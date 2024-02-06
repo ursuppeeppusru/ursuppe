@@ -48,6 +48,11 @@ def event_list(request):
     event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today())
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
 
+def event_list_past(request):
+    # Only objects which are marked as published and where end date has exceeded
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lte=today())
+    return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
+
 def event_list_json(request):
     # JSON
     # fields = ['slug', 'latitude', 'longitude']

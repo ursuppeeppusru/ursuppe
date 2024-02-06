@@ -29,7 +29,7 @@ def exhibition_submission_create(request):
 
                 # Add more logic here if needed, such as redirecting to a success page.
                 messages.success(request, "Thank you for submitting your archive to ursuppe. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By submitting your archive you have also accepted the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media.")
-                return redirect('/')
+                return redirect('/archive')
             else:
                 messages.error(request, "There must be a minimum of 5 images and a maximum 20 images submitted. Please re-submit the form.")
         else:
