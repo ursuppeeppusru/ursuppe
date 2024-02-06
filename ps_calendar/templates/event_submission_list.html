@@ -16,6 +16,18 @@
         <h5><b>EVENTS</b></h5>
     </div>
 </div>
+
+<nav class="tabs text-uppercase is-full">
+        <a href="{% url 'event_list' %}">current</a>
+        <a href="{% url 'event_list_upcoming' %}">upcoming</a>
+        <a href="#">closing soon</a>
+        <a href="{% url 'event_list_past' %}">past</a>
+</nav>
+<nav class="tabs text-uppercase is-full">
+        <a href="{% url 'event_list' %}">list</a>
+        <a href="#">map</a>
+</nav>
+<br/>
 {% for submission in event_submissions %}
 <div class="row content events-list-card">
     <div class="col-4">

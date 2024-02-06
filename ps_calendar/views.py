@@ -43,20 +43,40 @@ def today():
     today = timezone.now().date()
     return today
 
+# Current events
 def event_list(request):
-    # Only objects which are marked as published and where end date has not exceeded
-    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today())
+    # Only objects which are marked as published, where end date has not exceeded and opening date has started
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__lte=today())
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
 
+# Upcoming events
+def event_list_upcoming(request):
+    # Only objects which are marked as published, where end date has not exceeded and opening date has NOT started
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__gte=today())
+    return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
+
+# Past events
 def event_list_past(request):
     # Only objects which are marked as published and where end date has exceeded
     event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lte=today())
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
 
-def event_list_json(request):
+def json_event_list(request):
     # JSON
     # fields = ['slug', 'latitude', 'longitude']
-    event_submissions_json = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).values()
+    event_submissions_json = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__lte=today()).values()
+    return JsonResponse({"event_submissions_json": list(event_submissions_json)})
+
+def json_event_list_upcoming(request):
+    # JSON
+    # fields = ['slug', 'latitude', 'longitude']
+    event_submissions_json = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__gte=today()).values()
+    return JsonResponse({"event_submissions_json": list(event_submissions_json)})
+
+def json_event_list_past(request):
+    # JSON
+    # fields = ['slug', 'latitude', 'longitude']
+    event_submissions_json = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lte=today()).values()
     return JsonResponse({"event_submissions_json": list(event_submissions_json)})
 
 def event_detail(request, event_id, event_project_title):

@@ -84,17 +84,23 @@ img.stars {
 
 /* nav */
 
-nav {
+nav.main {
   padding: 0 35px;
 }
 
-nav a {
+nav.main a {
   position: relative;
   font-size: 3rem;
   padding: 5px 20px 5px 0;
   color: black;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+/* tab */
+
+nav.tabs a.active {
+    font-weight: bold;
 }
 
 /* content */
