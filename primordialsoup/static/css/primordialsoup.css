@@ -267,6 +267,39 @@ div.submission-image-detail-wrapper {
 
 /* ADD MORE CSS HERE */
 
+
+/* leaflet map feature */
+#map { 
+    height: 580px;
+    width: 100%;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 0;
+    background: blueviolet;
+    color: white;
+    font-size: 14px;
+}
+
+.leaflet-popup-content {
+    margin: 5px;
+}
+
+.leaflet-popup-tip {
+    background: blueviolet;
+    display: none;
+} 
+
+.leaflet-popup-close-button {
+    display: none;
+}
+
+hr.map {
+    border: 0.80px solid #000;
+    width: 100%;
+    margin: 0;
+  }
+
 /* highlight index */
 
 div.events-highlight {

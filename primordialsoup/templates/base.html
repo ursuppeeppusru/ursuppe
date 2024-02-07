@@ -20,6 +20,9 @@
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/chota.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/primordialsoup.css' %}">
+        <!--leaflet style-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/>
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
@@ -187,14 +190,14 @@
 
         <nav class="row nav-left">
                 <a href="{% url 'exhibition_list' %}">archive</a>
-                <a href="{% url 'exhibition_submission_create' %}">submit</a>
+                <a class="submit" href="{% url 'exhibition_submission_create' %}">submit</a>
         </nav>
 
         <hr/>
 
         <nav class="row nav-left">
                 <a href="{% url 'event_list' %}">events</a>
-                <a href="{% url 'calendar_submission_create' %}">submit</a>
+                <a class="submit" href="{% url 'calendar_submission_create' %}">submit</a>
         </nav>
 
         <hr/>
@@ -205,12 +208,15 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/primordialsoup.js' %}"></script>
+        <!--leaflet.js MUST be loaded before local map, else 'L' is not defined-->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <!--local map-->
+        <script type="text/javascript" src="{% static 'js/map.js' %}"></script>
 
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}
 
-        <hr/>
 
         <nav class="row nav-left">
                 <a href="/artists">artists</a>
