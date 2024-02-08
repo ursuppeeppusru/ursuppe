@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} Locations {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+    <div class="col-12">
+        <h5><b>LOCATIONS</b></h5><br/>
+        <p><small>This is a generated list in alphabetical order.</small></p><br/>
+
+        {% for location in list %}
+        <a href="/search/?query={{ location }}"><h3>{{ location }}</h3></a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+

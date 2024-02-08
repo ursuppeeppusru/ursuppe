@@ -4,10 +4,10 @@ from django.forms import modelformset_factory
 from .forms import CalendarSubmissionForm, CalendarImagesForm
 from .models import CalendarImages
 from django.contrib import messages
+from django.utils import timezone
+from django.http import JsonResponse
 
 from .models import CalendarSubmission
-
-from django.http import JsonResponse
 
 
 def calendar_submission_create(request):
@@ -26,8 +26,8 @@ def calendar_submission_create(request):
                     image.save()
 
             # Add more logic here if needed, such as redirecting to a success page.
-            messages.success(request, "Thank you for submitting your exhibition!" )
-            return redirect('/')
+            messages.success(request, "Thank you for submitting your event to ursuppe. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By submitting your event you also accept the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media." )
+            return redirect('/events')
         else:
             messages.error(request, "Some error occurred while submitting. Please re-check your form.")
     else:
@@ -39,15 +39,33 @@ def calendar_submission_create(request):
         'formset': formset,
     })
 
+def today():
+    today = timezone.now().date()
+    return today
+
+# Current events
 def event_list(request):
-    # Only object which are marked as published
-    event_submissions = CalendarSubmission.objects.filter(published=True)
+    # Only objects which are marked as published, where end date has not exceeded and opening date has started
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__lte=today())
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
 
-def event_list_json(request):
+# Upcoming events
+def event_list_upcoming(request):
+    # Only objects which are marked as published, where end date has not exceeded and opening date has NOT started
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__gte=today())
+    return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
+
+# Past events
+def event_list_past(request):
+    # Only objects which are marked as published and where end date has exceeded
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lte=today())
+    return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
+
+# Current and upcoming events for map
+def json_event_list(request):
     # JSON
-    fields = ['slug', 'latitude', 'longitude']
-    event_submissions_json = CalendarSubmission.objects.filter(published=True).values()
+    # fields = ['slug', 'latitude', 'longitude']
+    event_submissions_json = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).values()
     return JsonResponse({"event_submissions_json": list(event_submissions_json)})
 
 def event_detail(request, event_id, event_project_title):

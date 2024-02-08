@@ -62,11 +62,11 @@
 {% if events_results %}
 <div class="row content">
     <div class="col-12">
-        <h5><b>EVENT(S) WAS FOUND</b></h5><br/>
+        <h5><b>EVENT(S) WAS FOUND</b></h5>
     </div>
 </div>
     {% for submission in events_results %}
-    <div class="row content">
+    <div class="row content events-list-card">
         <div class="col-4">
             <h4>{{ submission.location }}</h4>
             <p>{{ submission.location_address }}</p>
@@ -75,7 +75,7 @@
         </div>
         <div class="col-4 text-center">
             <p>{{ submission.artists }}</p>
-            <a class="event_project_title_link" href="#">
+            <a class="event_project_title_link" href="{% url 'event_detail' event_id=submission.id event_project_title=submission.slug %}">
                 <h2 class="text-uppercase is-large event_project_title">{{ submission.project_title }}</h2>
                 <img class="event-submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
             </a>
@@ -94,10 +94,12 @@
             <p><small>{{ submission.admission }}</small></p>
         </div>
     </div>
+    <!--
     {% if forloop.last == 0 %}
        <hr/>
        <br/><br/>
     {% endif %}
+    -->
     {% endfor %}
 {% endif %}
 

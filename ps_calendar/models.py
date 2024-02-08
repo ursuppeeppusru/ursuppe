@@ -95,10 +95,11 @@ def geocoder(address):
     
     try:
         place, (lat, lng) = geolocator.geocode(address, country_codes=["dk"], exactly_one=True)
-    except ValueError:
+    except:
         # print("Error: geocode failed on input %s with message %s"%(a, error_message))
         # Instead of catching and printing the error, just set lat, lng to 0 and set later in admin
         lat, lng = (0,0)
+        pass
 
     return Decimal(lat), Decimal(lng)
 

@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <title>
-            {% block title %}{% if title %}{{ title }}{% endif %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{% wagtail_site as current_site %}{% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}{% endblock %}
+            {% block title %}{% if title %}{{ title }}{% endif %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{% wagtail_site as current_site %}{% if current_site and current_site.site_name %} | {{ current_site.site_name }}{% endif %}{% endblock %}
         </title>
         {% if page.search_description %}
         <meta name="description" content="{{ page.search_description }}" />
@@ -188,14 +188,14 @@
 
         <hr/>
 
-        <nav class="row nav-left">
+        <nav class="row nav-left main">
                 <a href="{% url 'exhibition_list' %}">archive</a>
                 <a class="submit" href="{% url 'exhibition_submission_create' %}">submit</a>
         </nav>
 
         <hr/>
 
-        <nav class="row nav-left">
+        <nav class="row nav-left main">
                 <a href="{% url 'event_list' %}">events</a>
                 <a class="submit" href="{% url 'calendar_submission_create' %}">submit</a>
         </nav>
@@ -218,11 +218,11 @@
         {% endblock %}
 
 
-        <nav class="row nav-left">
-                <a href="/artists">artists</a>
-                <a href="/curators">curators</a>
-                <a href="/spaces">spaces</a>
-                <a href="/pinboard">pinboard</a>
+        <nav class="row nav-left main">
+                <a href="{% url 'list_artists' %}">artists</a>
+                <a href="{% url 'list_curators' %}">curators</a>
+                <a href="{% url 'list_locations' %}">locations</a>
+                <a href="#">pinboard</a>
                 <a href="/about">about</a>
         </nav>
 
