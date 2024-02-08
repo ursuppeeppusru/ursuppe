@@ -73,8 +73,10 @@ class CalendarSubmission(models.Model):
     slug = models.SlugField(max_length=255, unique=False, blank=True)
     
     def save(self, *args, **kwargs):
-        # Generate latitude longitude coordinates for the map when saving the object
-        self.latitude, self.longitude = geocoder(self.location_address)
+        # Only override for new events
+        if self.pk is None:
+            # Generate latitude longitude coordinates for the map when saving the object
+            self.latitude, self.longitude = geocoder(self.location_address)
 
         # Generate a slug when saving the object
         self.slug = slugify(self.project_title)
