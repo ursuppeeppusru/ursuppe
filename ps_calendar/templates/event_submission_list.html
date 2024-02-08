@@ -16,16 +16,15 @@
         <h5><b>EVENTS</b></h5>
     </div>
 </div>
-
 <nav class="tabs text-uppercase is-full">
-        <a href="{% url 'event_list' %}">current</a>
-        <a href="{% url 'event_list_upcoming' %}">upcoming</a>
-        <a href="#">closing soon</a>
-        <a href="{% url 'event_list_past' %}">past</a>
+        <a class="{% if request.path == '/events/' %}active{% endif %}" href="{% url 'event_list' %}">current</a>
+        <a class="{% if request.path == '/events/upcoming' %}active{% endif %}" href="{% url 'event_list_upcoming' %}">upcoming</a>
+        <a class="{% if request.path == '/events/closing-soon' %}active{% endif %}" href="{% url 'event_list_closing_soon' %}">closing soon</a>
+        <a class="{% if request.path == '/events/past' %}active{% endif %}" href="{% url 'event_list_past' %}">past</a>
 </nav>
 <nav class="tabs text-uppercase is-full">
-        <a href="{% url 'event_list' %}">list</a>
-        <a href="#">map</a>
+        <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
+        <a href="{% url 'event_map' %}">map ◯</a>
 </nav>
 <br/>
 {% for submission in event_submissions %}
