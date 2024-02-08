@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %} Events {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+    <div class="col-12">
+        <h5><b>EVENTS</b></h5>
+    </div>
+</div>
+<nav class="tabs text-uppercase is-full">
+        <a href="{% url 'event_list' %}">current</a>
+        <a href="{% url 'event_list_upcoming' %}">upcoming</a>
+        <a href="{% url 'event_list_closing_soon' %}">closing soon</a>
+        <a href="{% url 'event_list_past' %}">past</a>
+</nav>
+<nav class="tabs text-uppercase is-full">
+        <a href="{% url 'event_list' %}">list</a>
+        <a class="active" href="{% url 'event_map' %}">map ◯</a>
+</nav>
+<br/>
+
+<!-- map -->
+
+{% endblock content %}
+

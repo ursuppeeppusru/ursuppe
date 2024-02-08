@@ -63,12 +63,16 @@ def event_list_past(request):
     event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lte=today())
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
 
-# Closing soon (2 weeks) TODO
+# Closing soon (2 weeks)
 def event_list_closing_soon(request):
     # Only objects which are marked as published and where end date is between today and in two weeks
     today_plus_2w = today() + timedelta(weeks=2)
     event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__range=(today(), today_plus_2w))
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
+
+# map
+def event_map(request):
+    return render(request, 'event_submission_map.html')
 
 # Current and upcoming events for map
 def json_event_list(request):

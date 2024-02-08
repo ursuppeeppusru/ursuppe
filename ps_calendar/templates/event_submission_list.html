@@ -24,11 +24,9 @@
 </nav>
 <nav class="tabs text-uppercase is-full">
         <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
-        <a href="#">map</a>
+        <a href="{% url 'event_map' %}">map ◯</a>
 </nav>
 <br/>
-<h1>{{ today_minus_2_weeks }}</h1>
-<h1>{{ today }}</h1>
 {% for submission in event_submissions %}
 <div class="row content events-list-card">
     <div class="col-4">
