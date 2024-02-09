@@ -12,8 +12,15 @@
 {% block content %}
 
 <div class="row content">
+    <a href="{% url 'event_map' %}">
+        <div class='circle-multiline'>
+        <span class="text-uppercase">map</span></br>
+        </div>
+    </a>
     <div class="col-9">
-        <h5><b>ARCHIVE HIGHLIGHTS</b></h5><br/>
+        <h5><b>ARCHIVE HIGHLIGHTS</b></h5>
+        <small>Sorted by end date</small>
+        <br/><br/>
         {% for submission in highlighted_submissions %}
         <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
             <!-- <p>Artists: {{ submission.artists }}</p>
@@ -46,7 +53,9 @@
 
     <div class="col-3 text-center events-highlight">
         <div class="text-left">
-            <h5><b>EVENT HIGHLIGHTS</b></h5><br/>
+            <h5><b>EVENT HIGHLIGHTS</b></h5>
+            <small>Current and upcoming</small>
+            <br/><br/>
         </div>
             <!-- calendar highlights goes here -->
             {% for event_submission in highlighted_event_submissions %}

@@ -310,6 +310,30 @@ div.submission-image-detail-wrapper {
 
 /* highlight index */
 
+div.circle-multiline {
+    position: absolute;
+    top: 503px;
+    right: 25px;
+    display: table-cell;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 2px black solid;
+    background: var(--bg-color);
+    z-index: 999999;
+    /* rotate: 30deg; */
+
+}
+
+div.circle-multiline span {
+    position: absolute;
+    top: 15px;
+    left: 8px;
+    font-size: 15px;
+}
+
 div.events-highlight {
 
 }
