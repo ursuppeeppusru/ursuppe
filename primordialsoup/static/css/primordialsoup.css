@@ -60,6 +60,20 @@ ul {
     font-weight: 400;
 }
 
+div.home p, 
+div.home h1,
+div.home h2,
+div.home h3,
+div.home h4,
+div.home h5 {
+    margin-bottom: 23px;
+    line-height: 23px;
+}
+
+div.home li {
+    line-height: 23px;
+}
+
 a {
   color: #000;
 }
