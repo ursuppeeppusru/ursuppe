@@ -117,6 +117,12 @@ nav.main a {
 
 /* tab */
 
+@media only screen and (max-width: 599px) {
+    nav.tabs a {
+        font-size: smaller;
+    }
+}
+
 nav.tabs a.active {
     font-weight: bold;
 }
@@ -327,7 +333,7 @@ div.submission-image-detail-wrapper {
 div.circle-multiline {
     position: absolute;
     top: 503px;
-    right: 25px;
+    right: 22px;
     display: table-cell;
     height: 50px;
     width: 50px;

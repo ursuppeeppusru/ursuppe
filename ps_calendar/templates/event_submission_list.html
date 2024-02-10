@@ -27,6 +27,7 @@
         <a href="{% url 'event_map' %}">map ◯</a>
 </nav>
 <br/>
+{% if event_submissions %}
 {% for submission in event_submissions %}
 <div class="row content events-list-card">
     <div class="col-4">
@@ -56,14 +57,12 @@
         <p><small>{{ submission.admission }}</small></p>
     </div>
 </div>
-<!-- 
-{% if forloop.last == 0 %}
-   <hr/>
-   <br/><br/>
-{% endif %}
--->
-
 {% endfor %}
+{% else %}
+<div class="row content">
+    <p>No event(s). Try another sorting method.</p>
+</div>
+{% endif %}
 
 {% endblock content %}
 
