@@ -279,23 +279,19 @@ img.event-submission-image-list {
     opacity: 0.8;
 
     position: fixed;
-    top: 15%; 
-    left: 35%;
-
-    width: 30%;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: 40%;
 }
 
-a.event_project_title_link {
+a.event-project-title-link {
     position: relative;
-    z-index: 99;
+    z-index: 9;
 }
 
-a.event_project_title_link>img { display: none; }
-a.event_project_title_link:hover>img { display: block; }
-
-h2.event_project_title:hover img.event-submission-image-list {
-    display: block;
-}
+a.event-project-title-link:hover~img.event-submission-image-list { display: block; }
 
 /* detail */
 
