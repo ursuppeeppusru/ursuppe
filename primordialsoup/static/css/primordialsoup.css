@@ -115,6 +115,12 @@ nav.main a {
   text-transform: uppercase;
 }
 
+@media only screen and (max-width: 599px) {
+    nav.main a {
+      font-size: 2.5rem;
+    }
+}
+
 /* tab */
 
 @media only screen and (max-width: 599px) {
@@ -330,6 +336,7 @@ div.submission-image-detail-wrapper {
 
 /* highlight index */
 
+/* map button */
 div.circle-multiline {
     position: absolute;
     top: 503px;
@@ -352,6 +359,20 @@ div.circle-multiline span {
     top: 15px;
     left: 7px;
     font-size: 15px;
+}
+
+@media only screen and (max-width: 599px) {
+    div.circle-multiline {
+        top: 495px;
+        right: 15px;
+    }
+}
+
+@media only screen and (max-width: 372px) {
+    div.circle-multiline {
+        top: 515px;
+        right: 10px;
+    }
 }
 
 div.events-highlight {

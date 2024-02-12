@@ -17,7 +17,7 @@
         <p><small>This is a generated list in alphabetical order.</small></p><br/>
 
         {% for location in list %}
-        <a href="/search/?query={{ location }}"><h3>{{ location }}</h3></a>
+        <a href="/search/?query={{ location }}"><small>{{ location.0 }}</small><h5>&emsp;&emsp;&emsp;&emsp;{{ location }}</h5></a>
         {% endfor %}
     </div>
 </div>

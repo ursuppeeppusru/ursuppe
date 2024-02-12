@@ -17,8 +17,9 @@
         <p><small>This is a generated list in alphabetical order.</small></p><br/>
 
         {% for artist in list %}
-        <a href="/search/?query={{ artist }}"><h3>{{ artist }}</h3></a>
+        <a href="/search/?query={{ artist }}"><small>{{ artist.0 }}</small><h5>&emsp;&emsp;&emsp;&emsp;{{ artist }}</h5></a>
         {% endfor %}
+
     </div>
 </div>
 {% endblock content %}

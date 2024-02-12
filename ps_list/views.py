@@ -26,6 +26,10 @@ def unique(list):
     return result
 
 
+def first_letter(self):
+        return self.name and self.name[0] or ''
+
+
 def compile_list(list_type):
     submissions = (ExhibitionSubmission.objects.filter(published=True).values(list_type))
     events = (CalendarSubmission.objects.filter(published=True).values(list_type))

@@ -17,7 +17,7 @@
         <p><small>This is a generated list in alphabetical order.</small></p><br/>
 
         {% for curator in list %}
-        <a href="/search/?query={{ curator }}"><h3>{{ curator }}</h3></a>
+        <a href="/search/?query={{ curator }}"><small>{{ curator.0 }}</small><h5>&emsp;&emsp;&emsp;&emsp;{{ curator }}</h5></a>
         {% endfor %}
     </div>
 </div>
