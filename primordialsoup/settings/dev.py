@@ -35,6 +35,20 @@ DATABASES = {
     }
 }
 
+# SITE CONFIG
+SITE_NAME=env('SITE_NAME')
+SITE_HEADER_TEXT=env('SITE_HEADER_TEXT')
+
+SOCIAL_MEDIA=env('SOCIAL_MEDIA')
+SOCIAL_MEDIA_URL=env('SOCIAL_MEDIA_URL')
+
+# Export to templates
+SETTINGS_EXPORT = [
+    'SITE_NAME',
+    'SITE_HEADER_TEXT',
+    'SOCIAL_MEDIA',
+    'SOCIAL_MEDIA_URL',
+]
 
 try:
     from .local import *

@@ -176,7 +176,7 @@
                      </a>
             </div>
             <div class="col-3 text-right">
-                    <a href="/about"><p>ursuppe is an artist-run and anti-authoritarian platform for contemporary art in Denmark</p></a>
+                    <a href="/about"><p>{{ settings.SITE_HEADER_TEXT }}</p></a>
                     <br/>
                     <a href="/search">
                         <p><b>SEARCH</b></p>
@@ -226,13 +226,13 @@
 
         <footer class="row">
             <div class="col-4">
-                2024 ursuppe. Licenses: GPL, CC4r.<br/><br/>
+                {% now 'Y' %} {{ settings.SITE_NAME }}. Licenses: CNPLv7<br/><br/>
 
                 Ursuppe is hosted on a server running in a medicine cabinet on the re-configured network of Funen Art Academy, therefore the stability of ursuppe is in an extreme precarious state until 01/07/2024.
             </div>
             <div class="col-4 text-center"><div id="time"></div></div>
             <div class="col-4 text-right">
-                <a href="https://www.instagram.com/ursuppeeppusru/">Instagram</a>
+                <a target="_blank" href="{{ settings.SOCIAL_MEDIA_URL }}">{{ settings.SOCIAL_MEDIA }}</a>
             </div>
         </footer>
     </body>
