@@ -12,12 +12,17 @@
 - python manage.py migrate
 - python manage.py createsuperuser
 - python manage.py runserver
+- create about page
 
 ## Cache
 
 - Redis
 - 1 hour default on all views except submit pages
 - How to configure
+
+## Styling
+
+- CSS :root variables
   
 ## License
 
