@@ -70,8 +70,10 @@ class ExhibitionSubmission(models.Model):
         self.slug = slugify(self.project_title)
         super().save(*args, **kwargs)
         
-        # Clear cache
-        cache.clear()
+        # Only clear cache from admin
+        if self._state.adding is False:
+            # Clear cache
+            cache.clear()
 
     def __str__(self):
         return self.project_title
