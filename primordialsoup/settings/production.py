@@ -39,6 +39,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': env('REDIS_URL'),  # Change this according to your Redis server's URL & port
+        'KEY_PREFIX': env('REDIS_PREFIX'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }

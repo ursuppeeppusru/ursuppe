@@ -3,6 +3,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
+from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 
 # GeoPy libraries
@@ -82,6 +83,9 @@ class CalendarSubmission(models.Model):
         self.slug = slugify(self.project_title)
 
         super().save(*args, **kwargs)
+        
+        # Clear cache
+        cache.clear()
         
     def __str__(self):
         return self.project_title

@@ -1,8 +1,8 @@
 # ps_list/views.py
 from django.shortcuts import render
-
-from itertools import chain
+from django.views.decorators.cache import cache_page
 from django.utils import timezone
+from itertools import chain
 
 from ps_submission.models import ExhibitionSubmission
 from ps_calendar.models import CalendarSubmission
@@ -76,25 +76,27 @@ def compile_list_current(list_type):
 
 
 # Index
+@cache_page(60 * 60)
 def list_artists(request):
     return render(request, 'list_artists.html', {'list': compile_list('artists')})
 
-
+@cache_page(60 * 60)
 def list_curators(request):
     return render(request, 'list_curators.html', {'list': compile_list('curators')})
 
-
+@cache_page(60 * 60)
 def list_locations(request):
     return render(request, 'list_locations.html', {'list': compile_list('location')})
 
+@cache_page(60 * 60)
 # Current and upcoming
 def list_current_artists(request):
     return render(request, 'list_artists.html', {'list': compile_list_current('artists')})
 
-
+@cache_page(60 * 60)
 def list_current_curators(request):
     return render(request, 'list_curators.html', {'list': compile_list_current('curators')})
 
-
+@cache_page(60 * 60)
 def list_current_locations(request):
     return render(request, 'list_locations.html', {'list': compile_list_current('location')})
