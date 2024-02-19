@@ -176,7 +176,9 @@
                      </a>
             </div>
             <div class="col-3 text-right">
-                    <a href="/about"><p>{{ settings.SITE_HEADER_TEXT }}</p></a>
+                    {% if settings.HEADER_TEXT %}
+                    <a href="/about"><p>{{ settings.HEADER_TEXT }}</p></a>
+                    {% endif %}
                     <br/>
                     <a href="/search">
                         <p><b>SEARCH</b></p>
@@ -227,10 +229,13 @@
         <footer class="row">
             <div class="col-4">
                 {% now 'Y' %} {{ settings.SITE_NAME }}. Licenses: CNPLv7<br/><br/>
-
-                Ursuppe is hosted on a server running in a medicine cabinet on the re-configured network of Funen Art Academy, therefore the stability of ursuppe is in an extreme precarious state until 01/07/2024.
             </div>
-            <div class="col-4 text-center"><div id="time"></div></div>
+            <div class="col-4 text-center">
+                <div id="time"></div>
+                {% if settings.FOOTER_TEXT %}
+                <br/><p class="text-center"><small>{{ settings.FOOTER_TEXT }}</small></p><br/>
+                {% endif %}
+            </div>
             <div class="col-4 text-right">
                 <a target="_blank" href="{{ settings.SOCIAL_MEDIA_URL }}">{{ settings.SOCIAL_MEDIA }}</a>
             </div>
