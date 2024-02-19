@@ -1,12 +1,12 @@
 /* Variables */
 :root {
-  --bg-color: #c4cf6a; /* #c4cf6a; #badc58; */
+  --bg-color: #c4cf6a;
   --bg-secondary-color: #f3f3f6;
-  --color-primary: black;
-  --color-secondary: green;
-  --color-lightGrey: black;
+  --color-primary: #000;
+  --color-secondary: #fff;
+  --color-lightGrey: #000;
   --color-grey: #747681;
-  --color-darkGrey: black;
+  --color-darkGrey: #000;
   --color-error: #d43939;
   --color-success: #000;
   --grid-maxWidth: 120rem;
@@ -75,7 +75,7 @@ div.home li {
 }
 
 a {
-  color: #000;
+  color: var(--color-primary);
 }
 
 a:hover {
@@ -110,7 +110,7 @@ nav.main a {
   position: relative;
   font-size: 3rem;
   padding: 5px 20px 5px 0;
-  color: black;
+  color: var(--color-primary);
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -181,7 +181,7 @@ label {
     background: var(--color-primary);
     border: 1px solid transparent;
     border-radius: 0px;
-    color: #fff;
+    color: var(--color-secondary);
     cursor: pointer;
     display: inline-block;
     font-size: var(--font-size);
@@ -199,7 +199,7 @@ label {
     background: var(--color-primary);
     border: 1px solid transparent;
     border-radius: 0px;
-    color: #fff;
+    color: var(--color-secondary);
     cursor: pointer;
     display: inline-block;
     font-size: var(--font-size);
@@ -566,7 +566,7 @@ div.events-highlight-card img.stars {
 .particles > div{
     position: absolute; 
     border-radius: 100%;
-    background-color: #3D2020;
+    background-color: var(--color-primary);
     animation-duration: var(--duration);
     animation-delay: var(--delay);
     animation-iteration-count: infinite;
