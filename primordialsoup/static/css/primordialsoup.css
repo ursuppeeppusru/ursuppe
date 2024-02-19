@@ -507,7 +507,7 @@ div.events-highlight-card img.stars {
     right: 0px;
     bottom: 0px;
     border-radius: 50%;
-    border: solid #3D2020 0.1px;
+    border: solid var(--color-primary) 0.1px;
     animation-name: spread;
     animation-duration: var(--duration);
     animation-delay: var(--delay);
