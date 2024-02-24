@@ -17,6 +17,24 @@
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
 }
 
+.dark {
+  --bg-color: #736751;
+  --bg-secondary-color: #f3f3f6;
+  --color-primary: #fefede;
+  --color-secondary: #fff;
+  --color-lightGrey: #000;
+  --color-grey: #fefede;
+  --color-darkGrey: #000;
+  --color-error: #d43939;
+  --color-success: #000;
+  --grid-maxWidth: 120rem;
+  --grid-gutter: 2rem;
+  --font-size: 1.6rem;
+  --font-color: #fefede;
+  --font-family-sans: sans-serif;
+  --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
+}
+
 /* general */
 
 html {
@@ -38,7 +56,7 @@ body {
 }
 
 hr {
-  border: 1px solid #000;
+  border: 1px solid var(--color-primary);
   width: 100%;
 }
 
@@ -89,6 +107,7 @@ svg:not(:root) {
 /* header */
 
 header {
+  position: relative;
   padding: 25px 25px 0px 25px;
 }
 
@@ -96,8 +115,12 @@ header img.logo {
 
 }
 
-img.stars {
-    width: 40px;
+@media only screen and (min-width: 599px) {
+    .darkmode-btn {
+        position: absolute;
+        right: 35px;
+        bottom: 10px;
+    }
 }
 
 /* nav */
@@ -122,6 +145,18 @@ nav.main a {
 }
 
 /* tab */
+
+nav.tabs {
+}
+
+nav.tabs a {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+nav.tabs a:hover {
+    border-color: var(--color-primary);
+}
 
 @media only screen and (max-width: 599px) {
     nav.tabs a {
@@ -156,14 +191,14 @@ form p {
 }
 
 input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],[type=reset]), select, textarea, textarea[type=text] {
-    border: 1px solid #000;
+    border: 1px solid var(--color-primary);
     border-radius: 0px;
     /* margin-bottom: 20px; */
     width: 100% !important;
 }
 
 input:hover, select:hover, textarea:hover, textarea[type=text]:hover {
-    border: 1px solid #000;
+    border: 1px solid var(--color-primary);
     border-radius: 0px;
     width: 100% !important;
 }
@@ -181,7 +216,7 @@ label {
     background: var(--color-primary);
     border: 1px solid transparent;
     border-radius: 0px;
-    color: var(--color-secondary);
+    color: #000;
     cursor: pointer;
     display: inline-block;
     font-size: var(--font-size);
@@ -241,14 +276,14 @@ img.submission-image-list:hover {
 
 div.events-list-card {
     position: relative;
-    border: 2px solid black;
+    border: 2px solid var(--color-primary);
     margin: 0 20px 20px 20px;
     padding: 20px 10px 10px 10px;
 }
 
 div.events-detail-card {
     position: relative;
-    border: 2px solid black;
+    border: 2px solid var(--color-primary);
     margin: 0 20px 20px 20px;
     padding: 10px 10px 10px 10px;
 }
@@ -324,7 +359,7 @@ div.submission-image-detail-wrapper {
     box-shadow: none;
     padding: 20px;
     margin: 10px 5px 25px 5px;
-    border: 2px solid #000;
+    border: 2px solid var(--color-primary);
     border-radius: 0px;
     /* margin-bottom: 20px; */
     width: 100% !important;
@@ -343,7 +378,7 @@ div.circle-multiline {
     text-align: center;
     vertical-align: middle;
     border-radius: 50%;
-    border: 2px black solid;
+    border: 2px solid var(--color-primary);
     background: var(--bg-color);
     z-index: 999999;
     /* rotate: 30deg; */
@@ -359,7 +394,7 @@ div.circle-multiline span {
 
 @media only screen and (max-width: 599px) {
     div.circle-multiline {
-        top: 495px;
+        top: 515px;
         right: 15px;
     }
 }
@@ -377,7 +412,7 @@ div.events-highlight {
 
 div.events-highlight-card {
     position: relative;
-    border: 2px solid black;
+    border: 2px solid var(--color-primary);
     margin-bottom: 15px;
     padding: 20px;
 }
@@ -507,7 +542,7 @@ div.events-highlight-card img.stars {
     right: 0px;
     bottom: 0px;
     border-radius: 50%;
-    border: solid var(--color-primary) 0.1px;
+    border: solid 0.1px var(--color-primary);
     animation-name: spread;
     animation-duration: var(--duration);
     animation-delay: var(--delay);
