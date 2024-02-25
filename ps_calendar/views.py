@@ -62,7 +62,7 @@ def event_list_upcoming(request):
 @cache_page(60 * 60)
 def event_list_past(request):
     # Only objects which are marked as published and where end date has exceeded
-    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lte=today())
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lt=today())
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions})
 
 # Closing soon (2 weeks)
