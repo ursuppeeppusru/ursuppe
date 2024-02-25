@@ -312,7 +312,7 @@ div.events-detail-card {
 
 
 img.event-submission-image-list {
-    z-index: 1;
+    z-index: -99;
     display: none;
 
     opacity: 0.8;
@@ -327,7 +327,7 @@ img.event-submission-image-list {
 
 a.event-project-title-link {
     position: relative;
-    z-index: 9;
+    z-index: 99;
 }
 
 a.event-project-title-link:hover~img.event-submission-image-list { display: block; }
