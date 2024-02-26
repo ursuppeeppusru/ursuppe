@@ -58,7 +58,11 @@ body {
 }
 
 hr {
-  border: 1px solid var(--color-primary);
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--color-primary);
+  padding: 0;
   width: 100%;
 }
 
@@ -153,11 +157,15 @@ nav.tabs {
 
 nav.tabs a {
     color: var(--color-primary);
-    border-color: var(--color-primary);
+    border-bottom: 1px solid var(--color-primary);
+    border-top: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
 }
 
 nav.tabs a:hover {
-    border-color: var(--color-primary);
+    border-bottom: 1px solid var(--color-primary);
+    border-top: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
 }
 
 @media only screen and (max-width: 599px) {
@@ -167,7 +175,21 @@ nav.tabs a:hover {
 }
 
 nav.tabs a.active {
-    font-weight: bold;
+    border-bottom: 2px solid var(--color-primary);
+    border-top: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
+}
+
+nav.tabs-last a {
+    border-top: 0;
+}
+
+nav.tabs-last a:hover {
+    border-top: 0;
+}
+
+nav.tabs-last a.active {
+    border-top: 0;
 }
 
 /* content */
@@ -194,7 +216,7 @@ form p {
 
 input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],[type=reset]), select, textarea, textarea[type=text] {
     background: var(--color-secondary);
-    border: 2px solid var(--font-color);
+    border: 1px solid var(--font-color);
     color: var(--font-color);
     border-radius: 0px;
     /* margin-bottom: 20px; */
@@ -202,7 +224,7 @@ input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],
 }
 
 input:hover, select:hover, textarea:hover, textarea[type=text]:hover {
-    border: 2px solid var(--font-color);
+    border: 1px solid var(--font-color);
     border-radius: 0px;
     width: 100% !important;
 }
@@ -217,10 +239,10 @@ label {
 
 .button, [type=button], [type=reset], [type=submit], button {
     width: 100% !important;
-    background: var(--color-secondary);
-    border: 2px solid var(--font-color);
+    background: var(--color-primary);
+    border: 1px solid var(--font-color);
     border-radius: 0px;
-    color: var(--font-color);
+    color: var(--btn-font-color);
     cursor: pointer;
     display: inline-block;
     font-size: var(--font-size);
@@ -235,10 +257,10 @@ label {
 }
 
 ::-webkit-file-upload-button {
-    background: var(--color-secondary);
+    background: var(--color-primary);
     border: 1px solid transparent;
     border-radius: 0px;
-    color: var(--color-secondary);
+    color: var(--btn-font-color);
     cursor: pointer;
     display: inline-block;
     font-size: var(--font-size);
@@ -280,14 +302,14 @@ img.submission-image-list:hover {
 
 div.events-list-card {
     position: relative;
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
     margin: 0 20px 20px 20px;
     padding: 20px 10px 10px 10px;
 }
 
 div.events-detail-card {
     position: relative;
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
     margin: 0 20px 20px 20px;
     padding: 10px 10px 10px 10px;
 }
@@ -363,7 +385,7 @@ div.submission-image-detail-wrapper {
     box-shadow: none;
     padding: 20px;
     margin: 10px 5px 25px 5px;
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
     border-radius: 0px;
     /* margin-bottom: 20px; */
     width: 100% !important;
@@ -382,7 +404,7 @@ div.circle-multiline {
     text-align: center;
     vertical-align: middle;
     border-radius: 50%;
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
     background: var(--bg-color);
     z-index: 999999;
     /* rotate: 30deg; */
@@ -391,8 +413,8 @@ div.circle-multiline {
 
 div.circle-multiline span {
     position: absolute;
-    top: 15px;
-    left: 7px;
+    top: 16px;
+    left: 8px;
     font-size: 15px;
 }
 
@@ -416,7 +438,7 @@ div.events-highlight {
 
 div.events-highlight-card {
     position: relative;
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
     margin-bottom: 15px;
     padding: 20px;
 }
