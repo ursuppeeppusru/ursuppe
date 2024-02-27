@@ -41,7 +41,11 @@
 
             <!-- Display existing images for the exhibition -->
             <div class="image-container-list">
-                <img class="submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+            {% for image in submission.images.all %}
+                {% if image.cover_image %} 
+                <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+                {% endif %}
+            {% endfor %}
             </div>
             <small>
                 <b>{{ submission.project_title }}</b>, {{ submission.artists }}, {{ submission.exhibition_opening }}
@@ -63,7 +67,6 @@
                 <div class="events-highlight-card">
                     <p>{{ event_submission.artists }}</p>
                         <h2 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h2>
-                    <!-- <img class="stars" src="{% static 'image/stars.png' %}" /> -->
                     <p><small>{{ event_submission.event_type }}</small></p>
                     <br/>
                     <p>Curated by {{ event_submission.curators }}</p>
