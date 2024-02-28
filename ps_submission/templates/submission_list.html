@@ -20,15 +20,7 @@
     <nav class="tabs text-uppercase is-full">
         <!-- TODO: add highlighting -->
         {% for year in years %}
-        {{request.path}}
-        {{year}}
-        {% if request.path == '/archive/{{year}}/' %}
-        in path
-        <a class="active" href="{% url 'exhibition_list' %}{{ year }}">{{ year }}</a>
-        {% else %}
-        not in path
         <a href="{% url 'exhibition_list' %}{{ year }}">{{ year }}</a>
-        {% endif %}
         {% endfor %}
     </nav>
 </div>
