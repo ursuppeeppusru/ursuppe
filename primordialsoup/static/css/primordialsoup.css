@@ -123,6 +123,10 @@ nav.main a {
 
 /* tab */
 
+nav.tabs:last-child {
+    padding-bottom: 25px;
+}
+
 @media only screen and (max-width: 599px) {
     nav.tabs a {
         font-size: smaller;
