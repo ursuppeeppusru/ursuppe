@@ -23,22 +23,6 @@
         <br/><br/>
         {% for submission in highlighted_submissions %}
         <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
-            <!-- <p>Artists: {{ submission.artists }}</p>
-            <p>Curators: {{ submission.curators }}</p>
-            <p>Location: {{ submission.location }}</p>
-            <p>Link to Location: <a href="{{ submission.link_to_location }}">{{ submission.link_to_location }}</a></p>
-            <p>Exhibition Opening: {{ submission.exhibition_opening }}</p>
-            <p>Exhibition End: {{ submission.exhibition_end }}</p>
-            <p>Description: {{ submission.description }}</p>
-            <p>Text Author: {{ submission.text_author }}</p>
-            <p>Photographer: {{ submission.photographer }}</p>
-            <p>Link to Video: <a href="{{ submission.link_to_video }}">{{ submission.link_to_video }}</a></p>
-            <p>Social Media Info: {{ submission.social_media_info }}</p>
-            <p>Email: {{ submission.email }}</p>
-            <p>Consent to Collect Info: {{ submission.get_consent_to_collect_info_display }}</p>
-            <p>Highlight: {{ submission.highlight }}</p> -->
-            <!-- Add other fields as needed -->
-
             <!-- Display existing images for the exhibition -->
             <div class="image-container-list">
             {% for image in submission.images.all %}
