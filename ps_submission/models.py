@@ -113,3 +113,4 @@ class ExhibitionImages(models.Model):
         max_length=500
     )
     caption = models.CharField(max_length=1000, verbose_name='Image Caption', help_text='Caption for the image', blank=False)
+    cover_image = models.BooleanField(default=False, help_text='Check this box to set as cover image')

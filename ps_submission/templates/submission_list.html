@@ -30,7 +30,11 @@
     <div class="col-4">
     <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
         <div class="image-container-list">
-            <img class="submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+            {% for image in submission.images.all %}
+                {% if image.cover_image %} 
+                <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+                {% endif %}
+            {% endfor %}
         </div>
         <small>
             <b>{{ submission.project_title }}</b>, {{ submission.artists }}. {{ submission.exhibition_opening }}.
