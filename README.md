@@ -59,4 +59,4 @@ CSS `:root` variables for light and dark mode, as well as other styling options 
   
 ## License
 
-As a worker-owned cooperative that strives to avoid exploitation and protect against any form of discrimination and violence we are using [CNPLv7+ License](https://github.com/ursuppeeppusru/ursuppe/blob/development/LICENSE).
+As a worker-owned cooperative that strives to avoid exploitation, discrimination and violence we are using [CNPLv7+ - The Cooperative Non-Violent Public License](https://github.com/ursuppeeppusru/ursuppe/blob/development/LICENSE). It aims to ensure basic protections against forms of violence, coercion, and discrimination which creations are frequently leveraged for in the modern world. This license covers several formats of creative work but has extra terms for software given the power it has as a tool outside of its creative capacities. The cooperative layer only allows commercial use of the copyrighted work for individuals and worker-owned organizations. It is a semi-permissive license that allows free use, modification and redistribution as long as the software is not used to harm another person or cause conflict. 
