@@ -1,6 +1,7 @@
 # ps_submission/views.py
 from django.shortcuts import render
 from django.utils import timezone
+from django.views.decorators.cache import cache_page
 
 from ps_submission.models import ExhibitionSubmission
 from ps_calendar.models import CalendarSubmission
@@ -9,6 +10,7 @@ def today():
     today = timezone.now().date()
     return today
 
+@cache_page(60 * 60)
 def highlights(request):
     # Only object which are marked as published
     highlighted_submissions = ExhibitionSubmission.objects.filter(published=True, highlight=True).order_by('-exhibition_end')

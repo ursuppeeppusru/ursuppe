@@ -11,8 +11,10 @@
 
 {% load wagtailcore_tags %}
 
-<div class="col-12">
-{{ page.body|richtext }}
+<div class="row content">
+	<div class="col-12 home">
+	{{ page.body|richtext }}
+	</div>
 </div>
 
 <!-- {% include 'home/welcome_page.html' %} -->

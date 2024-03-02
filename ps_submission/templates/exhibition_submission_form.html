@@ -35,7 +35,7 @@
     // Create label element
     const label = document.createElement("label");
     label.setAttribute("for", `id_form-${imageFieldCounter}-image`);
-    label.textContent = `Exhibition Image (${imageFieldCounter}):`;
+    label.textContent = `Image (${imageFieldCounter}):`;
   
     // Create input element (file type)
     const input = document.createElement("input");
@@ -101,7 +101,7 @@
     <div class="col-8">
       <h5><b>SUBMIT ARCHIVE</b></h5>
       <br/>
-      <h5>If you would like to submit an exhibition for our archive please fill out our form below. Critera for submissions is that the exhibition has been held in Denmark or with artists whom resides in Denmark, that you have the rights to publish the exhibition, and that the exhibition is well-documented*. When you submit the exhibition, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
+      <h5>If you would like to submit an activity for our archive please fill out our form below. Critera for submissions is that the activity has been held in Denmark or with artists whom resides in Denmark, that you have the rights to publish the activity, and that the activity is well-documented*. When you submit the activity, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
     <br>
     <br>
     * Well-documented means:<br>
@@ -115,8 +115,8 @@
   </div>
   <div class="col-4">
       <h5><b>DISCLAIMER</b></h5><br/>
-      <h5>ursuppe does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5><br/>
-      <h5>ursuppe encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, and other sociopolitical markers.</h5>
+      <h5>{{ settings.SITE_NAME }} does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5><br/>
+      <h5>{{ settings.SITE_NAME }} encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, and other sociopolitical markers.</h5>
   </div>
 
   <div class="col-12"><br/></div>
@@ -149,7 +149,7 @@
       <!-- Button to add image field -->
       <button type="button" onclick="addImageField()" id="addImageClick">Add more images +</button>
       <br/><br/>
-      <button type="submit" class="btn-submit">Submit exhibition</button>
+      <button type="submit" class="btn-submit">Submit archive</button>
     </form>
     
    </div>

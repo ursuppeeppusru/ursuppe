@@ -1,18 +1,38 @@
 /* Variables */
 :root {
-  --bg-color: #c4cf6a; /* #c4cf6a; #badc58; */
+  --bg-color: #c4cf6a;
   --bg-secondary-color: #f3f3f6;
-  --color-primary: black;
-  --color-secondary: green;
-  --color-lightGrey: black;
+  --color-primary: #000;
+  --color-secondary: #fff;
+  --color-lightGrey: #000;
   --color-grey: #747681;
-  --color-darkGrey: black;
+  --color-darkGrey: #000;
   --color-error: #d43939;
   --color-success: #000;
   --grid-maxWidth: 120rem;
   --grid-gutter: 2rem;
   --font-size: 1.6rem;
   --font-color: #333333;
+  --btn-font-color: #fff;
+  --font-family-sans: sans-serif;
+  --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
+}
+
+.dark {
+  --bg-color: #736751;
+  --bg-secondary-color: #f3f3f6;
+  --color-primary: #fefede;
+  --color-secondary: #000;
+  --color-lightGrey: #000;
+  --color-grey: #fefede;
+  --color-darkGrey: #000;
+  --color-error: #d43939;
+  --color-success: #000;
+  --grid-maxWidth: 120rem;
+  --grid-gutter: 2rem;
+  --font-size: 1.6rem;
+  --font-color: #fefede;
+  --btn-font-color: #000;
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
 }
@@ -38,7 +58,11 @@ body {
 }
 
 hr {
-  border: 1px solid #000;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--color-primary);
+  padding: 0;
   width: 100%;
 }
 
@@ -60,8 +84,22 @@ ul {
     font-weight: 400;
 }
 
+div.home p, 
+div.home h1,
+div.home h2,
+div.home h3,
+div.home h4,
+div.home h5 {
+    margin-bottom: 23px;
+    line-height: 23px;
+}
+
+div.home li {
+    line-height: 23px;
+}
+
 a {
-  color: #000;
+  color: var(--color-primary);
 }
 
 a:hover {
@@ -75,6 +113,7 @@ svg:not(:root) {
 /* header */
 
 header {
+  position: relative;
   padding: 25px 25px 0px 25px;
 }
 
@@ -82,8 +121,12 @@ header img.logo {
 
 }
 
-img.stars {
-    width: 40px;
+@media only screen and (min-width: 599px) {
+    .darkmode-btn {
+        position: absolute;
+        right: 35px;
+        bottom: 10px;
+    }
 }
 
 /* nav */
@@ -94,17 +137,90 @@ nav.main {
 
 nav.main a {
   position: relative;
-  font-size: 3rem;
+  font-size: 2rem;
   padding: 5px 20px 5px 0;
-  color: black;
+  color: var(--color-primary);
   text-decoration: none;
   text-transform: uppercase;
 }
 
+nav.main a:last-child {
+  padding: 5px 0px 5px 0;
+}
+
+@media only screen and (max-width: 599px) {
+    nav.main a {
+      font-size: 2.5rem;
+    }
+}
+
+nav.footer {
+  padding: 0 35px;
+}
+
+nav.footer a {
+  position: relative;
+  font-size: 2rem;
+  padding: 5px 20px 5px 0;
+  color: var(--color-primary);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav.footer a:last-child {
+  padding: 5px 0px 5px 0;
+}
+
+@media only screen and (max-width: 599px) {
+    nav.footer a {
+      font-size: 2.5rem;
+    }
+}
+
 /* tab */
 
+nav.tabs:last-child {
+    padding-bottom: 25px;
+}
+
+nav.tabs {
+}
+
+nav.tabs a {
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-primary);
+    border-top: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
+}
+
+nav.tabs a:hover {
+    border-bottom: 1px solid var(--color-primary);
+    border-top: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
+}
+
+@media only screen and (max-width: 599px) {
+    nav.tabs a {
+        font-size: smaller;
+    }
+}
+
 nav.tabs a.active {
-    font-weight: bold;
+    border-bottom: 2px solid var(--color-primary);
+    border-top: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
+}
+
+nav.tabs-last a {
+    border-top: 0;
+}
+
+nav.tabs-last a:hover {
+    border-top: 0;
+}
+
+nav.tabs-last a.active {
+    border-top: 0;
 }
 
 /* content */
@@ -130,14 +246,16 @@ form p {
 }
 
 input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],[type=reset]), select, textarea, textarea[type=text] {
-    border: 1px solid #000;
+    background: var(--color-secondary);
+    border: 1px solid var(--font-color);
+    color: var(--font-color);
     border-radius: 0px;
     /* margin-bottom: 20px; */
     width: 100% !important;
 }
 
 input:hover, select:hover, textarea:hover, textarea[type=text]:hover {
-    border: 1px solid #000;
+    border: 1px solid var(--font-color);
     border-radius: 0px;
     width: 100% !important;
 }
@@ -153,9 +271,9 @@ label {
 .button, [type=button], [type=reset], [type=submit], button {
     width: 100% !important;
     background: var(--color-primary);
-    border: 1px solid transparent;
+    border: 1px solid var(--font-color);
     border-radius: 0px;
-    color: #fff;
+    color: var(--btn-font-color);
     cursor: pointer;
     display: inline-block;
     font-size: var(--font-size);
@@ -173,7 +291,7 @@ label {
     background: var(--color-primary);
     border: 1px solid transparent;
     border-radius: 0px;
-    color: #fff;
+    color: var(--btn-font-color);
     cursor: pointer;
     display: inline-block;
     font-size: var(--font-size);
@@ -215,18 +333,17 @@ img.submission-image-list:hover {
 
 div.events-list-card {
     position: relative;
-    border: 2px solid black;
     margin: 0 20px 20px 20px;
     padding: 20px 10px 10px 10px;
 }
 
 div.events-detail-card {
     position: relative;
-    border: 2px solid black;
     margin: 0 20px 20px 20px;
     padding: 10px 10px 10px 10px;
 }
 
+/*
 @media only screen and (max-width: 599px) {
     div.events-list-card {
         text-align: center;
@@ -244,32 +361,28 @@ div.events-detail-card {
         text-align: center;
     }
 }
-
+*/
 
 img.event-submission-image-list {
-    z-index: 1;
+    z-index: -99;
     display: none;
 
     opacity: 0.8;
 
     position: fixed;
-    top: 15%; 
-    left: 35%;
-
-    width: 30%;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: 40%;
 }
 
-a.event_project_title_link {
+a.event-project-title-link {
     position: relative;
     z-index: 99;
 }
 
-a.event_project_title_link>img { display: none; }
-a.event_project_title_link:hover>img { display: block; }
-
-h2.event_project_title:hover img.event-submission-image-list {
-    display: block;
-}
+a.event-project-title-link:hover~img.event-submission-image-list { display: block; }
 
 /* detail */
 
@@ -302,7 +415,7 @@ div.submission-image-detail-wrapper {
     box-shadow: none;
     padding: 20px;
     margin: 10px 5px 25px 5px;
-    border: 2px solid #000;
+    border: 1px solid var(--color-primary);
     border-radius: 0px;
     /* margin-bottom: 20px; */
     width: 100% !important;
@@ -345,13 +458,52 @@ hr.map {
 
 /* highlight index */
 
+/* map button */
+div.circle-multiline {
+    position: absolute;
+    top: 476px;
+    right: 22px;
+    display: table-cell;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+    background: var(--bg-color);
+    z-index: 999999;
+    /* rotate: 30deg; */
+
+}
+
+div.circle-multiline span {
+    position: absolute;
+    top: 16px;
+    left: 8px;
+    font-size: 15px;
+}
+
+@media only screen and (max-width: 599px) {
+    div.circle-multiline {
+        top: 515px;
+        right: 15px;
+    }
+}
+
+@media only screen and (max-width: 372px) {
+    div.circle-multiline {
+        top: 515px;
+        right: 10px;
+    }
+}
+
 div.events-highlight {
 
 }
 
 div.events-highlight-card {
     position: relative;
-    border: 2px solid black;
+    border: 1px solid var(--color-primary);
     margin-bottom: 15px;
     padding: 20px;
 }
@@ -481,7 +633,7 @@ div.events-highlight-card img.stars {
     right: 0px;
     bottom: 0px;
     border-radius: 50%;
-    border: solid #3D2020 0.1px;
+    border: solid 0.1px var(--color-primary);
     animation-name: spread;
     animation-duration: var(--duration);
     animation-delay: var(--delay);
@@ -540,7 +692,7 @@ div.events-highlight-card img.stars {
 .particles > div{
     position: absolute; 
     border-radius: 100%;
-    background-color: #3D2020;
+    background-color: var(--color-primary);
     animation-duration: var(--duration);
     animation-delay: var(--delay);
     animation-iteration-count: infinite;

@@ -20,17 +20,18 @@
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/chota.css' %}">
 	    <link rel="stylesheet" type="text/css" href="{% static 'css/primordialsoup.css' %}">
-        <!--Leaflet Stylesheet-->
+        <!-- leaflet.js stylesheet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
         <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/>
-        <!--Leaflet markerclustering stylesheet-->
+        <!-- leaflet.js markerclustering stylesheet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+
+        <link rel="shortcut icon" type="image/png" href="{% static 'image/favicon.png' %}"/>
     </head>
 
     <body onload="startTime()">
@@ -181,12 +182,15 @@
                      </a>
             </div>
             <div class="col-3 text-right">
-                    <a href="/about"><p>An artist-run and anti-authoritarian platform for contemporary art in Denmark</p></a>
+                    {% if settings.HEADER_TEXT %}
+                    <a href="/about"><p>{{ settings.HEADER_TEXT }}</p></a>
+                    {% endif %}
                     <br/>
                     <a href="/search">
                         <p><b>SEARCH</b></p>
                         <hr/>
                     </a>
+                    <a href="#" class="darkmode-btn"><small>Toggle darkmode</small></a>
             </div>
         </header>
 
@@ -212,11 +216,11 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/primordialsoup.js' %}"></script>
-        <!--leaflet.js MUST be loaded before local map, else 'L' is not defined-->
+        <!-- leaflet.js MUST be loaded before local map, else 'L' is not defined -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-        <!-- Leaflet.markercluster JavaScript -->
+        <!-- leaflet.markercluster.js -->
         <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-        <!--local map-->
+        <!-- local map.js -->
         <script type="text/javascript" src="{% static 'js/map.js' %}"></script>
 
         {% block extra_js %}
@@ -224,10 +228,10 @@
         {% endblock %}
 
 
-        <nav class="row nav-left main">
-                <a href="{% url 'list_artists' %}">artists</a>
-                <a href="{% url 'list_curators' %}">curators</a>
-                <a href="{% url 'list_locations' %}">locations</a>
+        <nav class="row nav-left footer">
+                <a href="{% url 'list_current_artists' %}">artists</a>
+                <a href="{% url 'list_current_curators' %}">curators</a>
+                <a href="{% url 'list_current_locations' %}">locations</a>
                 <a href="#">pinboard</a>
                 <a href="/about">about</a>
         </nav>
@@ -236,13 +240,17 @@
 
         <footer class="row">
             <div class="col-4">
-                2024 ursuppe. Licenses: GPL, CC4r.<br/><br/>
-
-                Ursuppe is hosted on a server running in a medicine cabinet on the re-configured network of Funen Art Academy, therefore the stability of ursuppe is in an extreme precarious state until 01/07/2024.
+                {% now 'Y' %} {{ settings.SITE_NAME }}. Licenses: CNPLv7<br/><br/>
             </div>
-            <div class="col-4 text-center"><div id="time"></div></div>
+            <div class="col-4 text-center">
+                {% now "M d" %} <span id="time"></span>
+                <br/>
+                {% if settings.FOOTER_TEXT %}
+                <br/><p class="text-center"><small>{{ settings.FOOTER_TEXT }}</small></p><br/>
+                {% endif %}
+            </div>
             <div class="col-4 text-right">
-                <a href="https://www.instagram.com/ursuppeeppusru/">Instagram</a>
+                <a target="_blank" href="{{ settings.SOCIAL_MEDIA_URL }}">{{ settings.SOCIAL_MEDIA }}</a>
             </div>
         </footer>
     </body>

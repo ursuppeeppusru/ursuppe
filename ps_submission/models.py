@@ -3,6 +3,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
+from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 
 
@@ -68,10 +69,15 @@ class ExhibitionSubmission(models.Model):
         # Generate a slug when saving the object
         self.slug = slugify(self.project_title)
         super().save(*args, **kwargs)
+        
+        # Only clear cache from admin
+        if self._state.adding is False:
+            # Clear cache
+            cache.clear()
 
     def __str__(self):
         return self.project_title
-    
+
     # def clean(self):
     #     if self.exhibition_end < self.exhibition_opening:
     #         raise ValidationError(_("Exhibition end date should not be before the opening date"))
@@ -107,3 +113,4 @@ class ExhibitionImages(models.Model):
         max_length=500
     )
     caption = models.CharField(max_length=1000, verbose_name='Image Caption', help_text='Caption for the image', blank=False)
+    cover_image = models.BooleanField(default=False, help_text='Check this box to set as cover image')

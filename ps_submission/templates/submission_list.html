@@ -13,37 +13,40 @@
 
 <div class="row content">
     <div class="col-12">
-        <h5><b>ARCHIVE</b></h5><br/>
+        <h5><b>ARCHIVE</b></h5>
     </div>
+</div>
+<div>
+    <nav class="tabs text-uppercase is-full">
+        <!-- TODO: add highlighting -->
+        {% for year in years %}
+        <a href="{% url 'exhibition_list' %}{{ year }}">{{ year }}</a>
+        {% endfor %}
+    </nav>
+</div>
+{% if submissions %}
+<div class="row content">
     {% for submission in submissions %}
     <div class="col-4">
     <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
-        <!-- <p>Artists: {{ submission.artists }}</p>
-        <p>Curators: {{ submission.curators }}</p>
-        <p>Location: {{ submission.location }}</p>
-        <p>Link to Location: <a href="{{ submission.link_to_location }}">{{ submission.link_to_location }}</a></p>
-        <p>Exhibition Opening: {{ submission.exhibition_opening }}</p>
-        <p>Exhibition End: {{ submission.exhibition_end }}</p>
-        <p>Description: {{ submission.description }}</p>
-        <p>Text Author: {{ submission.text_author }}</p>
-        <p>Photographer: {{ submission.photographer }}</p>
-        <p>Link to Video: <a href="{{ submission.link_to_video }}">{{ submission.link_to_video }}</a></p>
-        <p>Social Media Info: {{ submission.social_media_info }}</p>
-        <p>Email: {{ submission.email }}</p>
-        <p>Consent to Collect Info: {{ submission.get_consent_to_collect_info_display }}</p>
-        <p>Highlight: {{ submission.highlight }}</p> -->
-        <!-- Add other fields as needed -->
-
-        <!-- Display existing images for the exhibition -->
         <div class="image-container-list">
-            <img class="submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+            {% for image in submission.images.all %}
+                {% if image.cover_image %} 
+                <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+                {% endif %}
+            {% endfor %}
         </div>
         <small>
-            <b>{{ submission.project_title }}</b>, {{ submission.artists }}, {{ submission.exhibition_opening }}
+            <b>{{ submission.project_title }}</b>, {{ submission.artists }}. {{ submission.exhibition_opening }}.
         </small>
     </a>
     </div>
     {% endfor %}
+{% else %}
+<div class="row content">
+    <p>No archive(s). Try another sorting method.</p>
+</div>
+{% endif %}
 </div>
 
 {% endblock content %}
