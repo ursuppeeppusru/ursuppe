@@ -9,6 +9,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from ps_submission import urls as exhibition_urls
 from ps_calendar import urls as calendar_urls
 from ps_list import urls as list_urls
+from ps_calendar_subscription import urls as events_subscription_urls
 
 from search import views as search_views
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path('archive/', include(exhibition_urls)),
     path('events/', include(calendar_urls)),
+    path('feed/', include(events_subscription_urls)),
     path('list/', include(list_urls)),
 ]
 

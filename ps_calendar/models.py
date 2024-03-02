@@ -104,6 +104,9 @@ class CalendarSubmission(models.Model):
                 _("Activity end date should not be before the opening date")
             )
 
+    def get_absolute_url(self):
+        return f"/events/{self.slug}/"
+
 def geocoder(address):
     geolocator = Nominatim(user_agent="ursuppe-geocoder")
     
