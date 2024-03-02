@@ -1,0 +1,42 @@
+
+{% extends "base.html" %}
+{% block title %} Feed {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+    <div class="col-12">
+        <h5><b>SUBSCRIBE TO FEED</b></h5>
+    </div>
+</div>
+
+<div class="row content">
+    <div class="col-12">
+        <p>You can automatically stay updated with events by subscribing to feeds. These are data sources that can be added to your calendar by copy-pasting their URL into the Import function of your calendar of personal choice.</p>
+        <br/>
+        <p>By subscribing to feeds, you will see events directly in your calendar as a layer that can be switched on and off.</p>
+        <br/>
+        <p>Both new events will automatically be pulled in, but changes to existing events will also be visible - for instance date, time, description and location.</p>
+    </div>
+</div>
+<hr/>
+<br/>
+<div class="row content">
+    <div class="col-12">
+        <h5><b>Current and upcoming events feed</b></h5>
+        <br/>
+        <p>Copy this URL into your calendar's "Import" or "Subscribe" function (iCAL/ICS format):</p>
+        <input type="field" value="https://{{ request.get_host }}/feed/current-and-upcoming/ical" name="">
+    </div>
+</div>
+
+{% endblock content %}
+
