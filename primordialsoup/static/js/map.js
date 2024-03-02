@@ -6,6 +6,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+// Create a marker cluster group
+var markers = L.markerClusterGroup({
+    spiderfyOnMaxZoom: false,
+    showCoverOnHover: false,
+    zoomToBoundsOnClick: false
+});
+
 
 // // Click or hover to wake map - see: http://cliffcloud.github.io/Leaflet.Sleep/#summary 
 // map.on('click', function () {
@@ -37,10 +44,17 @@ fetch(jsonUrl)
             var marker = L.marker([latitude, longitude], {icon: soupIcon}).addTo(map);
             marker.bindPopup(`Event ID: ${id}`);
 
+            // Add marker to the marker cluster group
+            markers.addLayer(marker);
+
             // Event listener for marker click
             marker.on('click', function() {
                 showEventDetails(event);
             });
+
+         // Add marker cluster group to the map
+        map.addLayer(markers);
+
         });
     })
     .catch(error => {
@@ -100,8 +114,8 @@ map.on('popupclose', function() {
 
 // marker icons
 const soupIcon = L.icon({
-    iconUrl: '../media/images/icons/icon4.png',
-    iconSize:     [, 30], // size of the icon
-    iconAnchor:   [40, 15], // point of the icon which will correspond to marker's location
+    iconUrl: '../media/images/icons/circle.png',
+    iconSize:     [, 40], // size of the icon
+    iconAnchor:   [20, 8], // point of the icon which will correspond to marker's location
     popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 });
