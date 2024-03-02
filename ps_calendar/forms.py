@@ -14,6 +14,9 @@ class CalendarSubmissionForm(forms.ModelForm):
             'exhibition_end': forms.DateInput(
                 attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}
             ),
+            'opening': forms.DateInput(
+                attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}
+            ),
         }
 
 class CalendarSubmissionAdminForm(forms.ModelForm):

@@ -56,8 +56,8 @@ class CalendarSubmission(models.Model):
     opening = models.DateField(
         verbose_name="Opening/vernissage date",  help_text="Required *<br/><br/>e.g., 13/10/2023", blank=False, null=True
     )
-    opening_hours_for_opening_date = models.TextField(
-        verbose_name="Opening hours for opening/vernissage", help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False, null=True
+    opening_hours_for_opening_date = models.CharField(
+        max_length=255, verbose_name="Opening hours for opening/vernissage", help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False, null=True
     )
     description = models.TextField(
         verbose_name="Text/Description/Press Release", help_text="Required *", blank=False
