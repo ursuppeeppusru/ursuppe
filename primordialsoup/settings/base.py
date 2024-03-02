@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     # primordialsoup apps
     "ps_calendar",
+    "ps_calendar_subscription",
     "ps_submission",
     "ps_list",
     # other apps
