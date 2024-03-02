@@ -23,7 +23,7 @@
             <a class="{% if request.path == '/events/closing-soon' %}active{% endif %}" href="{% url 'event_list_closing_soon' %}">closing soon</a>
             <a class="{% if request.path == '/events/past' %}active{% endif %}" href="{% url 'event_list_past' %}">past</a>
     </nav>
-    <nav class="tabs text-uppercase is-full">
+    <nav class="tabs tabs-last text-uppercase is-full">
             <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
             <a href="{% url 'event_map' %}">map ◯</a>
     </nav>
@@ -31,13 +31,7 @@
 {% if event_submissions %}
 {% for submission in event_submissions %}
 <div class="row content events-list-card">
-    <div class="col-4">
-        <h4>{{ submission.location }}</h4>
-        <p>{{ submission.location_address }}</p>
-        <br/>
-        <p><small><a href="{{ submission.link_to_location }}" target="_blank">{{ submission.link_to_location }}</a></small></p>
-    </div>
-    <div class="col-4 text-center">
+    <div class="col-4 ">
         <p>{{ submission.artists }}</p>
         <a class="event-project-title-link" href="{% url 'event_detail' event_id=submission.id event_project_title=submission.slug %}">
             <h2 class="text-uppercase is-large event_project_title">{{ submission.project_title }}</h2>
@@ -48,16 +42,30 @@
         <br/>
         <p><small>{{ submission.event_type }}</small></p>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-4">
         <h4>{{ submission.exhibition_opening }} – {{ submission.exhibition_end }}</h4>
         <br/>
-        <p>Opening hours:</p>
+        <p>Weekly opening hours:</p>
         <p>{{ submission.opening_hours }}</p>
+        <br/>
+        <h4>Opening/vernissage: {{ submission.opening }}</h4>
+        <br/>
+        <p>Opening hours for opening/vernissage:</p>
+        <p>{{ submission.opening_hours_for_opening_date }}</p>
+    </div>
+    <div class="col-4">
+        <h4>{{ submission.location }}</h4>
+        <p>{{ submission.location_address }}</p>
+        <br/>
+        <p><small><a href="{{ submission.link_to_location }}" target="_blank">{{ submission.link_to_location }}</a></small></p>
         <br/>
         <p><small>Admission:</small></p>
         <p><small>{{ submission.admission }}</small></p>
     </div>
 </div>
+{% if not forloop.last %}
+<hr/>
+{% endif %}
 {% endfor %}
 {% else %}
 <div class="row content">

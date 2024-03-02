@@ -217,7 +217,7 @@
 
         <hr/>
 
-        <nav class="row nav-left main">
+        <nav class="row nav-left footer">
                 <a href="{% url 'list_current_artists' %}">artists</a>
                 <a href="{% url 'list_current_curators' %}">curators</a>
                 <a href="{% url 'list_current_locations' %}">locations</a>
@@ -232,7 +232,8 @@
                 {% now 'Y' %} {{ settings.SITE_NAME }}. Licenses: CNPLv7<br/><br/>
             </div>
             <div class="col-4 text-center">
-                <div id="time"></div>
+                {% now "M d" %} <span id="time"></span>
+                <br/>
                 {% if settings.FOOTER_TEXT %}
                 <br/><p class="text-center"><small>{{ settings.FOOTER_TEXT }}</small></p><br/>
                 {% endif %}

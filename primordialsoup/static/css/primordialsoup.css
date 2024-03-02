@@ -137,15 +137,42 @@ nav.main {
 
 nav.main a {
   position: relative;
-  font-size: 3rem;
+  font-size: 2rem;
   padding: 5px 20px 5px 0;
   color: var(--color-primary);
   text-decoration: none;
   text-transform: uppercase;
 }
 
+nav.main a:last-child {
+  padding: 5px 0px 5px 0;
+}
+
 @media only screen and (max-width: 599px) {
     nav.main a {
+      font-size: 2.5rem;
+    }
+}
+
+nav.footer {
+  padding: 0 35px;
+}
+
+nav.footer a {
+  position: relative;
+  font-size: 2rem;
+  padding: 5px 20px 5px 0;
+  color: var(--color-primary);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav.footer a:last-child {
+  padding: 5px 0px 5px 0;
+}
+
+@media only screen and (max-width: 599px) {
+    nav.footer a {
       font-size: 2.5rem;
     }
 }
@@ -306,18 +333,17 @@ img.submission-image-list:hover {
 
 div.events-list-card {
     position: relative;
-    border: 1px solid var(--color-primary);
     margin: 0 20px 20px 20px;
     padding: 20px 10px 10px 10px;
 }
 
 div.events-detail-card {
     position: relative;
-    border: 1px solid var(--color-primary);
     margin: 0 20px 20px 20px;
     padding: 10px 10px 10px 10px;
 }
 
+/*
 @media only screen and (max-width: 599px) {
     div.events-list-card {
         text-align: center;
@@ -335,7 +361,7 @@ div.events-detail-card {
         text-align: center;
     }
 }
-
+*/
 
 img.event-submission-image-list {
     z-index: -99;
@@ -400,7 +426,7 @@ div.submission-image-detail-wrapper {
 /* map button */
 div.circle-multiline {
     position: absolute;
-    top: 503px;
+    top: 476px;
     right: 22px;
     display: table-cell;
     height: 50px;

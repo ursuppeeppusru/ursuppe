@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} {{ event.project_title }} | Archive {% endblock %}
+{% block title %} {{ event.project_title }} | Events {% endblock %}
 
 {% load static %}
 
@@ -13,14 +13,8 @@
 <div class="row content events-detail-card">
     <div class="col-12"></div>
     <div class="col-4">
-        <h4>{{ event.location }}</h4>
-        <p>{{ event.location_address }}</p>
-        <br/>
-        <p><small><a href="{{ submission.link_to_location }}" target="_blank">{{ event.link_to_location }}</a></small></p>
-    </div>
-    <div class="col-4 text-center">
         <p>{{ event.artists }}</p>
-        <a class="event_project_title_link" href="#">
+        <a class="event-project-title-link" href="{% url 'event_detail' event_id=event.id event_project_title=event.slug %}">
             <h2 class="text-uppercase is-large event_project_title">{{ event.project_title }}</h2>
         </a>
         <br/>
@@ -28,17 +22,34 @@
         <br/>
         <p><small>{{ event.event_type }}</small></p>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-4">
         <h4>{{ event.exhibition_opening }} – {{ event.exhibition_end }}</h4>
         <br/>
-        <p>Opening hours:</p>
+        <p>Weekly opening hours:</p>
         <p>{{ event.opening_hours }}</p>
+        <br/>
+        <h4>Opening/vernissage: {{ event.opening }}</h4>
+        <br/>
+        <p>Opening hours for opening/vernissage:</p>
+        <p>{{ event.opening_hours_for_opening_date }}</p>
+    </div>
+    <div class="col-4">
+        <h4>{{ event.location }}</h4>
+        <p>{{ event.location_address }}</p>
+        <br/>
+        <p><small><a href="{{ event.link_to_location }}" target="_blank">{{ event.link_to_location }}</a></small></p>
         <br/>
         <p><small>Admission:</small></p>
         <p><small>{{ event.admission }}</small></p>
     </div>
 </div>
+<hr/>
+<div class="col-12 text-center">
+    <a id="downloadICS" href="#"><b>Add to calendar (.ics)</b></a>
+</div>
+<hr/>
 <div class="row content">
+    <div class="col-12"></div>
     <div class="col-6">
         <h5><b>IMAGE</b></h5>
         <br/>
@@ -57,4 +68,19 @@
         </h4>
     </div>    
 </div>
+
+<script>
+/* ICS file generator */
+document.getElementById('downloadICS').addEventListener('click', () => {
+  createDownloadICSFile(
+    'Europe/Copenhagen',
+    new Date("{{ event.exhibition_opening }}"),
+    new Date("{{ event.exhibition_end }}"),
+    "{{ event.event_type }}: {{ event.project_title }}",
+    "{{ event.event_type }} with {{ event.artists }} called {{ event.project_title }}. O pening/vernissage {{ event.opening }} at {{ event.opening_hours_for_opening_date }}.",
+    "{{ event.location }}",
+    "{{ event.location_address }}"
+  );  
+});
+</script>
 {% endblock content %}

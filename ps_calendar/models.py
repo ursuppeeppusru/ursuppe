@@ -37,21 +37,27 @@ class CalendarSubmission(models.Model):
     )
     link_to_location = models.URLField(verbose_name="Location link/URL", help_text="URL e.g., https://ladder.dk", blank=True)
     location_address = models.CharField(
-        max_length=1000, verbose_name="Location Address", help_text="Required *<br/><br/>Format:<br/>[street name] [street number], [town/city], [postcode], Denmark<br/><br/>Example:<br/>Halmtorvet 11D, København V, 1700, Denmark", blank=False, null=True
+        max_length=1000, verbose_name="Location address", help_text="Required *<br/><br/>Format:<br/>[street name] [street number], [town/city], [postcode], Denmark<br/><br/>Example:<br/>Halmtorvet 11D, København V, 1700, Denmark", blank=False, null=True
     )
     latitude = models.DecimalField(verbose_name="Latitude", max_digits=18, decimal_places=10, null=True)
     longitude = models.DecimalField(verbose_name="Longitude", max_digits=18, decimal_places=10, null=True)
-    opening_hours = models.TextField(
-        verbose_name="Opening Hours", help_text="Required *<br/><br/>Format:<br/>[weekday(s) and interval]: [timeslot]<br/><br/>Examples:<br/>- Wednesday-Saturday, except Thursday: 16:00-20:00<br/>- Thursday, Friday: 19:00-22:00<br/>- By appointment, Saturday: 12:00-16:00<br/>- Wednesday-Friday: 16:00-20:00,<br/>  Saturday: 12:00-17:00,<br/>  Sunday: 12:00-14:00,<br/>  Closed from 30.12.23 until 06.01.24", blank=False, null=True
-    )
     admission = models.CharField(
         max_length=255, verbose_name="Admission", help_text="Required *<br/><br/>Format:<br/>[value] [valuta] or free<br/><br/>Examples:<br/>- 80 DKK<br/>- Free", blank=False, null=True
     )
     exhibition_opening = models.DateField(
-        verbose_name="Exhibition Opening", help_text="Required*<br/><br/>e.g., 14/10/2023", blank=False
+        verbose_name="Activity start date", help_text="Required *<br/><br/>e.g., 14/10/2023", blank=False
     )
     exhibition_end = models.DateField(
-        verbose_name="Exhibition End",  help_text="Required*<br/><br/>e.g., 16/10/2023", blank=False
+        verbose_name="Activity end date",  help_text="Required *<br/><br/>e.g., 16/10/2023", blank=False
+    )
+    opening_hours = models.TextField(
+        verbose_name="Weekly opening hours", help_text="Required *<br/><br/>Format:<br/>[weekday(s) and interval]: [timeslot]<br/><br/>Examples:<br/>- Wednesday-Saturday, except Thursday: 16:00-20:00<br/>- Thursday, Friday: 19:00-22:00<br/>- By appointment, Saturday: 12:00-16:00<br/>- Wednesday-Friday: 16:00-20:00,<br/>  Saturday: 12:00-17:00,<br/>  Sunday: 12:00-14:00,<br/>  Closed from 30.12.23 until 06.01.24", blank=False, null=True
+    )
+    opening = models.DateField(
+        verbose_name="Opening/vernissage date",  help_text="Required *<br/><br/>e.g., 13/10/2023", blank=False, null=True
+    )
+    opening_hours_for_opening_date = models.TextField(
+        verbose_name="Opening hours for opening/vernissage", help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False, null=True
     )
     description = models.TextField(
         verbose_name="Text/Description/Press Release", help_text="Required *", blank=False
@@ -59,7 +65,7 @@ class CalendarSubmission(models.Model):
     social_media_info = models.TextField(verbose_name="Social Media Info", blank=True)
     email = models.EmailField(
         verbose_name="E-mail",
-        help_text="Required",
+        help_text="Required *",
         validators=[EmailValidator(message="Enter a valid email address.")],
         blank=False,
     )
@@ -95,7 +101,7 @@ class CalendarSubmission(models.Model):
     def clean(self):
         if self.exhibition_end < self.exhibition_opening:
             raise ValidationError(
-                _("Exhibition end date should not be before the opening date")
+                _("Activity end date should not be before the opening date")
             )
 
 def geocoder(address):
