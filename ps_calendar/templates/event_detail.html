@@ -44,8 +44,9 @@
     </div>
 </div>
 <hr/>
-<div class="col-12 text-center">
-    <a id="downloadICS" href="#"><b>Add to calendar (.ics)</b></a>
+<div class="col-12 text-center"> 
+
+    <a id="downloadICS" href="#"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a>
 </div>
 <hr/>
 <div class="row content">
@@ -77,7 +78,7 @@ document.getElementById('downloadICS').addEventListener('click', () => {
     new Date("{{ event.exhibition_opening }}"),
     new Date("{{ event.exhibition_end }}"),
     "{{ event.event_type }}: {{ event.project_title }}",
-    "{{ event.event_type }} with {{ event.artists }} called {{ event.project_title }}. O pening/vernissage {{ event.opening }} at {{ event.opening_hours_for_opening_date }}.",
+    "{{ event.event_type }} with {{ event.artists }} called {{ event.project_title }}. Opening/vernissage {{ event.opening }} at {{ event.opening_hours_for_opening_date }}.",
     "{{ event.location }}",
     "{{ event.location_address }}"
   );  

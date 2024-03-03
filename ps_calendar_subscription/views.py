@@ -6,6 +6,13 @@ from django.views.decorators.cache import cache_page
 
 from ps_calendar.models import CalendarSubmission
 
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 
 def today():
     today = timezone.now().date()
@@ -16,7 +23,10 @@ class EventFeed(ICalFeed):
     """
     Events feed for current and upcoming
     """
-    product_id = '-//ursuppe.dk//current-and-upcoming//EN'
+
+    title = env('SITE_NAME')
+    description = 'Current and upcoming events'
+    product_id = '-//current-and-upcoming//EN'
     timezone = 'GMT+1'
     file_name = "ursuppe_current-and-upcoming.ics"
 
