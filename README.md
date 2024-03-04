@@ -1,9 +1,9 @@
 # ursuppe
 
- ursuppe is an open submission and event platform for artistic projects written in Django, with three primary functions:
- - An open submissions platform
- - An open events calendar with an integrated map
- - Highlights
+ ursuppe is an open submission and event platform for cultural projects written in Django, with three primary functions:
+ - An open submissions platform for image documentation
+ - An open events calendar with an integrated map and ical feed
+ - Index with highlights
  
 ## Prerequisities
 
@@ -27,7 +27,7 @@ Install Python packages:
 
 Create .env file:
 
-`$ cp ./primordialsoup/.env-example .env`
+`$ cp ./primordialsoup/.env-example ./primordialsoup/.env`
 
 Configure by editing the `.env` file and remember to add `DEBUG=True` for localhost
 
