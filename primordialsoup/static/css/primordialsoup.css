@@ -137,22 +137,19 @@ nav.main {
   padding: 0 35px;
 }
 
-nav.main a {
+nav.main div {
   position: relative;
   font-size: 2rem;
-  padding: 5px 20px 5px 0;
+  padding: 7px 0 0px 0;
   color: var(--color-primary);
   text-decoration: none;
   text-transform: uppercase;
 }
 
-nav.main a:last-child {
-  padding: 5px 0px 5px 0;
-}
-
 @media only screen and (max-width: 599px) {
-    nav.main a {
+    nav.main div {
       font-size: 2.5rem;
+      flex: content;
     }
 }
 
@@ -163,14 +160,10 @@ nav.footer {
 nav.footer a {
   position: relative;
   font-size: 2rem;
-  padding: 5px 20px 5px 0;
+  padding: 9px 20px 9px 0;
   color: var(--color-primary);
   text-decoration: none;
   text-transform: uppercase;
-}
-
-nav.footer a:last-child {
-  padding: 5px 0px 5px 0;
 }
 
 @media only screen and (max-width: 599px) {
@@ -438,7 +431,7 @@ div.submission-image-detail-wrapper {
 /* map button */
 div.circle-multiline {
     position: absolute;
-    top: 476px;
+    top: 490px;
     right: 22px;
     display: table-cell;
     height: 50px;
@@ -462,15 +455,15 @@ div.circle-multiline span {
 
 @media only screen and (max-width: 599px) {
     div.circle-multiline {
-        top: 515px;
-        right: 15px;
+        top: 520px;
+        right: 42%;
     }
 }
 
-@media only screen and (max-width: 372px) {
+@media only screen and (max-width: 373px) {
     div.circle-multiline {
-        top: 515px;
-        right: 10px;
+        top: 540px;
+        right: 40%;
     }
 }
 

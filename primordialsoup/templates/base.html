@@ -191,15 +191,23 @@
         <hr/>
 
         <nav class="row nav-left main">
-                <a href="{% url 'exhibition_list' %}">archive</a>
-                <a href="{% url 'exhibition_submission_create' %}">submit</a>
+            <div class="col-6">
+                <a href="{% url 'exhibition_list' %}">archive</a>                
+            </div>
+            <div class="col-6 text-right">
+                <a href="{% url 'exhibition_submission_create' %}">submit</a>                
+            </div>
         </nav>
 
         <hr/>
 
         <nav class="row nav-left main">
-                <a href="{% url 'event_list' %}">events</a>
-                <a href="{% url 'calendar_submission_create' %}">submit</a>
+            <div class="col-6">
+                <a href="{% url 'event_list' %}">events</a>                
+            </div>
+            <div class="col-6 text-right">
+                <a href="{% url 'calendar_submission_create' %}">submit</a>                
+            </div>
         </nav>
 
         <hr/>
