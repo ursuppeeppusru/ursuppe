@@ -14,6 +14,7 @@
   --font-size: 1.6rem;
   --font-color: #333333;
   --btn-font-color: #fff;
+  --list-img-border: 50%;
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
 }
@@ -33,6 +34,7 @@
   --font-size: 1.6rem;
   --font-color: #fefede;
   --btn-font-color: #000;
+  --list-img-border: 50%;
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
 }
@@ -325,6 +327,7 @@ img.submission-image-list {
     height: 60rem;
     object-fit: cover;
     object-position: center center;
+    border-radius: var(--list-img-border);
 }
 
 img.submission-image-list:hover {
@@ -383,6 +386,7 @@ img.event-submission-image-list {
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     width: 40%;
+    border-radius: var(--list-img-border);
 }
 
 a.event-project-title-link {
