@@ -1,7 +1,7 @@
 # ursuppe
 
  ursuppe is an open submission and event platform for cultural projects written in Django, with three primary functions:
- - An open submissions platform of image documentation
+ - An open submissions platform for image documentation
  - An open events calendar with an integrated map and ical feed
  - Index with highlights
  
