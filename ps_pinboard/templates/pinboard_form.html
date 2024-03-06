@@ -1,0 +1,38 @@
+<!-- ps_calendar/templates/exhibition_submission_form.html -->
+{% extends "base.html" %}
+{% block title %} Submit Event {% endblock %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+  <div class="col-8">
+      <h5><b>SUBMIT POST TO PINBOARD</b></h5>
+      <br/>
+      <h5>If you would like to post to our pinboard please fill out our form below.</h5><br/>
+  </div>
+  <div class="col-4">
+      <h5><b>DISCLAIMER</b></h5><br/>
+      <h5>{{ settings.SITE_NAME }} does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5><br/>
+      <h5>{{ settings.SITE_NAME }} encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, and other sociopolitical markers.</h5>
+  </div>
+
+  <div class="col-12"><br/></div>
+
+  <div class="col-12">
+    <form method="post" enctype="multipart/form-data" class="pinboard-form">
+
+      {% csrf_token %}
+      {{ pinboard_post.as_p }}
+
+      <button type="submit" class="btn-submit">Submit post</button>
+    </form>
+  </div>
+</div>
+{% endblock content %}

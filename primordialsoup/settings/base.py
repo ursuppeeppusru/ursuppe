@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "ps_calendar_subscription",
     "ps_submission",
     "ps_list",
+    "ps_pinboard",
     # other apps
     "home",
     "search",

@@ -7,14 +7,6 @@ from django.views.decorators.cache import cache_page
 from .forms import ExhibitionSubmissionForm, ExhibitionImagesForm
 from .models import ExhibitionImages, ExhibitionSubmission
 
-def unique(list):
-    # remove duplicates from list
-    result = []
-    for i in list:
-        if i not in result:
-            result.append(i)
-
-    return result
 
 def exhibition_submission_create(request):
     # ImageFormSet = modelformset_factory(ExhibitionImages, form=ExhibitionImagesForm, extra=0)
@@ -36,7 +28,7 @@ def exhibition_submission_create(request):
                         image.save()
 
                 # Add more logic here if needed, such as redirecting to a success page.
-                messages.success(request, "Thank you for submitting your archive to ursuppe. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By submitting your archive you have also accepted the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media.")
+                messages.success(request, "Thank you for submitting your archive. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By submitting your archive you have also accepted the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media.")
                 return redirect('/archive/submit')
             else:
                 messages.error(request, "There must be a minimum of 5 images and a maximum 20 images submitted. Please re-submit the form.")
@@ -70,10 +62,9 @@ def exhibition_list(request):
     submissions = ExhibitionSubmission.objects.filter(published=True).order_by('-exhibition_end')
 
     # Get unique years and pass to template
-    years = ExhibitionSubmission.objects.filter(published=True).values_list('exhibition_opening__year', flat=True)
-    unique_years = unique(years)
+    years = ExhibitionSubmission.objects.filter(published=True).values_list('exhibition_opening__year', flat=True).distinct()
 
-    return render(request, 'submission_list.html', {'submissions': submissions, 'years': unique_years})
+    return render(request, 'submission_list.html', {'submissions': submissions, 'years': years})
 
 @cache_page(60 * 60)
 def exhibition_list_year(request, year):
@@ -81,10 +72,9 @@ def exhibition_list_year(request, year):
     submissions = ExhibitionSubmission.objects.filter(published=True, exhibition_opening__year=year).order_by('-exhibition_end')
 
     # Get unique years and pass to template
-    years = ExhibitionSubmission.objects.filter(published=True).values_list('exhibition_opening__year', flat=True)
-    unique_years = unique(years)
+    years = ExhibitionSubmission.objects.filter(published=True).values_list('exhibition_opening__year', flat=True).distinct()
 
-    return render(request, 'submission_list.html', {'submissions': submissions, 'years': unique_years})
+    return render(request, 'submission_list.html', {'submissions': submissions, 'years': years})
 
 @cache_page(60 * 60)
 def exhibition_submission_detail(request, submission_id, submission_project_title):

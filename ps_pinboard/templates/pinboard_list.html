@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %} Pinboard {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+    <div class="col-6">
+        <h5><b>PINBOARD</b></h5>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn" href="{% url 'pinboard_post' %}"><b>Submit</b> post to pinboard</a>
+    </div>
+</div>
+<div>
+<nav class="tabs text-uppercase is-full">
+    <!-- TODO: highlights -->
+    <a href="{% url 'pinboard_list' %}">All</a>
+    {% for pinboard_categories in pinboard_categories %}
+    <a href="/pinboard/category/{{ pinboard_categories }}">{{ pinboard_categories }}</a>
+    {% endfor %}
+</nav>
+</div>
+{% if pinboard_posts %}
+<div class="row content">
+{% for pinboard_post in pinboard_posts %}
+        <div class="col-4 pinboard-post-card">
+            <a href="{% url 'pinboard_detail' post_id=pinboard_post.id %}">
+                <h3>{{ pinboard_post.title }}</h3>
+                <small>Posted x days ago</small><br/><br/>
+                <p class="text-uppercase">{{ pinboard_post.get_category_display }}</p><br/>
+                <p>{{ pinboard_post.description|slice:":150" }} [...]</p><br/>
+                <p>{{ pinboard_post.location }}</p>
+
+            </a>
+        </div>
+{% endfor %}
+</div>
+{% else %}
+<div class="row content">
+    <p>No entries. Try another category.</p>
+</div>
+{% endif %}
+
+{% endblock content %}

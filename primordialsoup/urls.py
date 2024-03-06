@@ -10,6 +10,7 @@ from ps_submission import urls as exhibition_urls
 from ps_calendar import urls as calendar_urls
 from ps_list import urls as list_urls
 from ps_calendar_subscription import urls as events_subscription_urls
+from ps_pinboard import urls as pinboard_urls
 
 from search import views as search_views
 
@@ -26,6 +27,7 @@ urlpatterns = [
     path('events/', include(calendar_urls)),
     path('feed/', include(events_subscription_urls)),
     path('list/', include(list_urls)),
+    path('pinboard/', include(pinboard_urls)),
 ]
 
 

@@ -28,7 +28,7 @@
   --color-grey: #fefede;
   --color-darkGrey: #000;
   --color-error: #d43939;
-  --color-success: #000;
+  --color-success: #fefede;
   --grid-maxWidth: 120rem;
   --grid-gutter: 2rem;
   --font-size: 1.6rem;
@@ -134,7 +134,7 @@ header img.logo {
 /* nav */
 
 nav.main {
-  padding: 0 35px;
+  padding: 0 25px;
 }
 
 nav.main div {
@@ -395,6 +395,13 @@ div.submission-image-detail-wrapper {
 
 }
 
+.submission-image-detail-cover {
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: var(--list-img-border);
+}
+
 @media only screen and (min-width: 1028px) {
     img.submission-image-detail {
         max-width: 80%;
@@ -414,6 +421,7 @@ div.submission-image-detail-wrapper {
 
 .card {
     font-size: larger;
+    color: var(--color-primary);
     background: var(--bg-color);
     border-radius: 0px;
     -webkit-box-shadow: none;
@@ -467,10 +475,6 @@ div.circle-multiline span {
     }
 }
 
-div.events-highlight {
-
-}
-
 div.events-highlight-card {
     position: relative;
     border: 1px solid var(--color-primary);
@@ -483,6 +487,21 @@ div.events-highlight-card img.stars {
     width: 40px;
     top: 15px;
     right: 15px;
+}
+
+/* pinboard */
+
+div.pinboard-post-card {
+    position: relative;
+    border: 1px solid var(--color-primary);
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+small.posted {
+    position:absolute;
+    top: 20px;
+    right: 20px;
 }
 
 /* soup animation */

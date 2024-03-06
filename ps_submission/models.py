@@ -33,22 +33,22 @@ class ExhibitionSubmission(models.Model):
     )
     link_to_location = models.URLField(verbose_name="Location link/URL", help_text="URL e.g., https://ladder.dk", blank=True)
     exhibition_opening = models.DateField(
-        verbose_name="Exhibition Opening", help_text="Required*<br/><br/>e.g., 14/10/2023", blank=False
+        verbose_name="Exhibition opening", help_text="Required*<br/><br/>e.g., 14/10/2023", blank=False
     )
     exhibition_end = models.DateField(
-        verbose_name="Exhibition End", help_text="Required*<br/><br/>e.g., 16/10/2023", blank=False
+        verbose_name="Exhibition end", help_text="Required*<br/><br/>e.g., 16/10/2023", blank=False
     )
     description = models.TextField(
-        verbose_name="Text/Description/Press Release", help_text="Required *", blank=False
+        verbose_name="Text/description/press release", help_text="Required *", blank=False
     )
     text_author = models.CharField(
-        max_length=255, verbose_name="Text Author", help_text="Required *", blank=False
+        max_length=255, verbose_name="Text author", help_text="Required *", blank=False
     )
     photographer = models.CharField(
         max_length=255, verbose_name="Photographer", help_text="<br/><br/>Divide multiple photographers with comma (,)", blank=False
     )
-    link_to_video = models.URLField(verbose_name="Link to Video", blank=True)
-    social_media_info = models.TextField(verbose_name="Social Media Info", blank=True)
+    link_to_video = models.URLField(verbose_name="Link to video", blank=True)
+    social_media_info = models.TextField(verbose_name="Social media info", blank=True)
     email = models.EmailField(
         verbose_name="E-mail",
         help_text="Required *",
