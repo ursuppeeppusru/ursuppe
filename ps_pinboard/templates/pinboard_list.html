@@ -20,7 +20,7 @@
     </div>
 </div>
 <div>
-<nav class="tabs text-uppercase is-full">
+<nav class="tabs text-uppercase is-full pinboard-categories">
     <!-- TODO: highlights -->
     <a href="{% url 'pinboard_list' %}">All</a>
     {% for pinboard_categories in pinboard_categories %}
@@ -38,7 +38,6 @@
                 <p class="text-uppercase">{{ pinboard_post.get_category_display }}</p><br/>
                 <p>{{ pinboard_post.description|slice:":150" }} [...]</p><br/>
                 <p>{{ pinboard_post.location }}</p>
-
             </a>
         </div>
 {% endfor %}

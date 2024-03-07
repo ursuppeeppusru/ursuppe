@@ -43,6 +43,7 @@
 
 html {
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 body {
@@ -179,6 +180,19 @@ nav.tabs:last-child {
 }
 
 nav.tabs {
+
+}
+
+@media only screen and (max-width: 599px) {
+    nav.tabs {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    nav.tabs > a {
+        padding: 1rem 1rem;
+    }
 }
 
 nav.tabs a {
