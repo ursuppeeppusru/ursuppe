@@ -21,13 +21,13 @@ class CalendarSubmission(models.Model):
     event_type = models.CharField(
         verbose_name="Type",
         help_text="Required *",
-        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Screening", "Screening"), ("Other", "Other")],
+        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Screening", "Screening"), ("Fundraiser", "Fundraiser"), ("Other", "Other")],
         default="Exhibition",
         max_length=500,
         blank=False
     )
-    artists = models.CharField(
-        max_length=255, verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
+    artists = models.TextField(
+        verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
     )
     curators = models.CharField(
         max_length=255, verbose_name="Curator(s)", help_text="Required *<br/><br/>Divide multiple curators with comma (,)", blank=False
