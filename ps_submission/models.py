@@ -23,7 +23,7 @@ class ExhibitionSubmission(models.Model):
         blank=False
     )
     artists = models.CharField(
-        max_length=255, verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
+        max_length=2500, verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
     )
     curators = models.CharField(
         max_length=255, verbose_name="Curator(s)", help_text="Required *<br/><br/>Divide multiple curators with comma (,)", blank=False
