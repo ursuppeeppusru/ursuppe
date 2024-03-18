@@ -18,7 +18,9 @@ from .views import highlights
 
 urlpatterns = [
     path('', highlights, name="highlights"),
+    path("soup-auto/", TemplateView.as_view(template_name="soup-auto-redirect-to-text.html")),
     path("soup/", TemplateView.as_view(template_name="soup.html")),
+    path("text/", TemplateView.as_view(template_name="text.html")),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
