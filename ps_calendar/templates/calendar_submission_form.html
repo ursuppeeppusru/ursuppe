@@ -33,12 +33,19 @@
       {% csrf_token %}
       {{ submission_form.as_p }}
       
-      {{ formset.management_form }}
-      {% for form in formset %}
-        {{ form.as_table }}
+      {{ formset_openinghours.management_form }}
+
+      {% for form in formset_openinghours %}
+        {{ form.as_p }}
         <br/>
       {% endfor %}
 
+      {{ formset_image.management_form }}
+
+      {% for form in formset_image %}
+        {{ form.as_table }}
+        <br/>
+      {% endfor %}
       <button type="submit" class="btn-submit">Submit event</button>
     </form>
   </div>

@@ -7,24 +7,33 @@ from django.utils import timezone
 from django.http import JsonResponse
 from datetime import timedelta
 
-from .forms import CalendarSubmissionForm, CalendarImagesForm
-from .models import CalendarImages, CalendarSubmission
+from .forms import CalendarSubmissionForm, CalendarImagesForm, OpeningHoursForm
+from .models import CalendarImages, CalendarSubmission, OpeningHours
 
 
 def calendar_submission_create(request):
     ImageFormSet = modelformset_factory(CalendarImages, form=CalendarImagesForm, extra=1)
+    OpeninghoursFormSet = modelformset_factory(OpeningHours, form=OpeningHoursForm, extra=1)
 
     if request.method == 'POST':
         submission_form = CalendarSubmissionForm(request.POST)
-        formset = ImageFormSet(request.POST, request.FILES, queryset=CalendarImages.objects.none())
+        formset_image = ImageFormSet(request.POST, request.FILES, queryset=CalendarImages.objects.none())
+        formset_openinghours = OpeninghoursFormSet(request.POST, queryset=OpeningHours.objects.none())
 
-        if submission_form.is_valid() and formset.is_valid():
+        if submission_form.is_valid() and formset_image.is_valid() and formset_openinghours.is_valid():
             submission = submission_form.save()
-            for form in formset:
+            
+            for form in formset_image:
                 if form.cleaned_data:
                     image = form.save(commit=False)
                     image.calendar = submission
                     image.save()
+
+            for form in formset_openinghours:
+                if form.cleaned_data:
+                    hours = form.save(commit=False)
+                    hours.calendar = submission
+                    hours.save()
 
             # Add more logic here if needed, such as redirecting to a success page.
             messages.success(request, "Thank you for submitting your event. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By submitting your event you also accept the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media." )
@@ -33,11 +42,13 @@ def calendar_submission_create(request):
             messages.error(request, "Some error occurred while submitting. Please re-check your form.")
     else:
         submission_form = CalendarSubmissionForm()
-        formset = ImageFormSet(queryset=CalendarImages.objects.none())
+        formset_image = ImageFormSet(queryset=CalendarImages.objects.none())
+        formset_openinghours= OpeninghoursFormSet(queryset=OpeningHours.objects.none())
 
     return render(request, 'calendar_submission_form.html', {
         'submission_form': submission_form,
-        'formset': formset,
+        'formset_image': formset_image,
+        'formset_openinghours': formset_openinghours
     })
 
 def today():

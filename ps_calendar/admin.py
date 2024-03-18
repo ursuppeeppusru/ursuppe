@@ -1,7 +1,7 @@
 # ps_calendar/admin.py
 from django.contrib import admin
-from .models import CalendarSubmission, CalendarImages
-from .forms import CalendarSubmissionAdminForm, CalendarImagesForm
+from .models import CalendarSubmission, CalendarImages, OpeningHours
+from .forms import CalendarSubmissionAdminForm, CalendarImagesForm, OpeningHoursForm
 
 # @admin.register(CalendarSubmission)
 # class CalendarSubmissionAdmin(admin.ModelAdmin):
@@ -15,8 +15,13 @@ class CalendarImagesInline(admin.TabularInline):  # or admin.StackedInline for a
     form = CalendarImagesForm
     extra = 1  # Number of empty forms to display
 
+class CalendarOpeningHoursInline(admin.TabularInline):  # or admin.StackedInline for a different layout
+    model = OpeningHours
+    form = OpeningHoursForm
+    extra = 1  # Number of empty forms to display
+
 class CalendarSubmissionAdmin(admin.ModelAdmin):
     form = CalendarSubmissionAdminForm
-    inlines = [CalendarImagesInline]
+    inlines = [CalendarImagesInline, CalendarOpeningHoursInline]
 
 admin.site.register(CalendarSubmission, CalendarSubmissionAdmin)

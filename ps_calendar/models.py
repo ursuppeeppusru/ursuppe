@@ -56,6 +56,7 @@ class CalendarSubmission(models.Model):
     opening = models.DateField(
         verbose_name="Opening/vernissage date",  help_text="Required *<br/><br/>e.g., 13/10/2023", blank=False, null=True
     )
+
     opening_hours_for_opening_date = models.CharField(
         max_length=255, verbose_name="Opening hours for opening/vernissage", help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False, null=True
     )
@@ -147,3 +148,29 @@ class CalendarImages(models.Model):
         validators=[validate_image_size, validate_image_extension]
     )
     caption = models.CharField(max_length=255, verbose_name='Image Caption', help_text='')
+
+WEEKDAYS = [
+  (1, _("Monday")),
+  (2, _("Tuesday")),
+  (3, _("Wednesday")),
+  (4, _("Thursday")),
+  (5, _("Friday")),
+  (6, _("Saturday")),
+  (7, _("Sunday")),
+]
+
+class OpeningHours(models.Model):
+    calendar = models.ForeignKey(
+        CalendarSubmission, on_delete=models.CASCADE, related_name="openinghours"
+    )
+    weekday = models.IntegerField(choices=WEEKDAYS)
+    from_hour = models.TimeField()
+    to_hour = models.TimeField()
+
+    class Meta:
+        ordering = ('weekday', 'from_hour')
+        unique_together = ('weekday', 'from_hour', 'to_hour')
+
+    def __unicode__(self):
+        return u'%s: %s - %s' % (self.get_weekday_display(),
+                                 self.from_hour, self.to_hour)

@@ -1,6 +1,6 @@
 # ps_calendar/forms.py
 from django import forms
-from .models import CalendarSubmission, CalendarImages
+from .models import CalendarSubmission, CalendarImages, OpeningHours
 
 class CalendarSubmissionForm(forms.ModelForm):
     class Meta:
@@ -28,3 +28,8 @@ class CalendarImagesForm(forms.ModelForm):
     class Meta:
         model = CalendarImages
         fields = ['image','caption']  # Assuming you only want to upload an image
+
+class OpeningHoursForm(forms.ModelForm):
+    class Meta:
+        model = OpeningHours
+        fields = ['weekday', 'from_hour', 'to_hour']  # Assuming you only want to upload an image
