@@ -10,13 +10,38 @@
 {% endblock extra_css %}
 
 {% block content %}
-
+<div class="row content events-whatson-header">
+    <div class="col-12">
+        <h5><b>WHAT'S ON</b></h5>
+        <small>Current events</small>
+    </div>
+</div>
+<div class="events-whatson" id="events-whatson">
+    {% for event_submission in all_current_event_submissions %}
+    <span class="events-whatson-card">
+        {% if event_submission.exhibition_end <= today_plus_2w %}
+        <span class="event-status-label">CLOSING SOON</span>
+        {% endif %}
+        <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
+        {% if ',' in event_submission.artists %}
+        <small>Group exhibition</small>
+        {% else %}
+        <small>{{ event_submission.artists }}</small>
+        {% endif %}
+        <h5 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h5>
+        </a>
+        <img class="event-submission-image-list-highlight" src="{{ event_submission.images.all.0.image.url }}" alt="{{ event_submission.images.all.0.image.caption }}">
+        <p><small>{{ event_submission.event_type }}</small></p>
+        <br/>
+        <h5>{{ event_submission.location }}</h5>
+        <br/>
+        <small>→ {{ event_submission.exhibition_end }}</small>
+    </span>
+    {% endfor %}
+</div>
+<hr/>
+<br/>
 <div class="row content">
-    <a href="{% url 'event_map' %}">
-        <div class='circle-multiline'>
-        <span class="text-uppercase">map</span></br>
-        </div>
-    </a>
     <div class="col-9">
         <h5><b>ARCHIVE HIGHLIGHTS</b></h5>
         <small>Sorted by end date</small>
@@ -47,20 +72,29 @@
         </div>
             <!-- calendar highlights goes here -->
             {% for event_submission in highlighted_event_submissions %}
-            <a class="event_project_title_link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
                 <div class="events-highlight-card">
+                    {% if event_submission.exhibition_end <= today_plus_2w %}
+                    <span class="event-status-label">CLOSING SOON</span>
+                    {% elif event_submission.exhibition_opening < today %}
+                    <span class="event-status-label">CURRENT</span>
+                    {% else %}
+                    <span class="event-status-label">UPCOMING</span>
+                    {% endif %}
                     <p>{{ event_submission.artists }}</p>
-                        <h2 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h2>
+                    <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
+                    <h2 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h2>
+                    </a>
+                    <img class="event-submission-image-list-highlight" src="{{ event_submission.images.all.0.image.url }}" alt="{{ event_submission.images.all.0.image.caption }}">
                     <p><small>{{ event_submission.event_type }}</small></p>
                     <br/>
                     <p>Curated by {{ event_submission.curators }}</p>
                     <br/>
-                    <h4>{{ event_submission.exhibition_opening }} – {{ event_submission.exhibition_end }}</h4>
+                    <h4>{{ event_submission.exhibition_opening }} → {{ event_submission.exhibition_end }}</h4>
+                    {{ today }}
                     <br/>
                     <h4>{{ event_submission.location }}</h4>
                     <p><small>{{ event_submission.location_address }}</small></p>
                 </div>
-            </a>
             {% endfor %}
     </div>
 </div>

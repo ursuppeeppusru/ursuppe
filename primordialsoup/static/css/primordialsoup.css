@@ -141,10 +141,11 @@ nav.main {
 nav.main div {
   position: relative;
   font-size: 2rem;
-  padding: 7px 0 0px 0;
+  padding: 10px 0 10px 0;
   color: var(--color-primary);
   text-decoration: none;
   text-transform: uppercase;
+  margin-bottom: 0px;
 }
 
 @media only screen and (max-width: 599px) {
@@ -453,11 +454,11 @@ div.submission-image-detail-wrapper {
 /* map button */
 div.circle-multiline {
     position: absolute;
-    top: 490px;
-    right: 22px;
+    top: 388px;
+    right: 47.5%;
     display: table-cell;
     height: 50px;
-    width: 50px;
+    width: 70px;
     text-align: center;
     vertical-align: middle;
     border-radius: 50%;
@@ -470,21 +471,21 @@ div.circle-multiline {
 
 div.circle-multiline span {
     position: absolute;
-    top: 16px;
-    left: 8px;
-    font-size: 15px;
+    top: 17px;
+    left: 21px;
+    font-size: 12px;
 }
 
 @media only screen and (max-width: 599px) {
     div.circle-multiline {
-        top: 520px;
-        right: 42%;
+        top: 525px;
+        right: 43%;
     }
 }
 
-@media only screen and (max-width: 373px) {
+@media only screen and (max-width: 435px) {
     div.circle-multiline {
-        top: 540px;
+        top: 545px;
         right: 40%;
     }
 }
@@ -492,16 +493,74 @@ div.circle-multiline span {
 div.events-highlight-card {
     position: relative;
     border: 1px solid var(--color-primary);
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     padding: 20px;
 }
 
-div.events-highlight-card img.stars {
+span.event-status-label {
+    background-color: var(--bg-color);
     position: absolute;
-    width: 40px;
-    top: 15px;
-    right: 15px;
+    top: -16px;
+    right: -10px;
+    padding: 7.5px;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+    font-size: smaller;
 }
+
+span.event-detail-status-label {
+    background-color: var(--bg-color);
+    position: absolute;
+    bottom: 15px;
+    right: 25px;
+    padding: 7.5px;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+    font-size: smaller;
+}
+
+div.events-whatson {
+    position: relative;
+    white-space: nowrap;
+    overflow-x: auto;
+    padding-top: 15px;
+    scrollbar-color: var(--color-primary) var(--bg-color);
+    scrollbar-width: thin;
+}
+
+div.events-whatson-header {
+    padding-bottom: 0;
+}
+
+span.events-whatson-card {
+    display: inline-block;
+    position: relative;
+    border: 1px solid var(--color-primary);
+    margin: 0px 15px 15px 0;
+    padding: 20px;
+}
+
+span.events-whatson-card:first-child {
+    margin-left: 25px;
+}
+
+span.events-whatson-card:last-child {
+    margin-right: 25px;
+}
+
+img.event-submission-image-list-highlight {
+    object-fit: cover;
+    object-position: center center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    z-index: -99;
+    display: none;
+}
+
+a.event-project-title-link:hover~img.event-submission-image-list-highlight { display: block; }
 
 /* pinboard */
 

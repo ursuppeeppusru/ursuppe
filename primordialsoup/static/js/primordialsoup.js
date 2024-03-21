@@ -113,3 +113,16 @@ function createDownloadICSFile(timezone, startTime, endTime, title, description,
 
   download(title + '.ics', icsBody);
 }
+
+/* index horisontal scroll button */
+/*
+const buttonRight = document.getElementById('slide-right');
+const buttonLeft = document.getElementById('slide-left');
+
+buttonRight.onclick = function () {
+  document.getElementById('events-whatson').scrollLeft += 400;
+};
+buttonLeft.onclick = function () {
+  document.getElementById('events-whatson').scrollLeft -= 400;
+};
+*/

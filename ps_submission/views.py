@@ -28,10 +28,10 @@ def exhibition_submission_create(request):
                         image.save()
 
                 # Add more logic here if needed, such as redirecting to a success page.
-                messages.success(request, "Thank you for submitting your archive. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By submitting your archive you have also accepted the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media.")
-                return redirect('/archive/submit')
+                messages.success(request, "Thank you for creating your archive. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By creating your archive you have also accepted the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media.")
+                return redirect('/archive/create')
             else:
-                messages.error(request, "There must be a minimum of 5 images and a maximum 20 images submitted. Please re-submit the form.")
+                messages.error(request, "There must be a minimum of 5 images and a maximum 20 images. Please re-submit the form.")
         else:
             
             # print(formset.errors)
@@ -42,7 +42,7 @@ def exhibition_submission_create(request):
                         if isinstance(value, str) or key == 'image':
                             errors[key.upper()] = value[0].upper()
             # print(errors)
-            messages.error(request, "Some error occurred while submitting. Please re-check and re-submit the form.")
+            messages.error(request, "Some error occurred. Please re-check and re-submit the form.")
             formset = ImageFormSet(queryset=ExhibitionImages.objects.none())
             
     else:

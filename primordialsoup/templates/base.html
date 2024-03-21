@@ -195,7 +195,7 @@
                 <a href="{% url 'exhibition_list' %}">archive</a>                
             </div>
             <div class="col-6 text-right">
-                <a href="{% url 'exhibition_submission_create' %}">submit</a>                
+                <a href="{% url 'exhibition_submission_create' %}">create</a>                
             </div>
         </nav>
 
@@ -206,7 +206,7 @@
                 <a href="{% url 'event_list' %}">events</a>                
             </div>
             <div class="col-6 text-right">
-                <a href="{% url 'calendar_submission_create' %}">submit</a>                
+                <a href="{% url 'calendar_submission_create' %}">create</a>                
             </div>
         </nav>
 
@@ -214,6 +214,11 @@
 
         {% include 'messages.html' %}
 
+        <a href="{% url 'event_map' %}">
+            <div class='circle-multiline'>
+            <span class="text-uppercase">map</span></br>
+            </div>
+        </a>
         {% block content %}{% endblock %}
 
         {# Global javascript #}

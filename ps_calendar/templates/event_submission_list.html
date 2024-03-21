@@ -28,7 +28,7 @@
     </nav>
     <nav class="tabs tabs-last text-uppercase is-full">
             <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
-            <a href="{% url 'event_map' %}">map ◯</a>
+            <a href="{% url 'event_map' %}">map</a>
     </nav>
 </div>
 {% if event_submissions %}
@@ -46,7 +46,7 @@
         <p><small>{{ submission.event_type }}</small></p>
     </div>
     <div class="col-4">
-        <h4>{{ submission.exhibition_opening }} – {{ submission.exhibition_end }}</h4>
+        <h4>{{ submission.exhibition_opening }} → {{ submission.exhibition_end }}</h4>
         <br/>
         <p>Weekly opening hours:</p>
         <p>{{ submission.opening_hours }}</p>
