@@ -87,14 +87,30 @@ ul {
     font-weight: 400;
 }
 
-div.home p, 
+div.home p {
+    margin-bottom: 21px;
+    line-height: 21px;
+}
+
 div.home h1,
 div.home h2,
 div.home h3,
-div.home h4,
 div.home h5 {
-    margin-bottom: 23px;
-    line-height: 23px;
+    font-weight: bold;
+    margin-top: 42px;
+    margin-bottom: 42px;
+    line-height: 18px;
+}
+
+div.home h4 {
+    font-weight: bold;
+    margin-top: 42px;
+    margin-bottom: 21px;
+    line-height: 18px;
+}
+
+div.home h2:first-child {
+    margin-top: 10px;
 }
 
 div.home li {
