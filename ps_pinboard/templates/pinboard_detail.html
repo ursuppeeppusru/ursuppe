@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %} Pinboard {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+    <div class="col-6">
+        <h5><b>PINBOARD</b></h5>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn" href="{% url 'pinboard_post' %}"><b>Submit post</b> to pinboard</a>
+    </div>
+</div>
+<div>
+<nav class="tabs text-uppercase is-full">
+    <a class="{% if request.path == '/pinboard/' %}active{% endif %}" href="{% url 'pinboard_list' %}">All</a>
+    {% for pinboard_categories in pinboard_categories %}
+    <a class="{% if request.path == '/pinboard/category/{{ pinboard_categories }}' %}active{% endif %}" href="/pinboard/category/{{ pinboard_categories }}">{{ pinboard_categories }}</a>
+    {% endfor %}
+</nav>
+</div>
+<div class="row content">
+        <div class="col-4"></div>
+        <div class="col-4 pinboard-post-card">
+            <h3>{{ post.title }}</h3>
+            <small>Posted x days ago</small><br/><br/>
+            <p class="text-uppercase">{{ post.get_category_display }}</p><br/>
+            <p>{{ post.description }}</p><br/>
+            <p>{{ post.location }}</p><br/>
+            <p>{{ post.contact_information }}</p>
+        </div>
+        <div class="col-4"></div>
+</div>
+
+{% endblock content %}

@@ -21,13 +21,13 @@ class CalendarSubmission(models.Model):
     event_type = models.CharField(
         verbose_name="Type",
         help_text="Required *",
-        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Screening", "Screening"), ("Other", "Other")],
+        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Screening", "Screening"), ("Fundraiser", "Fundraiser"), ("Other", "Other")],
         default="Exhibition",
         max_length=500,
         blank=False
     )
-    artists = models.CharField(
-        max_length=255, verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
+    artists = models.TextField(
+        verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
     )
     curators = models.CharField(
         max_length=255, verbose_name="Curator(s)", help_text="Required *<br/><br/>Divide multiple curators with comma (,)", blank=False
@@ -56,8 +56,8 @@ class CalendarSubmission(models.Model):
     opening = models.DateField(
         verbose_name="Opening/vernissage date",  help_text="Required *<br/><br/>e.g., 13/10/2023", blank=False, null=True
     )
-    opening_hours_for_opening_date = models.TextField(
-        verbose_name="Opening hours for opening/vernissage", help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False, null=True
+    opening_hours_for_opening_date = models.CharField(
+        max_length=255, verbose_name="Opening hours for opening/vernissage", help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False, null=True
     )
     description = models.TextField(
         verbose_name="Text/Description/Press Release", help_text="Required *", blank=False
@@ -103,6 +103,9 @@ class CalendarSubmission(models.Model):
             raise ValidationError(
                 _("Activity end date should not be before the opening date")
             )
+
+    def get_absolute_url(self):
+        return f"/events/{self.slug}/"
 
 def geocoder(address):
     geolocator = Nominatim(user_agent="ursuppe-geocoder")

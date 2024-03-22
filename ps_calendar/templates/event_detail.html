@@ -13,6 +13,13 @@
 <div class="row content events-detail-card">
     <div class="col-12"></div>
     <div class="col-4">
+        {% if event.exhibition_end <= today_plus_2w %}
+        <span class="event-detail-status-label">CLOSING SOON</span>
+        {% elif event.exhibition_opening < today %}
+        <span class="event-detail-status-label">CURRENT</span>
+        {% else %}
+        <span class="event-detail-status-label">UPCOMING</span>
+        {% endif %}
         <p>{{ event.artists }}</p>
         <a class="event-project-title-link" href="{% url 'event_detail' event_id=event.id event_project_title=event.slug %}">
             <h2 class="text-uppercase is-large event_project_title">{{ event.project_title }}</h2>
@@ -23,7 +30,7 @@
         <p><small>{{ event.event_type }}</small></p>
     </div>
     <div class="col-4">
-        <h4>{{ event.exhibition_opening }} – {{ event.exhibition_end }}</h4>
+        <h4>{{ event.exhibition_opening }} → {{ event.exhibition_end }}</h4>
         <br/>
         <p>Weekly opening hours:</p>
         <p>{{ event.opening_hours }}</p>
@@ -44,8 +51,9 @@
     </div>
 </div>
 <hr/>
-<div class="col-12 text-center">
-    <a id="downloadICS" href="#"><b>Add to calendar (.ics)</b></a>
+<div class="col-12 text-center"> 
+
+    <a id="downloadICS" href="#"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a>
 </div>
 <hr/>
 <div class="row content">
@@ -77,7 +85,7 @@ document.getElementById('downloadICS').addEventListener('click', () => {
     new Date("{{ event.exhibition_opening }}"),
     new Date("{{ event.exhibition_end }}"),
     "{{ event.event_type }}: {{ event.project_title }}",
-    "{{ event.event_type }} with {{ event.artists }} called {{ event.project_title }}. O pening/vernissage {{ event.opening }} at {{ event.opening_hours_for_opening_date }}.",
+    "{{ event.event_type }} with {{ event.artists }} called {{ event.project_title }}. Opening/vernissage {{ event.opening }} at {{ event.opening_hours_for_opening_date }}.",
     "{{ event.location }}",
     "{{ event.location_address }}"
   );  

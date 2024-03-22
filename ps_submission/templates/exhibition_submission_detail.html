@@ -11,27 +11,31 @@
 
 {% block content %}
 <div class="row content">
-    <div class="col-12">
-            <h3>{{ submission.artists }}</h3>
-    </div>
-    <div class="col-12">
-            <h1>{{ submission.project_title }} 
-            </h1>
-            <h2>{{ submission.subtitle }}</h2>
-            <br/>
-            <h5>Curated by {{ submission.curators }}</h5>
-            <br/>
-    </div>
-    <div class="col-12"></div>
-    <div class="col-12">
+    <div class="col-6">
+        <h3>{{ submission.artists }}</h3><br/>
+        <h1>{{ submission.project_title }}
+        </h1>
+        <h2>{{ submission.subtitle }}</h2>
+        <br/>
+        <h5>Curated by {{ submission.curators }}</h5>
+        <br/><br/>
         <h5><b>INFORMATION</b></h5>
         <br/>
         <p><b>Artist(s):</b> {{ submission.artists }}</p>
         <p><b>Curator(s):</b> {{ submission.curators }}</p>
         <p><b>Type:</b> {{ submission.event_type }}</p>
         <p><b>Location:</b> <a href="{{ submission.link_to_location }}">{{ submission.location }}</a></p>
-        <p><b>Dates:</b> {{ submission.exhibition_opening }} – {{ submission.exhibition_end }}</p>
+        <p><b>Dates:</b> {{ submission.exhibition_opening }} → {{ submission.exhibition_end }}</p>
         <p><b>Photographer:</b> {{ submission.photographer }}</p>
+        <br/>
+    </div>
+    <div class="col-6 text-center is-vertical-align">
+        {% for image in submission.images.all %}
+        {% if image.cover_image %}
+        <img class="submission-image-detail-cover" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+        {% endif %}
+        {% endfor %}
+    </div>
     </div>
     {% if submission.link_to_video %}
     <div class="col-12 text-center">
