@@ -5,6 +5,7 @@ from django.core.cache import cache
 
 
 class PinBoard(models.Model):
+    created_at = models.DateField(auto_now_add=True)
     title = models.CharField(
         max_length=255, verbose_name="Title", help_text="Required *", blank=False
     )
