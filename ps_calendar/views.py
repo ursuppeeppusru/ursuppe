@@ -86,7 +86,11 @@ def event_map(request):
 @cache_page(60 * 60)
 def json_event_list(request):
     # JSON
+    # fields = ['slug', 'latitude', 'longitude']
+    # combine to one? add images
+    #event_submission_images = CalendarImages.objects.all().values()
     event_submissions = CalendarImages.objects.values(
+        'calendar__id',
         'calendar__project_title',
         'calendar__subtitle',
         'calendar__event_type',
@@ -108,6 +112,7 @@ def json_event_list(request):
         'image'
         ).filter(calendar__published=True).filter(calendar__exhibition_end__gte=today()).order_by('calendar__exhibition_end')
     return JsonResponse({"event_submissions": list(event_submissions)})
+
 
 @cache_page(60 * 60)
 def event_detail(request, event_id, event_project_title):
