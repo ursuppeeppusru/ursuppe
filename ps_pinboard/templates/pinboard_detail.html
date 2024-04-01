@@ -16,7 +16,7 @@
         <h5><b>PINBOARD</b></h5>
     </div>
     <div class="col-6 text-right">
-        <a class="btn" href="{% url 'pinboard_post' %}"><b>Submit post</b> to pinboard</a>
+        <a class="btn" href="{% url 'pinboard_post' %}"><b>Create</b> post for the pinboard</a>
     </div>
 </div>
 <div>
@@ -31,7 +31,7 @@
         <div class="col-4"></div>
         <div class="col-4 pinboard-post-card">
             <h3>{{ post.title }}</h3>
-            <small>Posted x days ago</small><br/><br/>
+            <small>Posted {{ post.created_at|timesince }} ago</small><br/><br/>
             <p class="text-uppercase">{{ post.get_category_display }}</p><br/>
             <p>{{ post.description }}</p><br/>
             <p>{{ post.location }}</p><br/>

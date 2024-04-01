@@ -2,10 +2,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import cache_page
 from django.contrib import messages
+from django.utils import timezone
 
 from .forms import PinboardForm
 from .models import PinBoard
 
+
+def today():
+    today = timezone.now().date()
+    return today
 
 def pinboard_post(request):
     if request.method == 'POST':
@@ -34,7 +39,7 @@ def pinboard_list(request):
     pinboard_posts = PinBoard.objects.filter(published=True)
     pinboard_categories = PinBoard.objects.values_list('category', flat=True).distinct()
     return render(request, 'pinboard_list.html',
-                  {'pinboard_posts': pinboard_posts, 'pinboard_categories': pinboard_categories})
+                  {'today': today, 'pinboard_posts': pinboard_posts, 'pinboard_categories': pinboard_categories})
 
 @cache_page(60 * 60)
 def pinboard_list_category(request, category):
@@ -42,10 +47,10 @@ def pinboard_list_category(request, category):
     pinboard_posts = PinBoard.objects.filter(category=category).filter(published=True)
     pinboard_categories = PinBoard.objects.values_list('category', flat=True).distinct()
     return render(request, 'pinboard_list.html',
-                  {'pinboard_posts': pinboard_posts, 'pinboard_categories': pinboard_categories})
+                  {'today': today, 'pinboard_posts': pinboard_posts, 'pinboard_categories': pinboard_categories})
 
 @cache_page(60 * 60)
 def pinboard_detail(request, post_id):
     post = get_object_or_404(PinBoard, id=post_id)
     pinboard_categories = PinBoard.objects.values_list('category', flat=True).distinct()
-    return render(request, 'pinboard_detail.html', {'post': post, 'pinboard_categories': pinboard_categories})
+    return render(request, 'pinboard_detail.html', {'today': today, 'post': post, 'pinboard_categories': pinboard_categories})

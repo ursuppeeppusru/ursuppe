@@ -32,9 +32,13 @@ def today():
 
 # Index
 def compile_list(list_type):
-    submissions = (ExhibitionSubmission.objects.filter(published=True).values(list_type))
-    events = (CalendarSubmission.objects.filter(published=True).values(list_type))
-    combined = list(chain(submissions, events))
+    if list_type is 'photographer':
+        submissions = (ExhibitionSubmission.objects.filter(published=True).values(list_type))
+        combined = list(submissions)
+    else:
+        submissions = (ExhibitionSubmission.objects.filter(published=True).values(list_type))
+        events = (CalendarSubmission.objects.filter(published=True).values(list_type))
+        combined = list(chain(submissions, events))
 
     result = []
     # loop through, split by comma and join into one list
@@ -83,6 +87,11 @@ def list_artists(request):
 @cache_page(60 * 60)
 def list_curators(request):
     return render(request, 'list_curators.html', {'list': compile_list('curators')})
+
+
+@cache_page(60 * 60)
+def list_photographers(request):
+    return render(request, 'list_photographers.html', {'list': compile_list('photographer')})
 
 @cache_page(60 * 60)
 def list_locations(request):
