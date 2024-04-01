@@ -25,16 +25,19 @@ fetch(jsonUrl)
     .then(response => response.json())
     .then(data => {
         // Loop through the data
-        data.event_submissions_json.forEach(event => {
+        data.event_submissions.forEach(event => {
             let id = event.id;
+            let eventImageId = event.calendar_id;
             let latitude = parseFloat(event.latitude);
             let longitude = parseFloat(event.longitude);
+//            console.log('Event ID: ' + id + '\n' + 'Event Image ID: ' + eventImageId);
+//            console.log('latitude: ' + latitude + 'longitude: ' + longitude)
 
-            // console.log('latitude: ' + latitude + 'longitude: ' + longitude)
             let marker = L.marker([latitude, longitude], {icon: soupIcon});
             marker.bindPopup(`<img style="border-radius: 50%;" src="https://kunsten.nu/wp-content/uploads/2024/03/gaza-18-904x603.jpg">`);
-            // event image url will be part of json `<img style="border-radius: 50%;" src=${event.image-url}>`
-
+            // 'src' should be event_submission_images.calendar_id corresponding to event_submissions.id
+            // How can this be done....... 
+            
             // Add marker to the marker cluster group
             markers.addLayer(marker);
 
@@ -43,9 +46,8 @@ fetch(jsonUrl)
                 showEventDetails(event);
             });
 
-         // Add marker cluster group to the map
-        map.addLayer(markers);
-
+            // Add marker cluster group to the map
+            map.addLayer(markers);
         });
     })
     .catch(error => {
@@ -112,7 +114,6 @@ map.on('popupclose', function() {
 
 // marker icons
 const soupIcon = L.divIcon({
-//    iconUrl: '/static/image/icons/circle.png',
     className: 'soup',
     html: '<div class="circle"></div>',
     iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location

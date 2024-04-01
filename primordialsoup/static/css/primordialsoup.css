@@ -486,8 +486,6 @@ div.submission-image-detail-wrapper {
     color: var(--color-primary);
     font-size: 20px;
     font-weight: 300;
-    pointer-events: none;
-
 }
 
 /* making popup box transparent and non-clickable*/
@@ -498,11 +496,12 @@ div.submission-image-detail-wrapper {
     box-shadow: 0 0px 0px rgba(0,0,0,0) !important;
 }
 
-.leaflet-popup-content {
+.leaflet-popup-content,
+.leaflet-popup.leaflet-zoom-animated {
+    padding: 0 !important;
     margin: 0 !important;
+    pointer-events: none;
 }
-
-.leaflet-
 
 .leaflet-popup-tip, 
 .leaflet-popup-close-button, 
