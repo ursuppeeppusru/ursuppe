@@ -9,6 +9,8 @@
 
 {% endblock extra_css %}
 
+<!-- move map.js script link from base.html to here, or after endblock content -->
+
 {% block content %}
 
 <div class="row content">
@@ -25,6 +27,9 @@
 </nav>
 <br/>
 
+{{ event_submissions|json_script }}
+
+<br/>
 <!-- LEAFLET MAP FEATURE -->
 <div id="map"></div>
 
@@ -34,4 +39,3 @@
 <!-- map -->
 
 {% endblock content %}
-

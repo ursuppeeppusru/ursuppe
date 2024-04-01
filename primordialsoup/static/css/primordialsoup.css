@@ -468,32 +468,49 @@ div.submission-image-detail-wrapper {
 /* ADD MORE CSS HERE */
 
 
-/* leaflet map feature */
+/* leaflet map feature starts here */
 #map { 
     height: 580px;
     width: 100%;
 }
 
+/* leaflet marker icon and cluster icon */
+.circle {
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    border: solid 1px var(--color-primary);
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 20px;
+    font-weight: 300;
+    pointer-events: none;
+
+}
+
+/* making popup box transparent and non-clickable*/
 .leaflet-popup-content-wrapper {
-    border-radius: 0;
-    background: blueviolet;
-    color: white;
-    font-size: 14px;
+    border-radius: 50% !important;
+    font-size: 12px;
+    width: 200px;
+    box-shadow: 0 0px 0px rgba(0,0,0,0) !important;
 }
 
 .leaflet-popup-content {
-    margin: 5px;
+    margin: 0 !important;
 }
 
-.leaflet-popup-tip {
-    background: blueviolet;
-    display: none;
-} 
+.leaflet-
 
-.leaflet-popup-close-button {
-    display: none;
+.leaflet-popup-tip, 
+.leaflet-popup-close-button, 
+.leaflet-container a.leaflet-popup-close-button {
+    display: none !important;
 }
 
+/* custom map hr */ 
 hr.map {
     border: 0.80px solid #000;
     width: 100%;
