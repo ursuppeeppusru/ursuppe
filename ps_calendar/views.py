@@ -86,9 +86,6 @@ def event_map(request):
 @cache_page(60 * 60)
 def json_event_list(request):
     # JSON
-    # fields = ['slug', 'latitude', 'longitude']
-    # combine to one? add images
-    #event_submission_images = CalendarImages.objects.all().values()
     event_submissions = CalendarImages.objects.values(
         'calendar__id',
         'calendar__project_title',
