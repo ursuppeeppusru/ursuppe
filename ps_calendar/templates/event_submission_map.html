@@ -25,16 +25,14 @@
         <a href="{% url 'event_list' %}">list</a>
         <a class="active" href="{% url 'event_map' %}">map</a>
 </nav>
-<br/>
 
-{{ event_submissions|json_script }}
-
-<br/>
 <!-- LEAFLET MAP FEATURE -->
 <div id="map"></div>
-
+<hr class="map"/>
 <div id="eventDetails" style="display: none;"></div>
-
+<div id="event-detail-blank-placeholder">
+    <p>Click the dots on the map to explore current and upcoming events.</p>
+</div>
 
 <!-- map -->
 

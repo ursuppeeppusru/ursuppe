@@ -494,6 +494,7 @@ div.submission-image-detail-wrapper {
     font-size: 12px;
     width: 200px;
     box-shadow: 0 0px 0px rgba(0,0,0,0) !important;
+    background: transparent !important;
 }
 
 .leaflet-popup-content,
@@ -509,11 +510,24 @@ div.submission-image-detail-wrapper {
     display: none !important;
 }
 
+/* Map: Placeholder for event details <- Toggles off when marker on map is clicked */ 
+#event-detail-blank-placeholder {
+    text-align: center; 
+    vertical-align: middle;
+    min-height: 300px; 
+    display: block;
+}
+
+
 /* custom map hr */ 
 hr.map {
-    border: 0.80px solid #000;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid var(--color-primary);
+    padding: 0;
     width: 100%;
-    margin: 0;
+    margin: 0px auto 10px;
   }
 
 /* highlight index */

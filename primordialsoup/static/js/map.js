@@ -16,6 +16,7 @@ let markers = L.markerClusterGroup({
     spiderfyOnMaxZoom: true, showCoverageOnHover: false, zoomToBoundsOnClick: true,
     maxClusterRadius: 60,
     
+    
 });
 
 const jsonUrl = 'http://127.0.0.1:8000/events/json';
@@ -26,15 +27,14 @@ fetch(jsonUrl)
     .then(data => {
         // Loop through the data
         data.event_submissions.forEach(event => {
-            let id = event.id;
-            let eventImageId = event.calendar_id;
-            let latitude = parseFloat(event.latitude);
-            let longitude = parseFloat(event.longitude);
-//            console.log('Event ID: ' + id + '\n' + 'Event Image ID: ' + eventImageId);
-//            console.log('latitude: ' + latitude + 'longitude: ' + longitude)
+            const id = event.calendar__id;
+            const image = event.image;
+            const latitude = parseFloat(event.calendar__latitude);
+            const longitude = parseFloat(event.calendar__longitude);
 
-            let marker = L.marker([latitude, longitude], {icon: soupIcon});
-            marker.bindPopup(`<img style="border-radius: 50%;" src="https://kunsten.nu/wp-content/uploads/2024/03/gaza-18-904x603.jpg">`);
+            const marker = L.marker([latitude, longitude], {icon: soupIcon});
+            marker.bindPopup(`<img style="border-radius: 50%;" src="/media/${image}">`);
+            // http://127.0.0.1:8000/media/calendar_images/green-world-8-904x1356.jpg
             // 'src' should be event_submission_images.calendar_id corresponding to event_submissions.id
             // How can this be done....... 
             
@@ -65,51 +65,71 @@ fetch(jsonUrl)
 //     }
 // });
 
+// Formating JSON date
+const formatJsonDate = (jsonDate) => {
+    const date = new Date(jsonDate);
+    const options = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    return formattedDate;
+};
+
+
 // Improvement: get EventDetails based on cards. Kan man bruge django templating i js?
 function showEventDetails(event) {
+    const exhibitionOpening = formatJsonDate(event.calendar__exhibition_opening);
+    const exhibitionEnd = formatJsonDate(event.calendar__exhibition_end);
+    const vernissage = formatJsonDate(event.calendar__opening);
     const eventDetailsDiv = document.getElementById('eventDetails');
+    const eventDetailBlankPlaceholder = document.getElementById('event-detail-blank-placeholder');
     eventDetailsDiv.innerHTML = `
         <div class="row content events-list-card">
-            <div class="col-4 ">
-                <p>${event.artists}</p>
-                <a class="event-project-title-link" href="/events/${event.id}-${event.slug}">
-                    <h2 class="text-uppercase is-large event_project_title">${event.project_title}</h2>
+            <div class="col-4">
+                <p>${event.calendar__artists}</p>
+                <a class="event-project-title-link" href="/events/${event.calendar__id}-${event.calendar__slug}">
+                    <h2 class="text-uppercase is-large event_project_title">${event.calendar__project_title}</h2>
                 </a>
-                <img class="event-submission-image-list" src="{event.images.all.0.image.url}" alt="{event.images.all.0.image.caption}">
+                <img class="event-submission-image-list" src="{event.calendar__images.all.0.image.url}" alt="{event.calendar__images.all.0.image.caption}">
                 <br/>
-                <p>Curated by ${event.curators}</p>
+                <p>Curated by ${event.calendar__curators}</p>
                 <br/>
-                <p><small>${event.event_type}</small></p>
+                <p><small>${event.calendar__event_type}</small></p>
             </div>
             <div class="col-4">
-                <h4>${event.exhibition_opening} → ${event.exhibition_end}</h4>
+                <h4>${exhibitionOpening} → ${exhibitionEnd}</h4>
                 <br/>
                 <p>Weekly opening hours:</p>
-                <p>${event.opening_hours}</p>
+                <p>${event.calendar__opening_hours}</p>
                 <br/>
-                <h4>Opening/vernissage: ${event.opening}</h4>
+                <h4>Opening/vernissage: ${vernissage}</h4>
                 <br/>
                 <p>Opening hours for opening/vernissage:</p>
-                <p>${event.opening_hours_for_opening_date}</p>
+                <p>${event.calendar__opening_hours_for_opening_date}</p>
             </div>
             <div class="col-4">
-                <h4>${event.location}</h4>
-                <p>${event.location_address}</p>
+                <h4>${event.calendar__location}</h4>
+                <p>${event.calendar__location_address}</p>
                 <br/>
-                <p><small><a href="${event.link_to_location}" target="_blank">${event.link_to_location}</a></small></p>
+                <p><small><a href="${event.calendar__link_to_location}" target="_blank">${event.calendar__link_to_location}</a></small></p>
                 <br/>
                 <p><small>Admission:</small></p>
-                <p><small>${event.admission}</small></p>
+                <p><small>${event.calendar__admission}</small></p>
             </div>
         </div>
     `;
     eventDetailsDiv.style.display = 'block';
+    eventDetailBlankPlaceholder.style.display = 'none';
 }
 
 // Event listener for closing the post details
 map.on('popupclose', function() {
-    var eventDetailsDiv = document.getElementById('eventDetails');
+    const eventDetailsDiv = document.getElementById('eventDetails');
+    const eventDetailBlankPlaceholder = document.getElementById('event-detail-blank-placeholder');
     eventDetailsDiv.style.display = 'none';
+    eventDetailBlankPlaceholder.style.display = 'block';
 });
 
 // marker icons
