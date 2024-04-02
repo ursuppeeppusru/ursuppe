@@ -16,6 +16,13 @@ def trim_whitespaces(list):
 
     return result
 
+def strip_start_end(list):
+    # strip start and end spaces
+    result = []
+    for i in list:
+        result.append(i.strip())
+
+    return result
 
 def unique(list):
     # remove duplicates from list
@@ -72,6 +79,7 @@ def compile_list_current(list_type):
             result.append(i[list_type])
 
     result = trim_whitespaces(result)
+    result = strip_start_end(result)
     result = unique(result)
     # sort alphabetically
     result = sorted(result,key=str.lower)
@@ -87,7 +95,6 @@ def list_artists(request):
 @cache_page(60 * 60)
 def list_curators(request):
     return render(request, 'list_curators.html', {'list': compile_list('curators')})
-
 
 @cache_page(60 * 60)
 def list_photographers(request):

@@ -30,7 +30,8 @@
 <div class="row content">
     <div class="col-12">
         {% for artist in list %}
-        <a href="/search/?query={{ artist }}"><small>{{ artist.0 }}</small><h5>&emsp;&emsp;&emsp;&emsp;{{ artist }}</h5></a>
+            {% ifchanged %}<br/><h4>{{ artist.0 }}</h4><br/>{% endifchanged %}
+            <a href="/search/?query={{ artist }}">{{ artist }}</a><br/>
         {% endfor %}
     </div>
 </div>
