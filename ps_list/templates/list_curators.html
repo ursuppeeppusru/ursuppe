@@ -27,7 +27,8 @@
 <div class="row content">
     <div class="col-12">
         {% for curator in list %}
-        <a href="/search/?query={{ curator }}"><small>{{ curator.0 }}</small><h5>&emsp;&emsp;&emsp;&emsp;{{ curator }}</h5></a>
+            {% ifchanged %}<br/><h4>{{ curator.0 }}</h4><br/>{% endifchanged %}
+            <a href="/search/?query={{ curator }}">{{ curator }}</a><br/>
         {% endfor %}
     </div>
 </div>

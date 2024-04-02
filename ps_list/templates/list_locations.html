@@ -27,7 +27,8 @@
 <div class="row content">
     <div class="col-12">
         {% for location in list %}
-        <a href="/search/?query={{ location }}"><small>{{ location.0 }}</small><h5>&emsp;&emsp;&emsp;&emsp;{{ location }}</h5></a>
+            {% ifchanged %}<br/><h4>{{ location.0 }}</h4><br/>{% endifchanged %}
+            <a href="/search/?query={{ location }}">{{ location }}</a><br/>
         {% endfor %}
     </div>
 </div>
