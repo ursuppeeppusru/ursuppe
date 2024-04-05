@@ -74,14 +74,10 @@
         <h4>
         {{ event.description|linebreaksbr }}
         </h4>
-        <br/>
-        <h5><b>MAP</b></h5>
-        <br/>
-        <div id="eventDetailMap"></div>        
-
     </div>    
 </div>
-
+<div id="map-event-detail" style="width: 100%;"></div>
+<div id="map" style="display: none;"></div>
 <script>
 /* ICS file generator */
 document.getElementById('downloadICS').addEventListener('click', () => {
@@ -95,5 +91,7 @@ document.getElementById('downloadICS').addEventListener('click', () => {
     "{{ event.location_address }}"
   );  
 });
+
+
 </script>
 {% endblock content %}

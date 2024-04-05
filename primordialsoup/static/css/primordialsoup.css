@@ -467,14 +467,13 @@ div.submission-image-detail-wrapper {
 
 /* ADD MORE CSS HERE */
 
-
-/* leaflet map feature starts here */
-#map { 
+/* map events */
+#map,
+#map-event-detail { 
     height: 580px;
     width: 100%;
 }
 
-/* leaflet marker icon and cluster icon */
 .circle {
     width: 40px;
     height: 40px;
@@ -488,7 +487,6 @@ div.submission-image-detail-wrapper {
     font-weight: 300;
 }
 
-/* making popup box transparent and non-clickable*/
 .leaflet-popup-content-wrapper {
     border-radius: 50% !important;
     font-size: 12px;
@@ -510,16 +508,13 @@ div.submission-image-detail-wrapper {
     display: none !important;
 }
 
-/* Map: Placeholder for event details <- Toggles off when marker on map is clicked */ 
-#event-detail-blank-placeholder {
+#event-details-placeholder {
     text-align: center; 
     vertical-align: middle;
     min-height: 300px; 
     display: block;
 }
 
-
-/* custom map hr */ 
 hr.map {
     display: block;
     height: 1px;
@@ -532,7 +527,7 @@ hr.map {
 
 /* highlight index */
 
-/* map button */
+/* menu map button */
 div.circle-multiline {
     position: absolute;
     top: 388px;
