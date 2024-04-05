@@ -13,11 +13,13 @@
 <div class="row content events-detail-card">
     <div class="col-12"></div>
     <div class="col-4">
-        {% if event.exhibition_end <= today_plus_2w %}
+        {% if event.exhibition_end < today %}
+        <span class="event-detail-status-label">PAST</span>
+        {% elif event.exhibition_end <= today_plus_2w %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif event.exhibition_opening < today %}
         <span class="event-detail-status-label">CURRENT</span>
-        {% else %}
+        {% elif event.exhibition_opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
         {% endif %}
         <p>{{ event.artists }}</p>

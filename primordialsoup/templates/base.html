@@ -196,11 +196,18 @@
 
         <hr/>
 
+        <nav class="nav-map">
+            <a href="{% url 'event_map' %}">
+                <div class="map-circle">
+                    <span class="text-uppercase">map</span></br>
+                </div>
+            </a>
+        </nav>
         <nav class="row nav-left main">
-            <div class="col-6">
+            <div class="col-6 link">
                 <a href="{% url 'exhibition_list' %}">archive</a>                
             </div>
-            <div class="col-6 text-right">
+            <div class="col-6 text-right link">
                 <a href="{% url 'exhibition_submission_create' %}">create</a>                
             </div>
         </nav>
@@ -208,23 +215,17 @@
         <hr/>
 
         <nav class="row nav-left main">
-            <div class="col-6">
+            <div class="col-6 link">
                 <a href="{% url 'event_list' %}">events</a>                
             </div>
-            <div class="col-6 text-right">
+            <div class="col-6 text-right link">
                 <a href="{% url 'calendar_submission_create' %}">create</a>                
             </div>
         </nav>
-
         <hr/>
 
         {% include 'messages.html' %}
 
-        <a href="{% url 'event_map' %}">
-            <div class='circle-multiline'>
-            <span class="text-uppercase">map</span></br>
-            </div>
-        </a>
         {% block content %}{% endblock %}
 
         {# Global javascript #}

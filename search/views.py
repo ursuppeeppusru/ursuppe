@@ -1,13 +1,24 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
+from django.utils import timezone
+from django.db.models import Q
+
+from datetime import date, timedelta
 
 from wagtail.models import Page
 from wagtail.search.models import Query
 
-from django.db.models import Q
-
 from ps_submission.models import ExhibitionSubmission
 from ps_calendar.models import CalendarSubmission
+
+
+def today():
+    today = timezone.now().date()
+    return today
+
+def today_plus_2w():    
+    today_plus_2w = today() + timedelta(weeks=2)
+    return today_plus_2w
 
 def search(request):
     search_query = request.GET.get("query", None)
@@ -59,5 +70,7 @@ def search(request):
             "search_results": search_results,
             "archive_results": archive_results,
             "events_results": events_results,
+            "today": today(), 
+            "today_plus_2w": today_plus_2w(),
         },
     )

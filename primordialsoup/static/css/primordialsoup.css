@@ -150,12 +150,15 @@ header img.logo {
 
 /* nav */
 
+nav.nav-map {
+    position: relative;
+}
+
 nav.main {
   padding: 0 25px;
 }
 
-nav.main div {
-  position: relative;
+nav.main div.link {
   font-size: 2rem;
   padding: 10px 0 10px 0;
   color: var(--color-primary);
@@ -165,11 +168,48 @@ nav.main div {
 }
 
 @media only screen and (max-width: 599px) {
-    nav.main div {
+    nav.main div.link {
       font-size: 2.5rem;
       flex: content;
     }
 }
+
+/* map button */
+div.map-circle {
+    position: absolute;
+    top: 30px;
+    left: 47%;
+    height: 50px;
+    width: 70px;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+    background: var(--bg-color);
+    z-index: 999999;
+    /* rotate: 30deg; */
+
+}
+
+div.map-circle span {
+    position: absolute;
+    top: 17px;
+    left: 21px;
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 599px) {
+    div.map-circle {
+        top: 35px;
+        left: 43%;
+    }
+}
+
+@media only screen and (max-width: 435px) {
+    div.map-circle {
+        top: 35px;
+        left: 40%;
+    }
+}
+
 
 nav.footer {
   padding: 0 35px;
@@ -402,7 +442,7 @@ img.event-submission-image-list {
     z-index: -99;
     display: none;
 
-    opacity: 0.8;
+    opacity: 0.9;
 
     position: fixed;
     top: 50%; 
@@ -526,45 +566,6 @@ hr.map {
   }
 
 /* highlight index */
-
-/* menu map button */
-div.circle-multiline {
-    position: absolute;
-    top: 388px;
-    right: 47.5%;
-    display: table-cell;
-    height: 50px;
-    width: 70px;
-    text-align: center;
-    vertical-align: middle;
-    border-radius: 50%;
-    border: 1px solid var(--color-primary);
-    background: var(--bg-color);
-    z-index: 999999;
-    /* rotate: 30deg; */
-
-}
-
-div.circle-multiline span {
-    position: absolute;
-    top: 17px;
-    left: 21px;
-    font-size: 12px;
-}
-
-@media only screen and (max-width: 599px) {
-    div.circle-multiline {
-        top: 525px;
-        right: 43%;
-    }
-}
-
-@media only screen and (max-width: 435px) {
-    div.circle-multiline {
-        top: 545px;
-        right: 40%;
-    }
-}
 
 div.events-highlight-card {
     position: relative;
