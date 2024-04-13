@@ -33,10 +33,10 @@ class ExhibitionSubmission(models.Model):
     )
     link_to_location = models.URLField(verbose_name="Location link/URL", help_text="URL e.g., https://ladder.dk", blank=True)
     exhibition_opening = models.DateField(
-        verbose_name="Exhibition opening", help_text="Required*<br/><br/>e.g., 14/10/2023", blank=False
+        verbose_name="Activity opening", help_text="Required*<br/><br/>e.g., 14/10/2023", blank=False
     )
     exhibition_end = models.DateField(
-        verbose_name="Exhibition end", help_text="Required*<br/><br/>e.g., 16/10/2023", blank=False
+        verbose_name="Activity end", help_text="Required*<br/><br/>e.g., 16/10/2023", blank=False
     )
     description = models.TextField(
         verbose_name="Text/description/press release", help_text="Required *", blank=False
@@ -108,7 +108,7 @@ class ExhibitionImages(models.Model):
     )
     image = models.ImageField(
         upload_to=get_image_filename, 
-        verbose_name="Exhibition Image",
+        verbose_name="Activity Image",
         validators=[validate_image_size, validate_image_extension],
         max_length=500
     )
