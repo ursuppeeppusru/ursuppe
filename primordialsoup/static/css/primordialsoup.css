@@ -151,6 +151,18 @@ header {
   padding: 25px 25px 0px 25px;
 }
 
+@media only screen and (max-width: 599px) {
+    header .header-text {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 599px) {
+    header .header-text {
+        font-size: 0.9em;
+    }
+}
+
 header img.logo {
 
 }
