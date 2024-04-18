@@ -34,12 +34,10 @@
     <div class="col-4">
         <h4>{{ event.exhibition_opening }} → {{ event.exhibition_end }}</h4>
         <br/>
-        <p>Weekly opening hours:</p>
         <p>{{ event.opening_hours }}</p>
         <br/>
         <h4>Opening/vernissage: {{ event.opening }}</h4>
         <br/>
-        <p>Opening hours for opening/vernissage:</p>
         <p>{{ event.opening_hours_for_opening_date }}</p>
         <p style="display: none;">{{ event.id }}</p>
     </div>
@@ -74,9 +72,9 @@
     <div class="col-6">
         <h5><b>TEXT</b></h5>
         <br/>
-        <h4>
+        <p>
         {{ event.description|linebreaksbr }}
-        </h4>
+        </p>
     </div>    
 </div>
 <script>

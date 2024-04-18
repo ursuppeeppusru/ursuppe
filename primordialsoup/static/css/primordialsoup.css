@@ -17,6 +17,7 @@
   --list-img-border: 50%;
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
+  --header-font: basteleur;
 }
 
 .dark {
@@ -37,6 +38,7 @@
   --list-img-border: 50%;
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
+  --header-font: basteleur;
 }
 
 /* general */
@@ -56,6 +58,11 @@ body {
     overflow-x: hidden;
 }
 
+@font-face {
+    font-family: basteleur;
+    src: url(/static/font/Basteleur-Moonlight.otf);
+}
+
 .row {
     overflow-x: hidden;
 }
@@ -73,6 +80,14 @@ hr {
 *:before,
 *:after {
     box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--header-font);
 }
 
 h1,
@@ -136,6 +151,18 @@ header {
   padding: 25px 25px 0px 25px;
 }
 
+@media only screen and (max-width: 599px) {
+    header .header-text {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 599px) {
+    header .header-text {
+        font-size: 0.9em;
+    }
+}
+
 header img.logo {
 
 }
@@ -159,12 +186,13 @@ nav.main {
 }
 
 nav.main div.link {
-  font-size: 2rem;
-  padding: 10px 0 10px 0;
-  color: var(--color-primary);
-  text-decoration: none;
-  text-transform: uppercase;
-  margin-bottom: 0px;
+    font-family: var(--header-font);
+    font-size: 2rem;
+    padding: 12px 0 10px 0;
+    color: var(--color-primary);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 0px;
 }
 
 @media only screen and (max-width: 599px) {
@@ -216,12 +244,13 @@ nav.footer {
 }
 
 nav.footer a {
-  position: relative;
-  font-size: 2rem;
-  padding: 9px 20px 9px 0;
-  color: var(--color-primary);
-  text-decoration: none;
-  text-transform: uppercase;
+    font-family: var(--header-font);
+    position: relative;
+    font-size: 2rem;
+    padding: 12px 20px 9px 0;
+    color: var(--color-primary);
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 @media only screen and (max-width: 599px) {
