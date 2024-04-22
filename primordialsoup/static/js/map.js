@@ -32,9 +32,7 @@ const markers = L.markerClusterGroup({
 
 // Fetch JSON
 const jsonUrl = '/events/json';
-fetch(jsonUrl)
-    .then(response => response.json())
-    .then(data => {
+fetch(jsonUrl).then(response => response.json()).then(data => {
         // Loop through the data
         data.event_submissions.forEach(event => {
             const id = event.calendar__id; 
@@ -46,7 +44,7 @@ fetch(jsonUrl)
             // Image as popup
             marker.bindPopup(`<img style="border-radius: 50%;" src="/media/${image}">`);
             
-            // Add marker to the marker cluster group
+            // Add marker to the markwer cluster group
             markers.addLayer(marker);
 
             // Event listener for marker click
@@ -60,7 +58,7 @@ fetch(jsonUrl)
     })
     .catch(error => {
         console.error('Error fetching data:', error);
-     });
+});
 
 // Formating JSON date for event details
 const formatJsonDate = (jsonDate) => {
@@ -96,28 +94,29 @@ function showEventDetails(event) {
             <p><small>${event.calendar__event_type}</small></p>
         </div>
         <div class="col-4">
-            <p>Opening/Vernissage: ${vernissage}, ${event.calendar__opening_hours_for_opening_date}</p>
-            <br/>
             <h4>${exhibitionOpening} → ${exhibitionEnd}</h4>
+            <br/>
             <p>${event.calendar__opening_hours}</p>
             <br/>
-            <p><small>Admission: ${event.calendar__admission}</small></p>
-     
+            <h4>Opening/Vernissage: </h4>
+            <br/>
+            <p>${vernissage}, ${event.calendar__opening_hours_for_opening_date}</p>
+            <br/>
         </div>
         <div class="col-4">
-            <h4><b>${event.calendar__location}</b></h4>
+            <h4>${event.calendar__location}</h4>
             <p>${event.calendar__location_address}</p>
             <br/>
             <p><small><a href="${event.calendar__link_to_location}" target="_blank">${event.calendar__link_to_location}</a></small></p>
             <br/>
-
+            <p><small>Admission: ${event.calendar__admission}</small></p>
         </div>
     </div>
 `;
     // Toggle display
     eventDetailsDiv.style.display = 'block';
     eventDetailBlankPlaceholder.style.display = 'none';
-}
+};
 
 // Hide event details when marker is deselected
 map.on('popupclose', function() {
