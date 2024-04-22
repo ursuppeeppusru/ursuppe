@@ -534,6 +534,66 @@ div.submission-image-detail-wrapper {
     width: 100% !important;
 }
 
+/* ADD MORE CSS HERE */
+
+/* map events */
+#map,
+#map-event-detail { 
+    height: 580px;
+    width: 100%;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    border: solid 1px var(--color-primary);
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 50% !important;
+    font-size: 12px;
+    width: 200px;
+    box-shadow: 0 0px 0px rgba(0,0,0,0) !important;
+    background: transparent !important;
+}
+
+.leaflet-popup-content,
+.leaflet-popup.leaflet-zoom-animated {
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none;
+}
+
+.leaflet-popup-tip, 
+.leaflet-popup-close-button, 
+.leaflet-container a.leaflet-popup-close-button {
+    display: none !important;
+}
+
+#event-details-placeholder {
+    text-align: center; 
+    vertical-align: middle;
+    min-height: 300px; 
+    display: block;
+}
+
+hr.map {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid var(--color-primary);
+    padding: 0;
+    width: 100%;
+    margin: 0px auto 10px;
+  }
+
 /* highlight index */
 
 div.events-highlight-card {

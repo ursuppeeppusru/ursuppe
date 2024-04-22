@@ -15,7 +15,7 @@
     <div class="col-6">
         <h5><b>EVENTS</b></h5>
     </div>
-    <div class="col-6 text-right">
+    <div class="col-6 subscribe-text text-right">
         <p><a href="{% url 'feed_information' %}"><b>Subscribe</b> to the events calendar feeds for automatic updates</a></p>
     </div>
 </div>
@@ -23,9 +23,13 @@
         <a href="{% url 'event_list' %}">list</a>
         <a class="active" href="{% url 'event_map' %}">map</a>
 </nav>
-<br/>
 
-<!-- map -->
+<!-- MAP FEATURE -->
+<div id="map"></div>
+<hr class="map"/>
+<div id="event-details" style="display: none;"></div>
+<div class="col-12" id="event-details-placeholder">
+    <p>Click the dots on the map to explore current and upcoming events.</p>
+</div>
 
 {% endblock content %}
-
