@@ -205,7 +205,7 @@ nav.main div.link {
 /* map button */
 div.map-circle {
     position: absolute;
-    top: 30px;
+    top: 31px;
     left: 47%;
     height: 50px;
     width: 70px;
@@ -226,14 +226,14 @@ div.map-circle span {
 
 @media only screen and (max-width: 599px) {
     div.map-circle {
-        top: 35px;
+        top: 38px;
         left: 43%;
     }
 }
 
 @media only screen and (max-width: 435px) {
     div.map-circle {
-        top: 35px;
+        top: 38px;
         left: 40%;
     }
 }
