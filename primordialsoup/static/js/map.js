@@ -11,7 +11,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-
 // Clustering
 const markers = L.markerClusterGroup({
     iconCreateFunction: function (cluster) {
@@ -82,37 +81,37 @@ function showEventDetails(event) {
     
     // Event Details 'card'
     eventDetailsDiv.innerHTML = `
-    <div class="row content events-list-card">
-        <div class="col-4">
-            <p>${event.calendar__artists}</p>
-            <a class="event-project-title-link" href="/events/${event.calendar__id}-${event.calendar__slug}">
-                <h2 class="text-uppercase is-large event_project_title">${event.calendar__project_title}</h2>
-            </a>
-            <br/>
-            <p>Curated by ${event.calendar__curators}</p>
-            <br/>
-            <p><small>${event.calendar__event_type}</small></p>
-        </div>
-        <div class="col-4">
-            <h4>${exhibitionOpening} → ${exhibitionEnd}</h4>
-            <br/>
-            <p>${event.calendar__opening_hours}</p>
-            <br/>
-            <h4>Opening/Vernissage: </h4>
-            <br/>
-            <p>${vernissage}, ${event.calendar__opening_hours_for_opening_date}</p>
-            <br/>
-        </div>
-        <div class="col-4">
-            <h4>${event.calendar__location}</h4>
-            <p>${event.calendar__location_address}</p>
-            <br/>
-            <p><small><a href="${event.calendar__link_to_location}" target="_blank">${event.calendar__link_to_location}</a></small></p>
-            <br/>
-            <p><small>Admission: ${event.calendar__admission}</small></p>
-        </div>
-    </div>
-`;
+        <div class="row content events-list-card">
+            <div class="col-4">
+                <p>${event.calendar__artists}</p>
+                <a class="event-project-title-link" href="/events/${event.calendar__id}-${event.calendar__slug}">
+                    <h2 class="text-uppercase is-large event_project_title">${event.calendar__project_title}</h2>
+                </a>
+                <br/>
+                <p>Curated by ${event.calendar__curators}</p>
+                <br/>
+                <p><small>${event.calendar__event_type}</small></p>
+            </div>
+            <div class="col-4">
+                <h4>${exhibitionOpening} → ${exhibitionEnd}</h4>
+                <br/>
+                <p>${event.calendar__opening_hours}</p>
+                <br/>
+                <h4>Opening/Vernissage: </h4>
+                <br/>
+                <p>${vernissage}, ${event.calendar__opening_hours_for_opening_date}</p>
+                <br/>
+            </div>
+            <div class="col-4">
+                <h4>${event.calendar__location}</h4>
+                <p>${event.calendar__location_address}</p>
+                <br/>
+                <p><small><a href="${event.calendar__link_to_location}" target="_blank">${event.calendar__link_to_location}</a></small></p>
+                <br/>
+                <p><small>Admission: ${event.calendar__admission}</small></p>
+            </div>
+        </div>`;
+        
     // Toggle display
     eventDetailsDiv.style.display = 'block';
     eventDetailBlankPlaceholder.style.display = 'none';
@@ -135,5 +134,3 @@ const soupIcon = L.divIcon({
     iconAnchor:   [20, 20], 
     popupAnchor:  [0, -40] 
 });
-
-
