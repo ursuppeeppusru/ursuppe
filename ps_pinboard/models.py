@@ -42,7 +42,9 @@ class PinBoard(models.Model):
         choices=[(True, "Yes"), (False, "No")],
     )
     published = models.BooleanField(default=False, help_text='Check this box to publish')
-
+    expiration_date = models.DateField(
+        verbose_name="Expiration date", help_text="Required *. The post will be removed after the expiration date<br/><br/>e.g., 14/10/2023", blank=False, null=True
+    )
     slug = models.SlugField(max_length=255, unique=False, blank=True)
 
     def save(self, *args, **kwargs):
