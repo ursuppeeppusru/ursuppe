@@ -1,4 +1,4 @@
-// Center of map and zoom level
+// Define position of map
 const zoom = 6;
 const center = [56.26904388487482, 10.755436652621228];
 
