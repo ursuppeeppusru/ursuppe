@@ -1,7 +1,9 @@
+// Center of map and zoom level
+const zoom = 6;
+const center = [56.26904388487482, 10.755436652621228];
+
 // Declaring map
-const map = L.map('map', {
-    center: [56.26904388487482, 10.755436652621228],
-    zoom: 6,
+const map = L.map('map', {center: center, zoom: zoom,
     dragging: !L.Browser.mobile,
     tap: !L.Browser.mobile
 });
@@ -26,7 +28,7 @@ const markers = L.markerClusterGroup({
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false, 
     zoomToBoundsOnClick: true,
-    maxClusterRadius: 60,
+    maxClusterRadius: 30,
 });
 
 // Fetch JSON
@@ -72,17 +74,28 @@ const formatJsonDate = (jsonDate) => {
 };
 
 // Show event details when marker is selected
+// Added span element for event status label
+// Changed wording from 'exhibition' to 'event' for variabels
+// Changed clustering distance
 function showEventDetails(event) {
-    const exhibitionOpening = formatJsonDate(event.calendar__exhibition_opening);
-    const exhibitionEnd = formatJsonDate(event.calendar__exhibition_end);
+    const eventOpening = formatJsonDate(event.calendar__exhibition_opening);
+    const eventEnd = formatJsonDate(event.calendar__exhibition_end);
     const vernissage = formatJsonDate(event.calendar__opening);
     const eventDetailsDiv = document.getElementById('event-details');
     const eventDetailBlankPlaceholder = document.getElementById('event-details-placeholder');
-    
-    // Event Details 'card'
+    if (new Date(eventEnd) <= new Date(Date.now() + 12096e5)) {
+        eventStatus = "CLOSING SOON";
+    } else if (new Date(eventOpening) < new Date()) {
+        eventStatus = "CURRENT";
+    } else {
+        eventStatus = "UPCOMING";
+    };
+
+    // Event Details card
     eventDetailsDiv.innerHTML = `
         <div class="row content events-list-card">
             <div class="col-4">
+            <span class="event-detail-status-label">${eventStatus}</span>
                 <p>${event.calendar__artists}</p>
                 <a class="event-project-title-link" href="/events/${event.calendar__id}-${event.calendar__slug}">
                     <h2 class="text-uppercase is-large event_project_title">${event.calendar__project_title}</h2>
@@ -93,7 +106,7 @@ function showEventDetails(event) {
                 <p><small>${event.calendar__event_type}</small></p>
             </div>
             <div class="col-4">
-                <h4>${exhibitionOpening} → ${exhibitionEnd}</h4>
+                <h4>${eventOpening} → ${eventEnd}</h4>
                 <br/>
                 <p>${event.calendar__opening_hours}</p>
                 <br/>
@@ -111,7 +124,7 @@ function showEventDetails(event) {
                 <p><small>Admission: ${event.calendar__admission}</small></p>
             </div>
         </div>`;
-        
+
     // Toggle display
     eventDetailsDiv.style.display = 'block';
     eventDetailBlankPlaceholder.style.display = 'none';
