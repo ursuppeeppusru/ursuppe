@@ -447,6 +447,14 @@ div.events-detail-card {
     padding: 10px 10px 10px 10px;
 }
 
+div.events-list-card p {
+    white-space: pre-wrap;
+}
+
+div.events-detail-card p {
+    white-space: pre-wrap;
+}
+
 /*
 @media only screen and (max-width: 599px) {
     div.events-list-card {
