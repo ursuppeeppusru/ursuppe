@@ -22,10 +22,12 @@
 <div>
 <nav class="tabs text-uppercase is-full pinboard-categories">
     <!-- TODO: highlights -->
-    <a href="{% url 'pinboard_list' %}">All</a>
+    <a class="{% if 'category' not in request.path %}active{% endif %}"href="{% url 'pinboard_list' %}">All</a>
     {% for pinboard_categories in pinboard_categories %}
-    <a href="/pinboard/category/{{ pinboard_categories }}">{{ pinboard_categories }}</a>
+    <a class="{% if pinboard_categories in request.path %}active{% endif %}" href="/pinboard/category/{{ pinboard_categories }}">{{ pinboard_categories }}</a>
     {% endfor %}
+
+
 </nav>
 </div>
 {% if pinboard_posts %}

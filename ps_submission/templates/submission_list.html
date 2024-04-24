@@ -19,8 +19,9 @@
 <div>
     <nav class="tabs text-uppercase is-full">
         <!-- TODO: add highlighting -->
-        {% for year in years %}
-        <a href="{% url 'exhibition_list' %}{{ year }}">{{ year }}</a>
+        <a class="{% if request.path == '/archive/' %}active{% endif %}"href="{% url 'exhibition_list' %}">All</a>
+        {% for year in years reversed %}
+        <a class="{% if year|lower in request.path %}active{% endif %}" href="{% url 'exhibition_list' %}{{ year }}">{{ year }}</a>
         {% endfor %}
     </nav>
 </div>

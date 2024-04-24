@@ -36,7 +36,7 @@ def pinboard_post(request):
 @cache_page(60 * 60)
 def pinboard_list(request):
     # Only objects which are marked as published, where end date has not exceeded and opening date has started
-    pinboard_posts = PinBoard.objects.filter(published=True)
+    pinboard_posts = PinBoard.objects.filter(published=True).order_by('-created_at')
     pinboard_categories = PinBoard.objects.values_list('category', flat=True).distinct()
     return render(request, 'pinboard_list.html',
                   {'today': today, 'pinboard_posts': pinboard_posts, 'pinboard_categories': pinboard_categories})
@@ -44,7 +44,7 @@ def pinboard_list(request):
 @cache_page(60 * 60)
 def pinboard_list_category(request, category):
     # Only objects which are marked as published, where end date has not exceeded and opening date has started
-    pinboard_posts = PinBoard.objects.filter(category=category).filter(published=True)
+    pinboard_posts = PinBoard.objects.filter(category=category).filter(published=True).order_by('-created_at')
     pinboard_categories = PinBoard.objects.values_list('category', flat=True).distinct()
     return render(request, 'pinboard_list.html',
                   {'today': today, 'pinboard_posts': pinboard_posts, 'pinboard_categories': pinboard_categories})

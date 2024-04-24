@@ -1,7 +1,7 @@
 /* Variables */
 :root {
   --bg-color: #c4cf6a;
-  --bg-secondary-color: #f3f3f6;
+  --bg-secondary-color: #e8ecc5;
   --color-primary: #000;
   --color-secondary: #fff;
   --color-lightGrey: #000;
@@ -18,11 +18,12 @@
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
   --header-font: basteleur;
+  --date-color-scheme: light;
 }
 
 .dark {
   --bg-color: #736751;
-  --bg-secondary-color: #f3f3f6;
+  --bg-secondary-color: #392613;
   --color-primary: #fefede;
   --color-secondary: #000;
   --color-lightGrey: #000;
@@ -39,6 +40,7 @@
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
   --header-font: basteleur;
+  --date-color-scheme: dark;
 }
 
 /* general */
@@ -340,8 +342,12 @@ form p {
     margin-bottom: 20px;
 }
 
+[type="date"]::-webkit-calendar-picker-indicator {
+    color-scheme: var(--date-color-scheme);
+}
+
 input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],[type=reset]), select, textarea, textarea[type=text] {
-    background: var(--color-secondary);
+    background: var(--bg-secondary-color);
     border: 1px solid var(--font-color);
     color: var(--font-color);
     border-radius: 0px;
@@ -445,6 +451,14 @@ div.events-detail-card {
     position: relative;
     margin: 0 20px 20px 20px;
     padding: 10px 10px 10px 10px;
+}
+
+div.events-list-card p {
+    white-space: pre-wrap;
+}
+
+div.events-detail-card p {
+    white-space: pre-wrap;
 }
 
 /*
