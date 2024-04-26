@@ -49,6 +49,18 @@ Run development server*:
 
 Note that for production it is recommended to run the application with [WSGI](https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/).
 
+## Map
+
+The map feature is made with Leaflet and OpenStreetMap. The coordinates for each event is retrieved from the OpenStreetMap API on each event creation and saved as a part of the model for events.
+
+The default position and zoom level is set to the geographical area of Denmark, but can be configured in `map.js` located at `./primordialsoup/static/js/` as seen below.
+
+```
+// Define position of map
+const zoom = 6;
+const center = [56.26904388487482, 10.755436652621228];
+```
+
 ## Cache
 
 The default cache program is redis and is enabled by default in the production environment. The default cache is set to 1 hour and can be configured in each views found in the `views.py` files under each Django app.
