@@ -370,6 +370,7 @@ function showEventDetails(event) {
                 <p>Curated by ${event.calendar__curators}</p>
                 <br/>
                 <p><small>${event.calendar__event_type}</small></p>
+                <br/>
             </div>
             <div class="col-4">
                 <h4>${eventOpening} → ${eventEnd}</h4>

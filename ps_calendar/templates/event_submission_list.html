@@ -53,9 +53,12 @@
         </a>
         <img class="event-submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
         <br/>
+        {% if submission.curators %}
         <p>Curated by {{ submission.curators }}</p>
         <br/>
+        {% endif %}
         <p><small>{{ submission.event_type }}</small></p>
+        <br/>
     </div>
     <div class="col-4">
         <h4>{{ submission.exhibition_opening }} → {{ submission.exhibition_end }}</h4>

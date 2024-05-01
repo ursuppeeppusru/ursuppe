@@ -27,9 +27,12 @@
             <h2 class="text-uppercase is-large event_project_title">{{ event.project_title }}</h2>
         </a>
         <br/>
+        {% if event.curators %}
         <p>Curated by {{ event.curators }}</p>
         <br/>
+        {% endif %}
         <p><small>{{ event.event_type }}</small></p>
+        <br/>
     </div>
     <div class="col-4">
         <h4>{{ event.exhibition_opening }} → {{ event.exhibition_end }}</h4>
