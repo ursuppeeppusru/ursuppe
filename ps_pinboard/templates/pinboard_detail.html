@@ -35,7 +35,7 @@
             <h3>{{ post.title }}</h3>
             <small>Posted {{ post.created_at|timesince }} ago</small><br/><br/>
             <p class="text-uppercase">{{ post.get_category_display }}</p><br/>
-            <p>{{ post.description }}</p><br/>
+	    <p>{{ post.description|linebreaksbr }}</p><br/>
             <p>{{ post.location }}</p><br/>
             <p>{{ post.contact_information }}</p>
         </div>
