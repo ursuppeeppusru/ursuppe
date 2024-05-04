@@ -17,9 +17,6 @@
 {% endblock extra_css %}
 
 {% block content %}
-
-
-
 <div class="row content">
     <div class="col-6">
         <h5><b>EVENTS</b></h5>
@@ -33,25 +30,21 @@
         <a class="active" href="{% url 'event_map' %}">map</a>
 </nav>
 
-<!-- MAP FEATURE -->
+<!-- Leaflet map -->
 <div id="map"></div>
 <hr class="map"/>
 <div id="event-details" style="display: none;"></div>
 <div class="col-12" id="event-details-placeholder">
     <p>Click the dots on the map to explore current and upcoming events.</p>
 </div>
-
-
-
 {% endblock content %}
 
-
 {% block extra_js %}
-{# Override this in templates to add extra javascript #}
-        <!-- leaflet.js must be loaded before local map.js -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-        <!-- leaflet.markercluster.js -->
-        <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-        <!-- local map.js -->
-        <script type="text/javascript" src="{% static 'js/map.js' %}"></script> 
+<!-- leaflet.js-->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- leaflet.markercluster.js -->
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<!-- local map.js -->
+<script type="text/javascript" src="{% static 'js/leaflet_sleep.js' %}"></script> 
+<script type="text/javascript" src="{% static 'js/map.js' %}"></script> 
 {% endblock %}

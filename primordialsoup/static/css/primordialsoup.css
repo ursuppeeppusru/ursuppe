@@ -550,7 +550,7 @@ div.submission-image-detail-wrapper {
 
 /* ADD MORE CSS HERE */
 
-/* map events */
+/* leaflet map */
 #map,
 #map-event-detail { 
     height: 580px;
