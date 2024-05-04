@@ -14,14 +14,14 @@ def exhibition_submission_create(request):
         submission_form = ExhibitionSubmissionForm(request.POST)
         ImageFormSet = modelformset_factory(ExhibitionImages, form=ExhibitionImagesForm)
         formset = ImageFormSet(request.POST, request.FILES, queryset=ExhibitionImages.objects.none())
-
+        
         if submission_form.is_valid() and formset.is_valid():
             if 5 <= formset.total_form_count() <= 21:
                 submission = submission_form.save()
                 for form in formset:
                     if form.cleaned_data:
                         image = form.save(commit=False)
-                        image.activity = submission
+                        image.exhibition = submission
                         image.save()
 
                 messages.success(request, "Thank you for creating your archive. We will look through your submission shortly, and if it meets our criteria it will be published onto this platform. By creating your archive you have also accepted the possibility of being featured on the index page highlighted by our board of artist-moderators, as well as on our social media.")
@@ -29,17 +29,20 @@ def exhibition_submission_create(request):
             else:
                 messages.error(request, "There must be a minimum of 5 images and a maximum 20 images. Please re-submit the form.")
         else:
-            
-            # print(formset.errors)
             errors = {}
-            for error_dict in formset.errors:
-                if error_dict:
-                    for key, value in error_dict.items():
+            
+            for formset_error_dict in formset.errors:
+                if formset_error_dict:
+                    for key, value in formset_error_dict.items():
                         #if isinstance(value, str) or key == 'image':
                         errors[key.upper()] = value[0].upper()
-            
-            #errors = formset.errors
-            
+           
+            for form_error_dict in submission_form.errors:
+                if form_error_dict:
+                    for key, value in form_error_dict.items():
+                        #if isinstance(value, str) or key == 'image':
+                        errors[key.upper()] = value[0].upper()
+             
             messages.error(request, "Some error occurred. Please re-check and re-submit the form.")
             formset = ImageFormSet(queryset=ExhibitionImages.objects.none())
             
