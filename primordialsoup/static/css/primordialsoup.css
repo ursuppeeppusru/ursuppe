@@ -551,10 +551,13 @@ div.submission-image-detail-wrapper {
 /* ADD MORE CSS HERE */
 
 /* leaflet map */
-#map,
-#map-event-detail { 
+#map { 
     height: 580px;
     width: 100%;
+}
+
+.map-event-detail {
+    margin-bottom: -10px;
 }
 
 .circle {
@@ -606,7 +609,11 @@ hr.map {
     padding: 0;
     width: 100%;
     margin: 0px auto 10px;
-  }
+}
+
+hr.map-event-detail-top {
+    margin: 0;
+}
 
 /* highlight index */
 
