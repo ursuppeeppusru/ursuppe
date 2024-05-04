@@ -104,7 +104,7 @@ def validate_image_extension(value):
 # Image Model
 class ExhibitionImages(models.Model):
     exhibition = models.ForeignKey(
-        ExhibitionSubmission, on_delete=models.CASCADE, related_name="images"
+        ExhibitionSubmission, on_delete=models.CASCADE, related_name="images", blank=True
     )
     image = models.ImageField(
         upload_to=get_image_filename, 
