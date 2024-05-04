@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %} {{ event.project_title }} | Events {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+        <!-- leaflet.js stylesheet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/>
+        <!-- leaflet.js markerclustering stylesheet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
+{% endblock extra_css %}
+
+{% block content %}
+<div class="row content events-detail-card">
+    <div class="col-12"></div>
+    <div class="col-4">
+        {% if event.exhibition_end < today %}
+        <span class="event-detail-status-label">PAST</span>
+        {% elif event.exhibition_end <= today_plus_2w %}
+        <span class="event-detail-status-label">CLOSING SOON</span>
+        {% elif event.exhibition_opening < today %}
+        <span class="event-detail-status-label">CURRENT</span>
+        {% elif event.exhibition_opening > today %}
+        <span class="event-detail-status-label">UPCOMING</span>
+        {% endif %}
+        <p>{{ event.artists }}</p>
+        <a class="event-project-title-link" href="{% url 'event_detail' event_id=event.id event_project_title=event.slug %}">
+            <h2 class="text-uppercase is-large event_project_title">{{ event.project_title }}</h2>
+        </a>
+        <br/>
+        {% if event.curators %}
+        <p>Curated by {{ event.curators }}</p>
+        <br/>
+        {% endif %}
+        <p><small>{{ event.event_type }}</small></p>
+        <br/>
+    </div>
+    <div class="col-4">
+        <h4>{{ event.exhibition_opening }} → {{ event.exhibition_end }}</h4>
+        <br/>
+        <p>{{ event.opening_hours|linebreaks }}</p>
+        <br/>
+        <h4>Opening/vernissage: {{ event.opening }}</h4>
+        <br/>
+        <p>{{ event.opening_hours_for_opening_date }}</p>
+        <p style="display: none;">{{ event.id }}</p>
+    </div>
+    <div class="col-4">
+        <h4>{{ event.location }}</h4>
+        <p>{{ event.location_address }}</p>
+        <br/>
+        <p><small><a href="{{ event.link_to_location }}" target="_blank">{{ event.link_to_location }}</a></small></p>
+        <br/>
+        <p><small>Admission:</small></p>
+        <p><small>{{ event.admission }}</small></p>
+    </div>
+</div>
+<hr/>
+<div class="col-12 text-center"> 
+
+    <a id="downloadICS" href="#/"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a>
+</div>
+<hr/>
+<div class="row content">
+    <div class="col-12"></div>
+    <div class="col-6">
+        <h5><b>IMAGE</b></h5>
+        <br/>
+        {% if event.images.all.0.image.url %} 
+        <img class="is-full-width" src="{{ event.images.all.0.image.url }}" alt="{{ event.images.all.0.image.caption }}">
+        <p><small>{{ event.images.all.0.caption }}</small></p>
+        {% else %}
+        <p>[no image]</p>
+        {% endif %}
+    </div>
+    <div class="col-6">
+        <h5><b>TEXT</b></h5>
+        <br/>
+        <p>
+        {{ event.description|linebreaksbr }}
+        </p>
+    </div>    
+</div>
+
+<hr class="map-event-detail-top"/>
+<div id="map" class="map-event-detail"></div>
+{% endblock content %}
+
+
+{% block extra_js %}
+<!-- leaflet.js-->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- leaflet.markercluster.js -->
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<!-- local map.js -->
+<script type="text/javascript" src="{% static 'js/leaflet-sleep.js' %}"></script> 
+
+<script>
+    /* ICS file generator */
+    document.getElementById('downloadICS').addEventListener('click', () => {
+        createDownloadICSFile(
+        'Europe/Copenhagen',
+        new Date("{{ event.exhibition_opening }}"),
+        new Date("{{ event.exhibition_end }}"),
+        "{{ event.event_type }}: {{ event.project_title }}",
+        "{{ event.event_type }} with {{ event.artists }} called {{ event.project_title }}. Opening/vernissage {{ event.opening }} at {{ event.opening_hours_for_opening_date }}.",
+        "{{ event.location }}",
+        "{{ event.location_address }}"
+        );  
+    });
+
+    // Leaflet map
+    // Define position of map
+    const zoom = 13;
+    const center = [{{event.latitude}}, {{event.longitude}}];
+    // Declaring map
+    const map = L.map('map', {center: center, zoom: zoom,
+        // Stop zoom interferring with scroll on mobile
+        dragging: !L.Browser.mobile,
+        tap: !L.Browser.mobile,
+    });
+
+    // Tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Marker and cluster icon is defined in CSS
+    const soupIcon = L.divIcon({
+        className: 'soup',
+        html: '<div class="circle"></div>',
+        iconAnchor:   [20, 20], 
+        popupAnchor:  [0, -40] 
+    });
+
+    // Marker based on coordinates
+    const marker = L.marker([{{event.latitude}}, {{event.longitude}}], {icon: soupIcon}).addTo(map);
+</script>
+{% endblock %}

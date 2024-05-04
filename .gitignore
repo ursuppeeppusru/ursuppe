@@ -6,11 +6,22 @@
 *.pot
 *.pyc
 __pycache__
+media/*
+media/exhibition_images/*
+media/calendar_images/*
+!media/.gitkeep
+!media/exhibition_images/.gitkeep
+!media/calendar_images/.gitkeep
+
+# DB
+db.sqlite3
 
 # Backup files # 
 *.bak 
 
 # If you are using PyCharm # 
+.idea/
+.idea/*
 idea/
 idea/*
 

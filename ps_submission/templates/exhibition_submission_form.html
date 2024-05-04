@@ -1,5 +1,6 @@
 <!-- ps_submission/templates/exhibition_submission_form.html -->
 {% extends "base.html" %}
+{% block title %} Create Archive {% endblock %}
 
 {% load static %}
 
@@ -34,7 +35,7 @@
     // Create label element
     const label = document.createElement("label");
     label.setAttribute("for", `id_form-${imageFieldCounter}-image`);
-    label.textContent = `Exhibition Image (${imageFieldCounter}):`;
+    label.textContent = `Image (${imageFieldCounter}):`;
   
     // Create input element (file type)
     const input = document.createElement("input");
@@ -50,8 +51,8 @@
     hiddenInput.setAttribute("type", "hidden");
     hiddenInput.setAttribute("name", `form-${imageFieldCounter}-id`);
     hiddenInput.setAttribute("id", `id_form-${imageFieldCounter}-id`);
-    
-  
+
+
     // Append label, input, and hiddenInput to the container
     const container = document.getElementById("imageFieldsContainer");
     container.appendChild(label);
@@ -95,63 +96,62 @@
     // Return the count of matching elements
     return elements.length;
   }
-
-  
-  
   </script>
-  <div class="col-8">
-    <h5><b>SUBMIT EXHIBITION</b></h5>
-    <br/>
-    <h5>If you would like to submit an exhibition for our archive please fill out our form below. Critera for submissions is that the exhibition has been held in Denmark or with artists whom resides in Denmark, that you have the rights to publish the exhibition, and that the exhibition is well-documented*. When you submit the exhibition, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
-  <br>
-  <br>
-  * Well-documented means:<br>
-  - A minimum of 5 images and a maximum of 20 images.<br>
-  - Images should have a minimum of 150 dpi and 2000px in width, and a maximum of 3 mb per image.<br>
-  - Allowed image file extensions are: png, jpg, jpeg, webp.<br>
-  - Remember to credit artist(s) and photographer(s) in captions. <br>
-  <br>
-Please note, we do not have the capacity to correct errors, typos, rearrange images etc. after your submission has been published. If you find an error in your post, please re-submit, and we will delete the previous post.
-  </h5>
-</div>
-<div class="col-4">
-  <br/>
-  <h5>DISCLAIMER: ursuppe does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </h5>
-</div>
+  <div class="row content">
+    <div class="col-8">
+      <h5><b>CREATE ARCHIVE</b></h5>
+      <br/>
+      <p>If you would like to create an activity for our archive please fill out our form below. Critera for submissions is that the activity has been held in Denmark or with artists whom resides in Denmark, that you have the rights to publish the activity, and that the activity is well-documented*. When you create the activity, you accept the possibility of being featured on the index as a highlight chosen by our board of artist-moderators, as well as on our social media account.
+    <br>
+    <br>
+    * Well-documented means:<br>
+    - A minimum of 5 images and a maximum of 20 images.<br>
+    - Images should have a minimum of 150 dpi and 2000px in width, and a maximum of 3 mb per image.<br>
+    - Allowed image file extensions are: png, jpg, jpeg, webp.<br>
+    - Credit artist(s) and photographer(s) in captions. <br>
+    - A sense of space and/or situation. <br>
+    <br>
+  Please note, we do not have the capacity to correct errors, typos, rearrange images etc. after your submission has been published. If you find an error in your post, please re-create, and we will delete the previous post.
+    </p>
+  </div>
+  <div class="col-4">
+      <h5><b>DISCLAIMER</b></h5><br/>
+      <p>{{ settings.SITE_NAME }} does not tolerate any type of discriminatory content e.g., misogynistic, racist, homophobic, or transphobic content will be deleted without further notice. </p><br/>
+      <p>{{ settings.SITE_NAME }} encourage anyone to contribute content regardless of background, education, class, gender, race, ethnicity, ability, age, and other sociopolitical markers.</p>
+  </div>
 
-<div class="col-12"><br/></div>
+  <div class="col-12"><br/></div>
 
-<div class="col-12">
-  <form method="post" enctype="multipart/form-data" class="exhibition-form">
-    
-    {% if errors %}
-      <div class="error-message">
-          <p>Please fix the following errors:</p>
-          <ul>
-              {% for field, error in errors.items %}
-               <li>{{ field }}: {{ error }}</li>    
-              {% endfor %}
-          </ul>
+  <div class="col-12">
+    <form method="post" enctype="multipart/form-data" class="exhibition-form">
+      {% if errors %}
+        <div class="text-error">
+            <p>Please fix the following errors:</p>
+                {% for field, error in errors.items %}
+		{{ field }}: {{ error }}<br/> 
+                {% endfor %}
+		<br/><br/>
+        </div>
+      {% endif %}
+
+      {% csrf_token %}
+      {{ submission_form.as_p }}
+      
+      {{ formset.management_form }}
+      Images:<br/><br/>
+      <small>For image criteria please refer to the description of well-documented* above.</small><br/><br/>
+      <!-- Image field container -->
+      <div id="imageFieldsContainer">
+        <!-- Initially, there are no image fields here -->
       </div>
-    {% endif %}
 
-    {% csrf_token %}
-    {{ submission_form.as_p }}
+      <!-- Button to add image field -->
+      <button type="button" onclick="addImageField()" id="addImageClick">Add more images +</button>
+      <br/><br/>
+      <button type="submit" class="btn-submit">Create archive</button>
+    </form>
     
-    {{ formset.management_form }}
-    Images:<br/><br/>
-    <small>For image criteria please refer to the description of well-documented* above.</small><br/><br/>
-    <!-- Image field container -->
-    <div id="imageFieldsContainer">
-      <!-- Initially, there are no image fields here -->
-    </div>
-
-    <!-- Button to add image field -->
-    <button type="button" onclick="addImageField()" id="addImageClick">Add more images +</button>
-    <br/><br/>
-    <button type="submit" class="btn-submit">Submit exhibition</button>
-  </form>
-  
+   </div>
  </div>
 
 <script>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %} Curators {% endblock %}
+
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="row content">
+    <div class="col-12">
+        <h5><b>CURATORS</b></h5><br/>
+        <p><small>This is a generated list in alphabetical order.</small></p>
+    </div>
+</div>
+
+<div>
+    <nav class="tabs text-uppercase is-full">
+            <a class="{% if '/current' in request.path %}active{% endif %}" href="{% url 'list_current_curators' %}">current</a>        
+            <a class="{% if '/current' not in request.path %}active{% endif %}" href="{% url 'list_curators' %}">all</a>
+    </nav>
+</div>
+<div class="row content">
+    <div class="col-12">
+        {% for curator in list %}
+            {% ifchanged %}<br/><h4>{{ curator.0 }}</h4><br/>{% endifchanged %}
+            <a href="/search/?query={{ curator }}">{{ curator }}</a><br/>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+

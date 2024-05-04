@@ -8,6 +8,9 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from ps_submission import urls as exhibition_urls
 from ps_calendar import urls as calendar_urls
+from ps_list import urls as list_urls
+from ps_calendar_subscription import urls as events_subscription_urls
+from ps_pinboard import urls as pinboard_urls
 
 from search import views as search_views
 
@@ -15,13 +18,19 @@ from .views import highlights
 
 urlpatterns = [
     path('', highlights, name="highlights"),
+    path("soup-auto/", TemplateView.as_view(template_name="soup-auto-redirect-to-text.html")),
     path("soup/", TemplateView.as_view(template_name="soup.html")),
+    path("text/", TemplateView.as_view(template_name="text.html")),
+    path("text-solidarity/", TemplateView.as_view(template_name="text-solidarity.html")),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path('archive/', include(exhibition_urls)),
     path('events/', include(calendar_urls)),
+    path('feed/', include(events_subscription_urls)),
+    path('list/', include(list_urls)),
+    path('pinboard/', include(pinboard_urls)),
 ]
 
 

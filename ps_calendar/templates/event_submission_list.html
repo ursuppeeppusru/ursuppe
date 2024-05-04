@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %} Events {% endblock %}
 
 {% load static %}
 
@@ -10,38 +11,83 @@
 
 {% block content %}
 
-<div class="col-12">
-    <h3>Events</h3>
-</div>
-{% for submission in event_submissions %}
-<div class="col-4">
-<a href="">
-    <!-- <p>Artists: {{ submission.artists }}</p>
-    <p>Curators: {{ submission.curators }}</p>
-    <p>Location: {{ submission.location }}</p>
-    <p>Link to Location: <a href="{{ submission.link_to_location }}">{{ submission.link_to_location }}</a></p>
-    <p>Exhibition Opening: {{ submission.exhibition_opening }}</p>
-    <p>Exhibition End: {{ submission.exhibition_end }}</p>
-    <p>Description: {{ submission.description }}</p>
-    <p>Text Author: {{ submission.text_author }}</p>
-    <p>Photographer: {{ submission.photographer }}</p>
-    <p>Link to Video: <a href="{{ submission.link_to_video }}">{{ submission.link_to_video }}</a></p>
-    <p>Social Media Info: {{ submission.social_media_info }}</p>
-    <p>Email: {{ submission.email }}</p>
-    <p>Consent to Collect Info: {{ submission.get_consent_to_collect_info_display }}</p>
-    <p>Highlight: {{ submission.highlight }}</p> -->
-    <!-- Add other fields as needed -->
-
-    <!-- Display existing images for the exhibition -->
-    <div class="image-container-list">
-        <img class="submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+<div class="row content">
+    <div class="col-6">
+        <h5><b>EVENTS</b></h5>
     </div>
-    <small>
-        <b>{{ submission.project_title }}</b>, {{ submission.artists }}, <i>{{ submission.exhibition_opening }}</i> 
-    </small>
-</a>
+    <div class="col-6 subscribe-text text-right">
+        <p><a href="{% url 'feed_information' %}"><b>Subscribe</b> to the events calendar feeds for automatic updates</a></p>
+    </div>
 </div>
+<div>
+    <nav class="tabs text-uppercase is-full">
+            <a class="{% if request.path == '/events/' %}active{% endif %}" href="{% url 'event_list' %}">current</a>
+            <a class="{% if request.path == '/events/upcoming' %}active{% endif %}" href="{% url 'event_list_upcoming' %}">upcoming</a>
+            <a class="{% if request.path == '/events/closing-soon' %}active{% endif %}" href="{% url 'event_list_closing_soon' %}">closing soon</a>
+            <a class="{% if request.path == '/events/past' %}active{% endif %}" href="{% url 'event_list_past' %}">past</a>
+    </nav>
+    <nav class="tabs tabs-last text-uppercase is-full">
+            <a class="{% if '/events/openings' in request.path %}active{% endif %}" href="{% url 'event_list_openings_this_week' %}">Openings/vernissages this week</a>
+    </nav>
+    <nav class="tabs tabs-last text-uppercase is-full">
+            <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
+            <a href="{% url 'event_map' %}">map</a>
+    </nav>
+</div>
+{% if event_submissions %}
+{% for submission in event_submissions %}
+<div class="row content events-list-card">
+    <div class="col-4 ">
+        {% if submission.exhibition_end < today %}
+        <span class="event-detail-status-label">PAST</span>
+        {% elif submission.exhibition_end <= today_plus_2w %}
+        <span class="event-detail-status-label">CLOSING SOON</span>
+        {% elif submission.exhibition_opening < today %}
+        <span class="event-detail-status-label">CURRENT</span>
+        {% elif submission.exhibition_opening > today %}
+        <span class="event-detail-status-label">UPCOMING</span>
+        {% endif %}
+        <p>{{ submission.artists }}</p>
+        <a class="event-project-title-link" href="{% url 'event_detail' event_id=submission.id event_project_title=submission.slug %}">
+            <h2 class="text-uppercase is-large event_project_title">{{ submission.project_title }}</h2>
+        </a>
+        <img class="event-submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
+        <br/>
+        {% if submission.curators %}
+        <p>Curated by {{ submission.curators }}</p>
+        <br/>
+        {% endif %}
+        <p><small>{{ submission.event_type }}</small></p>
+        <br/>
+    </div>
+    <div class="col-4">
+        <h4>{{ submission.exhibition_opening }} → {{ submission.exhibition_end }}</h4>
+        <br/>
+        <p>{{ submission.opening_hours|linebreaks }}</p>
+        <br/>
+        <h4>Opening/vernissage: {{ submission.opening }}</h4>
+        <br/>
+        <p>{{ submission.opening_hours_for_opening_date }}</p>
+    </div>
+    <div class="col-4">
+        <h4>{{ submission.location }}</h4>
+        <p>{{ submission.location_address }}</p>
+        <br/>
+        <p><small><a href="{{ submission.link_to_location }}" target="_blank">{{ submission.link_to_location }}</a></small></p>
+        <br/>
+        <p><small>Admission:</small></p>
+        <p><small>{{ submission.admission }}</small></p>
+    </div>
+</div>
+{% if not forloop.last %}
+<hr/>
+{% endif %}
 {% endfor %}
+{% else %}
+<div class="row content">
+    <p>No event(s). Try another sorting method.</p>
+</div>
+{% endif %}
+
 
 {% endblock content %}
-

@@ -7,15 +7,101 @@
 
 {% block content %}
 
-<div class="col-12">
-<form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <br/>
-    <!-- <input type="submit" value="Search ursuppe" class="button-submit"> -->
-    <button type="submit" class="btn-submit button-submit">Search ursuppe</button>
-</form>    
+<div class="row content">
+    <div class="col-12">
+    <h5><b>SEARCH</b></h5><br/>
+    <form action="{% url 'search' %}" method="get">
+        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %} autofocus>
+        <br/>
+        <!-- <input type="submit" value="Search ursuppe" class="button-submit"> -->
+        <button type="submit" class="btn-submit button-submit">Search {{ settings.SITE_NAME }}</button>
+    </form>    
+    </div>
 </div>
 
+{% if archive_results %}
+<div class="row content">
+    <div class="col-12">
+        <h5><b>ARCHIVE(S) WAS FOUND</b></h5><br/>
+    </div>
+    {% for submission in archive_results %}
+    <div class="col-4">
+    <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
+        <div class="image-container-list">
+            {% for image in submission.images.all %}
+                {% if image.cover_image %} 
+                <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <small>
+            <b>{{ submission.project_title }}</b>, {{ submission.artists }}. {{ submission.exhibition_opening }}.
+        </small>
+    </a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if archive_results and events_results %} <hr/><br/> {% endif %}
+
+{% if events_results %}
+<div class="row content">
+    <div class="col-12">
+        <h5><b>EVENT(S) WAS FOUND</b></h5>
+    </div>
+</div>
+    {% for event in events_results %}
+    <div class="row content events-detail-card">
+        <div class="col-12"></div>
+        <div class="col-4">
+            {% if event.exhibition_end < today %}
+            <span class="event-detail-status-label">PAST</span>
+            {% elif event.exhibition_end <= today_plus_2w %}
+            <span class="event-detail-status-label">CLOSING SOON</span>
+            {% elif event.exhibition_opening < today %}
+            <span class="event-detail-status-label">CURRENT</span>
+            {% elif event.exhibition_opening > today %}
+            <span class="event-detail-status-label">UPCOMING</span>
+            {% endif %}
+            <p>{{ event.artists }}</p>
+            <a class="event-project-title-link" href="{% url 'event_detail' event_id=event.id event_project_title=event.slug %}">
+                <h2 class="text-uppercase is-large event_project_title">{{ event.project_title }}</h2>
+            </a>
+            <img class="event-submission-image-list" src="{{ event.images.all.0.image.url }}" alt="{{ event.images.all.0.image.caption }}">
+            <br/>
+            <p>Curated by {{ event.curators }}</p>
+            <br/>
+            <p><small>{{ event.event_type }}</small></p>
+        </div>
+        <div class="col-4">
+            <h4>{{ event.exhibition_opening }} → {{ event.exhibition_end }}</h4>
+            <br/>
+            <p>Weekly opening hours:</p>
+            <p>{{ event.opening_hours }}</p>
+            <br/>
+            <h4>Opening/vernissage: {{ event.opening }}</h4>
+            <br/>
+            <p>Opening hours for opening/vernissage:</p>
+            <p>{{ event.opening_hours_for_opening_date }}</p>
+        </div>
+        <div class="col-4">
+            <h4>{{ event.location }}</h4>
+            <p>{{ event.location_address }}</p>
+            <br/>
+            <p><small><a href="{{ event.link_to_location }}" target="_blank">{{ event.link_to_location }}</a></small></p>
+            <br/>
+            <p><small>Admission:</small></p>
+            <p><small>{{ event.admission }}</small></p>
+        </div>
+    </div>
+    {% if not forloop.last %}
+    <hr/>
+    {% endif %}
+    {% endfor %}
+{% endif %}
+
+<!--
 {% if search_results %}
 <div class="col-12">
 <ul>
@@ -40,5 +126,6 @@
 No results found
 </div>
 {% endif %}
+-->
 
 {% endblock %}
