@@ -10,6 +10,11 @@ from django.utils.translation import gettext_lazy as _
 from geopy.geocoders import Nominatim
 from decimal import Decimal
 
+import environ
+
+env = environ.Env(
+    # set casting, default value
+)
 
 class CalendarSubmission(models.Model):
     project_title = models.CharField(
@@ -111,7 +116,8 @@ def geocoder(address):
     geolocator = Nominatim(user_agent="ursuppe-geocoder")
     
     try:
-        place, (lat, lng) = geolocator.geocode(address, country_codes=["dk"], exactly_one=True)
+        print("cc: ", env('GEO_COUNTRY_CODES'))
+        place, (lat, lng) = geolocator.geocode(address, country_codes=list(env('GEO_COUNTRY_CODES')), exactly_one=True)
     except:
         # print("Error: geocode failed on input %s with message %s"%(a, error_message))
         # Instead of catching and printing the error, just set lat, lng to 0 and set later in admin
