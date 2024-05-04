@@ -108,7 +108,8 @@
     - A minimum of 5 images and a maximum of 20 images.<br>
     - Images should have a minimum of 150 dpi and 2000px in width, and a maximum of 3 mb per image.<br>
     - Allowed image file extensions are: png, jpg, jpeg, webp.<br>
-    - Remember to credit artist(s) and photographer(s) in captions. <br>
+    - Credit artist(s) and photographer(s) in captions. <br>
+    - A sense of space and/or situation. <br>
     <br>
   Please note, we do not have the capacity to correct errors, typos, rearrange images etc. after your submission has been published. If you find an error in your post, please re-create, and we will delete the previous post.
     </p>
@@ -123,15 +124,13 @@
 
   <div class="col-12">
     <form method="post" enctype="multipart/form-data" class="exhibition-form">
-      
       {% if errors %}
-        <div class="error-message">
+        <div class="text-error">
             <p>Please fix the following errors:</p>
-            <ul>
                 {% for field, error in errors.items %}
-                 <li>{{ field }}: {{ error }}</li>    
+		{{ field }}: {{ error }}<br/> 
                 {% endfor %}
-            </ul>
+		<br/><br/>
         </div>
       {% endif %}
 

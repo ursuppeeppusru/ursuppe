@@ -26,7 +26,7 @@ class ExhibitionSubmission(models.Model):
         verbose_name="Artist(s)", help_text="Required *<br/><br/>Divide multiple artists with comma (,)", blank=False
     )
     curators = models.CharField(
-        max_length=255, verbose_name="Curator(s)", help_text="Divide multiple curators with comma (,)", blank=False
+        max_length=255, verbose_name="Curator(s)", help_text="Divide multiple curators with comma (,)", blank=True
     )
     location = models.CharField(
         max_length=255, verbose_name="Location name", help_text="Required *", blank=False
@@ -45,7 +45,7 @@ class ExhibitionSubmission(models.Model):
         max_length=255, verbose_name="Text author", help_text="Required *", blank=False
     )
     photographer = models.CharField(
-        max_length=255, verbose_name="Photographer", help_text="<br/><br/>Divide multiple photographers with comma (,)", blank=False
+        max_length=255, verbose_name="Photographer", help_text="Required *<br/><br/>Divide multiple photographers with comma (,)", blank=False
     )
     link_to_video = models.URLField(verbose_name="Link to video", blank=True)
     social_media_info = models.TextField(verbose_name="Social media info", blank=True)
@@ -113,4 +113,4 @@ class ExhibitionImages(models.Model):
         max_length=500
     )
     caption = models.CharField(max_length=1000, verbose_name='Image Caption', help_text='Caption for the image', blank=False)
-    cover_image = models.BooleanField(default=False, help_text='Check this box to set as cover image')
+    cover_image = models.BooleanField(default=False, help_text='Check this box to set as cover image', blank=True)
