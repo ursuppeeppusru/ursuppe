@@ -6,7 +6,15 @@
 *.pot
 *.pyc
 __pycache__
-/static/
+media/*
+media/exhibition_images/*
+media/calendar_images/*
+!media/.gitkeep
+!media/exhibition_images/.gitkeep
+!media/calendar_images/.gitkeep
+
+# DB
+db.sqlite3
 
 # Backup files # 
 *.bak 

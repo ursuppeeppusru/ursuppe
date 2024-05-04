@@ -16,13 +16,15 @@
         <h1>{{ submission.project_title }}
         </h1>
         <h2>{{ submission.subtitle }}</h2>
+        {% if submission.curators %}
         <br/>
         <h5>Curated by {{ submission.curators }}</h5>
+        {% endif %}
         <br/><br/>
         <h5><b>INFORMATION</b></h5>
         <br/>
         <p><b>Artist(s):</b> {{ submission.artists }}</p>
-        <p><b>Curator(s):</b> {{ submission.curators }}</p>
+        {% if submission.curators %}<p><b>Curator(s):</b> {{ submission.curators }}</p>{% endif %}
         <p><b>Type:</b> {{ submission.event_type }}</p>
         <p><b>Location:</b> <a href="{{ submission.link_to_location }}">{{ submission.location }}</a></p>
         <p><b>Dates:</b> {{ submission.exhibition_opening }} → {{ submission.exhibition_end }}</p>

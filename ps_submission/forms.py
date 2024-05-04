@@ -25,3 +25,6 @@ class ExhibitionImagesForm(forms.ModelForm):
     class Meta:
         model = ExhibitionImages
         fields = '__all__'  # Assuming you only want to upload an image
+        widgets = {
+            'exhibition': forms.HiddenInput(),
+        }

@@ -76,6 +76,17 @@ def event_list_closing_soon(request):
     event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__range=(today(), today_plus_2w())).order_by('exhibition_end')
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
 
+# Openings this week
+@cache_page(60 * 60)
+def event_list_openings_this_week(request):
+    date = today()
+    start_week = date - timedelta(date.weekday())
+    end_week = start_week + timedelta(7)
+
+    # Only objects which are marked as published and where opening date is in this week
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(opening__range=(start_week, end_week)).order_by('opening')
+    return render(request, 'event_submission_list.html', {'event_submissions': event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
+
 # map
 @cache_page(60 * 60)
 def event_map(request):

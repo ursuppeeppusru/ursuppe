@@ -27,6 +27,9 @@
             <a class="{% if request.path == '/events/past' %}active{% endif %}" href="{% url 'event_list_past' %}">past</a>
     </nav>
     <nav class="tabs tabs-last text-uppercase is-full">
+            <a class="{% if '/events/openings' in request.path %}active{% endif %}" href="{% url 'event_list_openings_this_week' %}">Openings/vernissages this week</a>
+    </nav>
+    <nav class="tabs tabs-last text-uppercase is-full">
             <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
             <a href="{% url 'event_map' %}">map</a>
     </nav>
@@ -50,9 +53,12 @@
         </a>
         <img class="event-submission-image-list" src="{{ submission.images.all.0.image.url }}" alt="{{ submission.images.all.0.image.caption }}">
         <br/>
+        {% if submission.curators %}
         <p>Curated by {{ submission.curators }}</p>
         <br/>
+        {% endif %}
         <p><small>{{ submission.event_type }}</small></p>
+        <br/>
     </div>
     <div class="col-4">
         <h4>{{ submission.exhibition_opening }} → {{ submission.exhibition_end }}</h4>
