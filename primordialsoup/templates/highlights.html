@@ -87,8 +87,10 @@
                     <img class="event-submission-image-list-highlight" src="{{ event_submission.images.all.0.image.url }}" alt="{{ event_submission.images.all.0.image.caption }}">
                     <p><small>{{ event_submission.event_type }}</small></p>
                     <br/>
+                    {% if event_submission.curators %}
                     <p>Curated by {{ event_submission.curators }}</p>
                     <br/>
+                    {% endif %}
                     <h4>{{ event_submission.exhibition_opening }} → {{ event_submission.exhibition_end }}</h4>
                     <br/>
                     <h4>{{ event_submission.location }}</h4>
