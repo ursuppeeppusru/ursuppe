@@ -135,15 +135,49 @@ div.home li {
 }
 
 a {
-  color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 a:hover {
-  color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 svg:not(:root) {
     overflow: hidden;
+}
+
+/* Wagtail pages, e.g. 'ABOUT' */
+
+div.home h1,
+div.home h2,
+div.home h3,
+div.home h4,
+div.home h5 {
+    line-height: 1.2em;
+    margin-bottom: 0.3em;
+    margin-top: 1em;        
+}
+
+div.home p {
+    margin-bottom: 0.8em;
+    line-height: 1.5em;
+}
+
+div.home a {
+    text-decoration: underline;
+}
+
+div.home h2:first-child {
+    margin-top: 10px;
+}
+
+div.home li {
+    line-height: 23px;
+}
+
+div.home hr {
+    width: 110%;
+    margin: auto -30px;
 }
 
 /* header */
