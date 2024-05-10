@@ -421,20 +421,23 @@ button.btn-submit {
 
 /* list */
 
-.image-container {
+.archive-image-container {
     margin-top: 25px;
 }
 
-img.submission-image-list {
+img.archive-submission-image-list {
     width: 100%;
     height: 60rem;
     object-fit: cover;
     object-position: center center;
     border-radius: var(--list-img-border);
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
-img.submission-image-list:hover {
-
+.archive-submission-image-text {
+    text-align: center;
+    margin-bottom: 15pz;
 }
 
 @media only screen and (max-width: 599px) {
@@ -621,11 +624,24 @@ hr.map-event-detail-top {
 
 /* highlight index */
 
-div.events-highlight-card {
-    position: relative;
-    border: 1px solid var(--color-primary);
-    margin-bottom: 25px;
-    padding: 20px;
+span.highlight-events-index-row-card {
+  display: inline-block;
+  position: relative;
+  flex-basis: 30rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border: 1px solid var(--color-primary);
+  margin: 0px 15px 15px 0;
+  padding: 20px;
+  white-space: initial;
+}
+
+span.highlight-events-index-row-card:first-child {
+    margin-left: 25px;
+}
+
+span.highlight-events-index-row-card:last-child {
+    margin-right: 25px;
 }
 
 span.event-status-label {
@@ -650,20 +666,45 @@ span.event-detail-status-label {
     font-size: smaller;
 }
 
-div.events-index-row {
-    position: relative;
-    white-space: nowrap;
-    overflow-x: auto;
-    padding-top: 15px;
-    scrollbar-color: var(--color-primary) var(--bg-color);
-    scrollbar-width: thin;
+div.scroll-container {
+        overflow-x: scroll;
+        scrollbar-color: var(--color-primary) var(--bg-color);
+        scrollbar-width: thin;
 }
 
-div.events-index-row-header {
+.slide-arrows-container {
+    position: absolute;
+    top: 0;
+    right: 35px;
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.slide-arrows {
+    font-family: var(--header-font);
+    font-size: 35px;
+    cursor: pointer;
+}
+
+div.events-index-row {
+    position: relative;
+    display: flex;
+    align-items: initial;
+    white-space: nowrap;
+    padding-top: 15px;
+
+}
+
+div.index-row-header {
+    position: relative;
     padding-bottom: 0;
 }
 
-div.events-index-row-header-col {
+div.index-row-header-col {
+    position: relative;
     margin-bottom: 5px;
 }
 
@@ -696,6 +737,36 @@ img.event-submission-image-list-highlight {
 }
 
 a.event-project-title-link:hover~img.event-submission-image-list-highlight { display: block; }
+
+.image-container {
+    margin-top: 25px;
+}
+
+img.submission-image-list {
+    width: 100%;
+    height: 60rem;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: var(--list-img-border);
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+img.submission-image-list:hover {
+
+}
+
+@media only screen and (max-width: 599px) {
+    .submission-image-text {
+        width: 30rem;
+        top: unset;
+        right: unset;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: none;
+    }
+}
 
 /* pinboard */
 
