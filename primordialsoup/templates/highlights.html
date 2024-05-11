@@ -92,23 +92,29 @@
         <small>Sorted by end date</small>
     </div>
 </div>
+<br/>
+<div>
+    <nav class="tabs text-uppercase is-full">
+        {% for submission in highlighted_submissions %}
+        <a class="tab-link {% if forloop.first %}active{% endif %}" href="javascript:void(0);" data-target="{{ submission.project_title }}">
+            <small class="submission-image-text text-center">
+                <b>{{ submission.project_title }}</b><br/>{{ submission.artists }}<br/>{{ submission.exhibition_opening }}
+            </small>
+        </a>
+        {% endfor %}
+    </nav>
+</div>
 <div class="row content">
     <div class="col-12">
         {% for submission in highlighted_submissions %}
         <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
-        </a>
-        <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
-            <!-- Display existing images for the exhibition -->
-            <div class="image-container-list">
+        <div id="{{ submission.project_title }}" class="image-container-list {% if forloop.first %}active{% endif %}">
             {% for image in submission.images.all %}
                 {% if image.cover_image %} 
                 <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
                 {% endif %}
             {% endfor %}
-            </div>
-            <small class="submission-image-text text-center">
-            <b>{{ submission.project_title }}</b>, {{ submission.artists }}. {{ submission.exhibition_opening }}.
-            </small>
+        </div>
         </a>
         {% endfor %}
     </div>

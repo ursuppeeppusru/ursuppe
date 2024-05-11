@@ -271,10 +271,6 @@ nav.tabs:last-child {
     padding-bottom: 25px;
 }
 
-nav.tabs {
-
-}
-
 @media only screen and (max-width: 599px) {
     nav.tabs {
         width: 100%;
@@ -294,10 +290,8 @@ nav.tabs a {
     border-right: 1px solid var(--color-primary);
 }
 
-nav.tabs a:hover {
-    border-bottom: 1px solid var(--color-primary);
-    border-top: 1px solid var(--color-primary);
-    border-right: 1px solid var(--color-primary);
+nav.tabs a:last-child {
+    border-right: none;
 }
 
 @media only screen and (max-width: 599px) {
@@ -308,8 +302,6 @@ nav.tabs a:hover {
 
 nav.tabs a.active {
     border-bottom: 2px solid var(--color-primary);
-    border-top: 1px solid var(--color-primary);
-    border-right: 1px solid var(--color-primary);
 }
 
 nav.tabs-last a {
@@ -740,6 +732,14 @@ a.event-project-title-link:hover~img.event-submission-image-list-highlight { dis
 
 .image-container {
     margin-top: 25px;
+}
+
+.image-container-list {
+    display: none;
+}
+
+.image-container-list.active {
+    display: block;
 }
 
 img.submission-image-list {

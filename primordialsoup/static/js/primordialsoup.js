@@ -171,3 +171,56 @@ function sideScroll(element,direction,speed,distance,step){
         }
     }, speed);
 }
+
+/* index archive selector */
+document.addEventListener("DOMContentLoaded", function() {
+    const tabLinks = document.querySelectorAll(".tab-link");
+    const imageContainers = document.querySelectorAll(".image-container-list");
+    let currentIndex = 0;
+    let timer; 
+
+    // Function to show image container based on index
+    function showImageByIndex(index) {
+        tabLinks.forEach(function(link) {
+            link.classList.remove("active");
+        });
+        tabLinks[index].classList.add("active");
+
+        imageContainers.forEach(function(container) {
+            container.classList.remove("active");
+        });
+        imageContainers[index].classList.add("active");
+    }
+
+    // Function to switch to the next tab and image container
+    function switchToNextImage() {
+        currentIndex = (currentIndex + 1) % tabLinks.length; // Increment index and wrap around
+        showImageByIndex(currentIndex);
+    }
+
+    // Add mouseover event listener to tab links
+    tabLinks.forEach(function(link, index) {
+        link.addEventListener("mouseover", function(e) {
+            e.preventDefault();
+            currentIndex = index; // Update current index when mouseover occurs
+            showImageByIndex(currentIndex);
+        });
+    });
+
+    // Start the timer to switch images automatically every 5 seconds
+    timer = setInterval(switchToNextImage, 5000);
+
+    // Stop the timer when mouseover occurs on tab links
+    tabLinks.forEach(function(link) {
+        link.addEventListener("mouseover", function() {
+            clearInterval(timer);
+        });
+    });
+
+    // Restart the timer when mouse leaves the tab links
+    tabLinks.forEach(function(link) {
+        link.addEventListener("mouseleave", function() {
+            timer = setInterval(switchToNextImage, 5000);
+        });
+    });
+});
