@@ -301,7 +301,11 @@ nav.tabs a:last-child {
 }
 
 nav.tabs a.active {
-    border-bottom: 2px solid var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+}
+
+nav.tabs a:hover {
+    border-bottom: 3px solid var(--color-primary);
 }
 
 nav.tabs-last a {
