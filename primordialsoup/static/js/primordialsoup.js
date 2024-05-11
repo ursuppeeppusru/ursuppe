@@ -114,41 +114,47 @@ function createDownloadICSFile(timezone, startTime, endTime, title, description,
   download(title + '.ics', icsBody);
 }
 
-/* index horisontal scroll button */
+/* index horisontal sliders */
+
+/* get #events-index-row width */
+var width = document.getElementById('events-index-row').offsetWidth;
+var width = width - 50;
+
+/* sliders */
 var buttonOne = document.getElementById('slideOne');
 buttonOne.onclick = function () {
     var containerOne = document.getElementById('scroll-containerOne');
-    sideScroll(containerOne,'right',7,300,10);
+    sideScroll(containerOne,'right',7,width,10);
 };
 
 var backOne = document.getElementById('slideBackOne');
 backOne.onclick = function () {
     var containerOne = document.getElementById('scroll-containerOne');
-    sideScroll(containerOne,'left',7,300,10);
+    sideScroll(containerOne,'left',7,width,10);
 };
 
 var buttonTwo = document.getElementById('slideTwo');
 buttonTwo.onclick = function () {
     var containerTwo = document.getElementById('scroll-containerTwo');
-    sideScroll(containerTwo,'right',7,300,10);
+    sideScroll(containerTwo,'right',7,width,10);
 };
 
 var backTwo = document.getElementById('slideBackTwo');
 backTwo.onclick = function () {
     var containerTwo = document.getElementById('scroll-containerTwo');
-    sideScroll(containerTwo,'left',7,300,10);
+    sideScroll(containerTwo,'left',7,width,10);
 };
 
 var buttonThree = document.getElementById('slideThree');
 buttonThree.onclick = function () {
     var containerThree = document.getElementById('scroll-containerThree');
-    sideScroll(containerThree,'right',7,300,10);
+    sideScroll(containerThree,'right',7,width,10);
 };
 
 var backThree = document.getElementById('slideBackThree');
 backThree.onclick = function () {
     var containerThree = document.getElementById('scroll-containerThree');
-    sideScroll(containerThree,'left',7,300,10);
+    sideScroll(containerThree,'left',7,width,10);
 };
 
 function sideScroll(element,direction,speed,distance,step){
