@@ -18,5 +18,7 @@ class ExhibitionImagesInline(admin.TabularInline):  # or admin.StackedInline for
 class ExhibitionSubmissionAdmin(admin.ModelAdmin):
     form = ExhibitionSubmissionAdminForm
     inlines = [ExhibitionImagesInline]
+    list_display = ["project_title", "published", "highlight"]
+
 
 admin.site.register(ExhibitionSubmission, ExhibitionSubmissionAdmin)
