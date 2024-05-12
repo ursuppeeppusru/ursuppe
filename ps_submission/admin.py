@@ -19,7 +19,6 @@ class ExhibitionSubmissionAdmin(admin.ModelAdmin):
     form = ExhibitionSubmissionAdminForm
     inlines = [ExhibitionImagesInline]
     list_display = ["project_title", "published", "highlight"]
-    # list_filter = ["created_date"] # 
     search_fields = ["project_title"]
 
 
