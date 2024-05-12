@@ -21,4 +21,5 @@ def highlights(request):
     highlighted_submissions = ExhibitionSubmission.objects.filter(published=True, highlight=True).order_by('-exhibition_end')
     highlighted_event_submissions = CalendarSubmission.objects.filter(published=True, highlight=True).filter(exhibition_end__gte=today()).order_by('exhibition_end')
     all_current_event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__lte=today()).order_by('exhibition_end')
-    return render(request, 'highlights.html', {'highlighted_submissions': highlighted_submissions, 'highlighted_event_submissions': highlighted_event_submissions, 'all_current_event_submissions': all_current_event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
+    all_upcoming_event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__gte=today()).order_by('exhibition_opening')
+    return render(request, 'highlights.html', {'highlighted_submissions': highlighted_submissions, 'highlighted_event_submissions': highlighted_event_submissions, 'all_current_event_submissions': all_current_event_submissions, 'all_upcoming_event_submissions': all_upcoming_event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
