@@ -24,18 +24,18 @@
     <div class="col-12">
         <h5><b>ARCHIVE(S) WAS FOUND</b></h5><br/>
     </div>
-    {% for submission in archive_results %}
-    <div class="col-4">
-    <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
-        <div class="image-container-list">
-            {% for image in submission.images.all %}
+    {% for archive in archive_results %}
+    <div class="col-4 archive-submission-image-list-wrapper">
+    <a href="{% url 'exhibition_submission_detail' submission_id=archive.id submission_project_title=archive.slug %}">
+        <div class="archive-image-container-list">
+            {% for image in archive.images.all %}
                 {% if image.cover_image %} 
-                <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+                <img class="archive-submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
                 {% endif %}
             {% endfor %}
         </div>
-        <small>
-            <b>{{ submission.project_title }}</b>, {{ submission.artists }}. {{ submission.exhibition_opening }}.
+        <small class="archive-submission-image-text text-center">
+            <b>{{ archive.project_title }}</b>, {{ archive.artists }}. {{ archive.exhibition_opening }}.
         </small>
     </a>
     </div>
@@ -70,8 +70,10 @@
             </a>
             <img class="event-submission-image-list" src="{{ event.images.all.0.image.url }}" alt="{{ event.images.all.0.image.caption }}">
             <br/>
+            {% if event.curators %}
             <p>Curated by {{ event.curators }}</p>
             <br/>
+            {% endif %}
             <p><small>{{ event.event_type }}</small></p>
         </div>
         <div class="col-4">

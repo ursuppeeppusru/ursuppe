@@ -114,15 +114,113 @@ function createDownloadICSFile(timezone, startTime, endTime, title, description,
   download(title + '.ics', icsBody);
 }
 
-/* index horisontal scroll button */
-/*
-const buttonRight = document.getElementById('slide-right');
-const buttonLeft = document.getElementById('slide-left');
+/* index horisontal sliders */
 
-buttonRight.onclick = function () {
-  document.getElementById('events-whatson').scrollLeft += 400;
+/* get #events-index-row width */
+var width = document.getElementById('events-index-row').offsetWidth;
+var width = width - 50;
+
+/* sliders */
+var buttonOne = document.getElementById('slideOne');
+buttonOne.onclick = function () {
+    var containerOne = document.getElementById('scroll-containerOne');
+    sideScroll(containerOne,'right',7,width,10);
 };
-buttonLeft.onclick = function () {
-  document.getElementById('events-whatson').scrollLeft -= 400;
+
+var backOne = document.getElementById('slideBackOne');
+backOne.onclick = function () {
+    var containerOne = document.getElementById('scroll-containerOne');
+    sideScroll(containerOne,'left',7,width,10);
 };
-*/
+
+var buttonTwo = document.getElementById('slideTwo');
+buttonTwo.onclick = function () {
+    var containerTwo = document.getElementById('scroll-containerTwo');
+    sideScroll(containerTwo,'right',7,width,10);
+};
+
+var backTwo = document.getElementById('slideBackTwo');
+backTwo.onclick = function () {
+    var containerTwo = document.getElementById('scroll-containerTwo');
+    sideScroll(containerTwo,'left',7,width,10);
+};
+
+var buttonThree = document.getElementById('slideThree');
+buttonThree.onclick = function () {
+    var containerThree = document.getElementById('scroll-containerThree');
+    sideScroll(containerThree,'right',7,width,10);
+};
+
+var backThree = document.getElementById('slideBackThree');
+backThree.onclick = function () {
+    var containerThree = document.getElementById('scroll-containerThree');
+    sideScroll(containerThree,'left',7,width,10);
+};
+
+function sideScroll(element,direction,speed,distance,step){
+    scrollAmount = 0;
+    var slideTimer = setInterval(function(){
+        if(direction == 'left'){
+            element.scrollLeft -= step;
+        } else {
+            element.scrollLeft += step;
+        }
+        scrollAmount += step;
+        if(scrollAmount >= distance){
+            window.clearInterval(slideTimer);
+        }
+    }, speed);
+}
+
+/* index archive selector */
+document.addEventListener("DOMContentLoaded", function() {
+    const tabLinks = document.querySelectorAll(".tab-link");
+    const imageContainers = document.querySelectorAll(".image-container-list");
+    let currentIndex = 0;
+    let timer; 
+
+    // Function to show image container based on index
+    function showImageByIndex(index) {
+        tabLinks.forEach(function(link) {
+            link.classList.remove("active");
+        });
+        tabLinks[index].classList.add("active");
+
+        imageContainers.forEach(function(container) {
+            container.classList.remove("active");
+        });
+        imageContainers[index].classList.add("active");
+    }
+
+    // Function to switch to the next tab and image container
+    function switchToNextImage() {
+        currentIndex = (currentIndex + 1) % tabLinks.length; // Increment index and wrap around
+        showImageByIndex(currentIndex);
+    }
+
+    // Add mouseover event listener to tab links
+    tabLinks.forEach(function(link, index) {
+        link.addEventListener("mouseover", function(e) {
+            e.preventDefault();
+            currentIndex = index; // Update current index when mouseover occurs
+            showImageByIndex(currentIndex);
+        });
+    });
+
+    // Start the timer to switch images automatically every 5 seconds
+    timer = setInterval(switchToNextImage, 5000);
+
+    // Stop the timer when mouseover occurs on tab links
+    tabLinks.forEach(function(link) {
+        link.addEventListener("mouseover", function() {
+            clearInterval(timer);
+        });
+    });
+
+    // Restart the timer when mouse leaves the tab links
+    tabLinks.forEach(function(link) {
+        link.addEventListener("mouseleave", function() {
+            timer = setInterval(switchToNextImage, 5000);
+        });
+    });
+});
