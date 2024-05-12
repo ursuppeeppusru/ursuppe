@@ -752,8 +752,7 @@ img.submission-image-list {
     object-fit: cover;
     object-position: center center;
     border-radius: var(--list-img-border);
-    margin-top: 15px;
-    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 img.submission-image-list:hover {
