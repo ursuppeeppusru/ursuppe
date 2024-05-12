@@ -116,60 +116,62 @@ function createDownloadICSFile(timezone, startTime, endTime, title, description,
 
 /* index horisontal sliders */
 
-/* get #events-index-row width */
-var width = document.getElementById('events-index-row').offsetWidth;
-var width = width - 50;
-
-/* sliders */
+// Cache DOM elements
+var eventsRow = document.getElementById('events-index-row');
 var buttonOne = document.getElementById('slideOne');
-buttonOne.onclick = function () {
-    var containerOne = document.getElementById('scroll-containerOne');
-    sideScroll(containerOne,'right',7,width,10);
-};
-
 var backOne = document.getElementById('slideBackOne');
-backOne.onclick = function () {
-    var containerOne = document.getElementById('scroll-containerOne');
-    sideScroll(containerOne,'left',7,width,10);
-};
-
 var buttonTwo = document.getElementById('slideTwo');
-buttonTwo.onclick = function () {
-    var containerTwo = document.getElementById('scroll-containerTwo');
-    sideScroll(containerTwo,'right',7,width,10);
-};
-
 var backTwo = document.getElementById('slideBackTwo');
-backTwo.onclick = function () {
-    var containerTwo = document.getElementById('scroll-containerTwo');
-    sideScroll(containerTwo,'left',7,width,10);
-};
-
 var buttonThree = document.getElementById('slideThree');
-buttonThree.onclick = function () {
-    var containerThree = document.getElementById('scroll-containerThree');
-    sideScroll(containerThree,'right',7,width,10);
-};
-
 var backThree = document.getElementById('slideBackThree');
-backThree.onclick = function () {
-    var containerThree = document.getElementById('scroll-containerThree');
-    sideScroll(containerThree,'left',7,width,10);
-};
 
-function sideScroll(element,direction,speed,distance,step){
-    scrollAmount = 0;
-    var slideTimer = setInterval(function(){
-        if(direction == 'left'){
-            element.scrollLeft -= step;
+// Calculate width once
+var width = eventsRow.offsetWidth - 50;
+
+// Consolidated event handler function
+function setupSliderEvents(button, back, containerId) {
+    button.onclick = function () {
+        var container = document.getElementById(containerId);
+        smoothScroll(container, 'right', width);
+    };
+
+    back.onclick = function () {
+        var container = document.getElementById(containerId);
+        smoothScroll(container, 'left', width);
+    };
+}
+
+// Setup event listeners
+setupSliderEvents(buttonOne, backOne, 'scroll-containerOne');
+setupSliderEvents(buttonTwo, backTwo, 'scroll-containerTwo');
+setupSliderEvents(buttonThree, backThree, 'scroll-containerThree');
+
+// Easing function
+function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+
+// Smooth scroll function
+function smoothScroll(element, direction, distance) {
+    var start = element.scrollLeft;
+    var startTime = performance.now();
+
+    function scroll(time) {
+        var elapsed = time - startTime;
+        var progress = Math.min(elapsed / 500, 1); // Duration: 500ms
+
+        if (direction === 'left') {
+            element.scrollLeft = start - (distance * easeInOutQuad(progress));
         } else {
-            element.scrollLeft += step;
+            element.scrollLeft = start + (distance * easeInOutQuad(progress));
         }
-        scrollAmount += step;
-        if(scrollAmount >= distance){
-            window.clearInterval(slideTimer);
+
+        if (progress < 1) {
+            requestAnimationFrame(scroll);
         }
-    }, speed);
+    }
+
+    requestAnimationFrame(scroll);
 }
 
 /* index archive selector */
