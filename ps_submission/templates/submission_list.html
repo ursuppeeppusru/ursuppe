@@ -28,16 +28,16 @@
 {% if submissions %}
 <div class="row content">
     {% for submission in submissions %}
-    <div class="col-4">
+    <div class="col-4 archive-submission-image-list-wrapper">
     <a href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}">
-        <div class="image-container-list">
+        <div class="archive-image-container-list">
             {% for image in submission.images.all %}
                 {% if image.cover_image %} 
-                <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+                <img class="archive-submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
                 {% endif %}
             {% endfor %}
         </div>
-        <small>
+        <small class="archive-submission-image-text text-center">
             <b>{{ submission.project_title }}</b>, {{ submission.artists }}. {{ submission.exhibition_opening }}.
         </small>
     </a>

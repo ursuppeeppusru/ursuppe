@@ -18,7 +18,7 @@ def today_plus_2w():
 @cache_page(60 * 60)
 def highlights(request):
     # Only object which are marked as published
-    highlighted_submissions = ExhibitionSubmission.objects.filter(published=True, highlight=True).order_by('-exhibition_end')
+    highlighted_submissions = ExhibitionSubmission.objects.filter(published=True, highlight=True).order_by('-exhibition_end')[:5]
     highlighted_event_submissions = CalendarSubmission.objects.filter(published=True, highlight=True).filter(exhibition_end__gte=today()).order_by('exhibition_end')
     all_current_event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__lte=today()).order_by('exhibition_end')
     all_upcoming_event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__gte=today()).order_by('exhibition_opening')
