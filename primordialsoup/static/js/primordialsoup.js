@@ -132,12 +132,12 @@ var width = eventsRow.offsetWidth - 50;
 function setupSliderEvents(button, back, containerId) {
     button.onclick = function () {
         var container = document.getElementById(containerId);
-        sideScroll(container, 'right', 7, width, 10);
+        smoothScroll(container, 'right', width);
     };
 
     back.onclick = function () {
         var container = document.getElementById(containerId);
-        sideScroll(container, 'left', 7, width, 10);
+        smoothScroll(container, 'left', width);
     };
 }
 
@@ -146,19 +146,32 @@ setupSliderEvents(buttonOne, backOne, 'scroll-containerOne');
 setupSliderEvents(buttonTwo, backTwo, 'scroll-containerTwo');
 setupSliderEvents(buttonThree, backThree, 'scroll-containerThree');
 
-function sideScroll(element, direction, speed, distance, step) {
-    var scrollAmount = 0;
-    var slideTimer = setInterval(function () {
-        if (direction == 'left') {
-            element.scrollLeft -= step;
+// Easing function
+function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+
+// Smooth scroll function
+function smoothScroll(element, direction, distance) {
+    var start = element.scrollLeft;
+    var startTime = performance.now();
+
+    function scroll(time) {
+        var elapsed = time - startTime;
+        var progress = Math.min(elapsed / 500, 1); // Duration: 500ms
+
+        if (direction === 'left') {
+            element.scrollLeft = start - (distance * easeInOutQuad(progress));
         } else {
-            element.scrollLeft += step;
+            element.scrollLeft = start + (distance * easeInOutQuad(progress));
         }
-        scrollAmount += step;
-        if (scrollAmount >= distance) {
-            clearInterval(slideTimer);
+
+        if (progress < 1) {
+            requestAnimationFrame(scroll);
         }
-    }, speed);
+    }
+
+    requestAnimationFrame(scroll);
 }
 
 /* index archive selector */
