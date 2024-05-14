@@ -24,7 +24,7 @@ class PinBoard(models.Model):
         default="Exhibition",
         max_length=500,
         blank=False
-    )
+    ) 
     location = models.CharField(
         max_length=255, verbose_name="Location", help_text="Required *. E.g. city name or region", blank=False
     )
