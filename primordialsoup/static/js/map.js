@@ -86,13 +86,14 @@ function showEventDetails(event) {
     const vernissage = formatJsonDate(event.calendar__opening);
     const eventDetailsDiv = document.getElementById('event-details');
     const eventDetailBlankPlaceholder = document.getElementById('event-details-placeholder');
-    if (new Date(eventEnd) <= new Date(Date.now() + 12096e5)) {
+    if (new Date(eventEnd) <= new Date(Date.now() + 12096e5) && new Date(eventOpening) < new Date()) {
         eventStatus = "CLOSING SOON";
     } else if (new Date(eventOpening) < new Date()) {
         eventStatus = "CURRENT";
     } else {
         eventStatus = "UPCOMING";
     };
+
 
     // Event Details card
     if (event.calendar__curators) {
