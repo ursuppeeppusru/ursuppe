@@ -112,12 +112,9 @@
     });
 
     // Leaflet map
-    // Define position of map
     const zoom = 13;
     const center = [{{event.latitude}}, {{event.longitude}}];
-    // Declaring map
     const map = L.map('map', {center: center, zoom: zoom,
-        // Stop zoom interferring with scroll on mobile
         dragging: !L.Browser.mobile,
         tap: !L.Browser.mobile,
     });
@@ -137,5 +134,13 @@
 
     // Marker based on coordinates
     const marker = L.marker([{{event.latitude}}, {{event.longitude}}], {icon: soupIcon}).addTo(map);
+
+    // Zoom when clicked function
+    function zoomToMarker(e) {
+        map.setView(e.latlng, 17);
+    };
+
+    marker.on('click', zoomToMarker)
+
 </script>
 {% endblock %}
