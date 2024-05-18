@@ -136,11 +136,20 @@
     const marker = L.marker([{{event.latitude}}, {{event.longitude}}], {icon: soupIcon}).addTo(map);
 
     // Zoom when clicked function
-    function zoomToMarker(e) {
-        map.setView(e.latlng, 17);
-    };
+    function markerZoom(e) {
+        if (map.getZoom() <= 17) {
+            map.flyTo(e.latlng, 18, {
+                animate: true,
+                duration: 0.5, // Duration in seconds
+            });
+        } else {
+            map.flyTo(e.latlng, 13, {
+                animate: true,
+                duration: 0.5, // Duration in seconds
+            });
+        };
+    }
 
-    marker.on('click', zoomToMarker)
-
+    marker.on('click', markerZoom);
 </script>
 {% endblock %}
