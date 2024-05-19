@@ -27,19 +27,22 @@
         <a href="{% url 'event_list' %}">list</a>
         <a class="active" href="{% url 'event_map' %}">map</a>
 </nav>
-<div class="row content">
-    <div class="col-12">
-        <button id="toggleButton">Toggle Current Events</button>
-    </div>
-</div>
 <hr class="map" style="margin: 0;"/>
 <!-- Leaflet map -->
-<div id="map"></div>
+<div id="map">
+    <div>
+        <button id="toggle-map-layers">Show only current events</button>
+      </div>      
+</div>
 <hr class="map"/>
 <div id="event-details" style="display: none;"></div>
 <div class="col-12" id="event-details-placeholder">
-    <p>Click the dots on the map to explore current and upcoming events.</p>
+    <p>Click the dots on the map to explore events.</p>
 </div>
+<div class="map-button" id="toggle-upcoming">
+    <input type="checkbox" id="checkbox1" />
+    <label for="checkbox1"></label>
+  </div>   
 {% endblock content %}
 
 {% block extra_js %}

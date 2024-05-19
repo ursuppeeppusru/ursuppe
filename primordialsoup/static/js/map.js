@@ -94,7 +94,6 @@ function showEventDetails(event) {
         eventStatus = "UPCOMING";
     };
 
-
     // Event Details card
     if (event.calendar__curators) {
         eventDetailsDiv.innerHTML = `
@@ -178,12 +177,15 @@ map.on('popupclose', function() {
     eventDetailBlankPlaceholder.style.display = 'block';
 });
 
-// Toggle 'Show upcoming events'
-document.getElementById('toggleButton').addEventListener('click', function() {
+// Toggle map layer. 'Show/hide upcoming events'
+const toggleMapLayers = document.getElementById('toggle-map-layers');
+toggleMapLayers.addEventListener('click', function() {
   if (map.hasLayer(currentEvents)) {
     map.removeLayer(currentEvents);
-  } else {
+    toggleMapLayers.innerHTML = `Show current and upcoming </br> events`;
+} else {
     map.addLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show only current events`;
   }
 });
 
