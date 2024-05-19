@@ -112,7 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# TODO: move TIME_ZONE to .env 
+TIME_ZONE = "Europe/Copenhagen"
 
 USE_I18N = True
 
