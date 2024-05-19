@@ -18,5 +18,8 @@ class CalendarImagesInline(admin.TabularInline):  # or admin.StackedInline for a
 class CalendarSubmissionAdmin(admin.ModelAdmin):
     form = CalendarSubmissionAdminForm
     inlines = [CalendarImagesInline]
+    list_display = ["project_title", "published", "highlight"]
+    search_fields = ["project_title"]
+
 
 admin.site.register(CalendarSubmission, CalendarSubmissionAdmin)
