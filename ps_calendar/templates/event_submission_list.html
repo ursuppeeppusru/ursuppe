@@ -40,7 +40,7 @@
     <div class="col-4 ">
         {% if submission.exhibition_end < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif submission.exhibition_end <= today_plus_2w %}
+        {% elif submission.exhibition_end <= today_plus_2w and submission.exhibition_opening < today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif submission.exhibition_opening < today %}
         <span class="event-detail-status-label">CURRENT</span>
