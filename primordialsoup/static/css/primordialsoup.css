@@ -65,6 +65,12 @@ body {
     src: url(/static/font/Basteleur-Moonlight.otf);
 }
 
+@font-face {
+    font-family: basteleurbold;
+    src: url(/static/font/Basteleur-Bold.otf);
+    font-weight: bold;
+}
+
 .row {
     overflow-x: hidden;
 }
@@ -358,7 +364,6 @@ input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],
 input:hover, select:hover, textarea:hover, textarea[type=text]:hover {
     border: 1px solid var(--font-color);
     border-radius: 0px;
-    width: 100% !important;
 }
 
 span.helptext {
@@ -579,24 +584,24 @@ div.submission-image-detail-wrapper {
 }
 
 .leaflet-popup-content-wrapper {
-    border-radius: 50% !important;
+    border-radius: 50%;
     font-size: 12px;
     width: 200px;
-    box-shadow: 0 0px 0px rgba(0,0,0,0) !important;
-    background: transparent !important;
+    box-shadow: 0 0px 0px rgba(0,0,0,0);
+    background: transparent;
 }
 
 .leaflet-popup-content,
 .leaflet-popup.leaflet-zoom-animated {
-    padding: 0 !important;
-    margin: 0 !important;
+    padding: 0;
+    margin: 0;
     pointer-events: none;
 }
 
 .leaflet-popup-tip, 
 .leaflet-popup-close-button, 
 .leaflet-container a.leaflet-popup-close-button {
-    display: none !important;
+    display: none;
 }
 
 #event-details-placeholder {
@@ -620,20 +625,91 @@ hr.map-event-detail-top {
     margin: 0;
 }
 
-#toggle-map-layers {
-    background-color: var(--bg-color);
-    border: solid 1px var(--color-primary);
-    color: var(--color-primary);
-    position: absolute;
-    border-radius: 50% !important;
-    font-size: 12px;
-    z-index: 500;
-    top: 10px;
-    right: 10px;
-    height: 50px;
-    width: 200px !important;
-    padding: 0;
+/* leaflet map layers control */
+.leaflet-touch .leaflet-control-layers, 
+.leaflet-touch .leaflet-bar {
+    border: 1px solid var(--color-primary);
+    border-radius: 3px;
+    background-clip: unset;
     cursor: pointer;
+}
+
+.leaflet-control-layers-expanded {
+    color: var(--color-primary);
+    background: var(--bg-color);
+}
+
+.leaflet-container {
+    font-family: var(--font-family-sans);
+    font-size: small;
+}
+
+/* leaflet map checkboxes */
+.leaflet-control-layers-overlays {
+    align-items: center;    
+}
+
+.leaflet-control-layers-overlays label {
+    cursor: pointer;
+    
+}
+
+.leaflet-control-layers-overlays input[type='checkbox'] {
+    cursor: pointer;
+    opacity: 0; 
+    position: absolute;
+}
+
+.leaflet-control-layers-overlays label::before {
+    display: inline-block;
+    content: "";
+    width: 1em;
+    height: 1em;
+    border-radius: 3px;
+    border: 1px solid var(--color-primary);
+}
+
+/* TODO fix afstend */ 
+.leaflet-control-layers-overlays label::before {
+    margin-left: 5px;
+}
+
+.leaflet-control-layers-overlays label:hover:before,
+.leaflet-control-layers-overlays input[type='checkbox']:hover + label::before { 
+    background: var(--color-primary);
+}
+
+.leaflet-control-layers-overlays input[type='checkbox']:disabled + label,
+.leaflet-control-layers-overlays input[type='checkbox']:disabled {
+    color: #aaa;
+    cursor: default;
+}
+
+.leaflet-control-layers-overlays > label > span > input[type='checkbox']:checked + label::before + span {
+/* .leaflet-control-layers-overlays input[type='checkbox']:checked + label::before { */
+    content: "\002714"; /* checkmark */
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.leaflet-control-layers-overlays input[type='checkbox']:disabled + label::before {
+    background-color: #ccc;
+    border-color: var(--bg-color);
+}
+
+/* leaflet map attribution */
+.leaflet-touch .leaflet-control-attribution {
+    font-size: 11px;
+}
+
+/* leaflet map zoom buttons */
+.leaflet-touch .leaflet-bar a {
+    background: var(--bg-color);
+    font-family: basteleurbold;
+    line-height: 35px;
 }
 
 
