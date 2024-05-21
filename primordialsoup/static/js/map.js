@@ -36,31 +36,14 @@ const clusterSettings = {
 const allEvents = L.markerClusterGroup(clusterSettings);
 const upcomingEvents = L.featureGroup.subGroup(allEvents);
 const currentEvents = L.featureGroup.subGroup(allEvents);
-
 allEvents.addTo(map);
 
 // Layer control 
 const control = L.control.layers(null, null, { collapsed: false});
 control.addOverlay(upcomingEvents, "Upcoming events");
 control.addOverlay(currentEvents, "Current events");
-// .onAdd = function (map) {
-//     var div = L.DomUtil.create('div');
-//     div.innerHTML = `
-//     <div class="leaflet-control-layers leaflet-control-layers-expanded">
-//       <form>
-//         <input class="leaflet-control-layers-overlays" id="command" 
-//           onclick=toggleFunction(this.checked) type="checkbox">
-//           Toggle
-//         </input>
-//       </form>
-//     </div>`; 
-//     return div;
-// };
-
 control.addTo(map);
   
-  
-
 // Fetch JSON
 const jsonUrl = '/events/json';
 fetch(jsonUrl).then(response => response.json()).then(data => {
@@ -202,6 +185,18 @@ map.on('popupclose', function() {
     // Toggle display
     eventDetailsDiv.style.display = 'none';
     eventDetailBlankPlaceholder.style.display = 'block';
+});
+
+// Toggle map layer. 'Show/hide upcoming events'
+const toggleMapLayers = document.getElementById('toggle-map-layers');
+toggleMapLayers.addEventListener('click', function() {
+  if (map.hasLayer(currentEvents)) {
+    map.removeLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show current and upcoming </br> events`;
+} else {
+    map.addLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show only current events`;
+  }
 });
 
 // Marker and cluster icon is defined in CSS
