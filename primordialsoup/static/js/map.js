@@ -14,11 +14,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Clustering
-const markers = L.markerClusterGroup({
+// Cluster settings
+const clusterSettings = {
     iconCreateFunction: function (cluster) {
-        var markers = cluster.getAllChildMarkers();
-        var html = '<div class="circle">' + markers.length + '</div>';
+        const markers = cluster.getAllChildMarkers();
+        const html = '<div class="circle">' + markers.length + '</div>';
         return L.divIcon({ 
             html: html,
             className: 'mycluster', 
@@ -30,32 +30,37 @@ const markers = L.markerClusterGroup({
     showCoverageOnHover: false, 
     zoomToBoundsOnClick: true,
     maxClusterRadius: 30,
-});
+}
+
+// Cluster groups
+const allEvents = L.markerClusterGroup(clusterSettings);
+const currentEvents = L.featureGroup.subGroup(allEvents);
 
 // Fetch JSON
 const jsonUrl = '/events/json';
 fetch(jsonUrl).then(response => response.json()).then(data => {
-        // Loop through the data
         data.event_submissions.forEach(event => {
             const id = event.calendar__id; 
             const image = event.image;
+            const eventOpening = formatJsonDate(event.calendar__exhibition_opening);
             const latitude = parseFloat(event.calendar__latitude);
             const longitude = parseFloat(event.calendar__longitude);
             const marker = L.marker([latitude, longitude], {icon: soupIcon});
             
-            // Image as popup
             marker.bindPopup(`<img style="border-radius: 50%;" src="/media/${image}">`);
             
-            // Add marker to the marker cluster group
-            markers.addLayer(marker);
-
-            // Event listener for marker click
+            if (new Date(eventOpening) >= new Date()) {
+                currentEvents.addLayer(marker);
+            } else {
+                allEvents.addLayer(marker);
+            };
+            
             marker.on('click', function() {
                 showEventDetails(event);
             });
 
-            // Add marker cluster group to the map
-            map.addLayer(markers);
+            map.addLayer(currentEvents);
+            map.addLayer(allEvents);
         });
     })
     .catch(error => {
@@ -81,7 +86,7 @@ function showEventDetails(event) {
     const vernissage = formatJsonDate(event.calendar__opening);
     const eventDetailsDiv = document.getElementById('event-details');
     const eventDetailBlankPlaceholder = document.getElementById('event-details-placeholder');
-    if (new Date(eventEnd) <= new Date(Date.now() + 12096e5)) {
+    if (new Date(eventEnd) <= new Date(Date.now() + 12096e5) && new Date(eventOpening) < new Date()) {
         eventStatus = "CLOSING SOON";
     } else if (new Date(eventOpening) < new Date()) {
         eventStatus = "CURRENT";
@@ -170,6 +175,18 @@ map.on('popupclose', function() {
     // Toggle display
     eventDetailsDiv.style.display = 'none';
     eventDetailBlankPlaceholder.style.display = 'block';
+});
+
+// Toggle map layer. 'Show/hide upcoming events'
+const toggleMapLayers = document.getElementById('toggle-map-layers');
+toggleMapLayers.addEventListener('click', function() {
+  if (map.hasLayer(currentEvents)) {
+    map.removeLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show current and upcoming </br> events`;
+} else {
+    map.addLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show only current events`;
+  }
 });
 
 // Marker and cluster icon is defined in CSS

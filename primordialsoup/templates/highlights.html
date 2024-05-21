@@ -139,7 +139,7 @@
     <!-- calendar highlights goes here -->
     {% for event_submission in highlighted_event_submissions %}
         <span class="highlight-events-index-row-card">
-            {% if event_submission.exhibition_end <= today_plus_2w %}
+            {% if event_submission.exhibition_end <= today_plus_2w and submission.exhibition_opening < today %}
             <span class="event-status-label">CLOSING SOON</span>
             {% elif event_submission.exhibition_opening < today %}
             <span class="event-status-label">CURRENT</span>
