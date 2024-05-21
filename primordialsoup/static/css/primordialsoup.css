@@ -644,70 +644,54 @@ hr.map-event-detail-top {
     font-size: small;
 }
 
-/* leaflet map checkboxes */
+/* checkboxes */
 .leaflet-control-layers-overlays {
     align-items: center;    
 }
 
 .leaflet-control-layers-overlays label {
     cursor: pointer;
-    
 }
 
-.leaflet-control-layers-overlays input[type='checkbox'] {
+.leaflet-control-layers-overlays .leaflet-control-layers-selector {
     cursor: pointer;
     opacity: 0; 
     position: absolute;
+    z-index: -1;
 }
 
-.leaflet-control-layers-overlays label::before {
+.leaflet-control-layers-overlays label span span:before {
     display: inline-block;
-    content: "";
-    width: 1em;
-    height: 1em;
-    border-radius: 3px;
-    border: 1px solid var(--color-primary);
+    vertical-align: middle;
+    content: "\2726";
+    color: var(--color-primary);
+    font-size: 1.4em;
+    margin: 0 5px 0px 2px;
 }
 
-/* TODO fix afstend */ 
-.leaflet-control-layers-overlays label::before {
-    margin-left: 5px;
+.leaflet-control-layers-overlays label {
+    margin: 0 4px -2px 5px;
 }
 
-.leaflet-control-layers-overlays label:hover:before,
-.leaflet-control-layers-overlays input[type='checkbox']:hover + label::before { 
-    background: var(--color-primary);
+.leaflet-control-layers-overlays span:hover:before,
+.leaflet-control-layers-overlays .leaflet-control-layers-selector:hover + span:before { 
+    background: var(--bg-color);
 }
 
-.leaflet-control-layers-overlays input[type='checkbox']:disabled + label,
-.leaflet-control-layers-overlays input[type='checkbox']:disabled {
-    color: #aaa;
-    cursor: default;
-}
-
-.leaflet-control-layers-overlays > label > span > input[type='checkbox']:checked + label::before + span {
-/* .leaflet-control-layers-overlays input[type='checkbox']:checked + label::before { */
-    content: "\002714"; /* checkmark */
-    background-color: green;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
-
-.leaflet-control-layers-overlays input[type='checkbox']:disabled + label::before {
-    background-color: #ccc;
-    border-color: var(--bg-color);
+.leaflet-control-layers-overlays .leaflet-control-layers-selector:not(:checked) + span:before { 
+    background: var(--bg-color);
+    content: "\2727";
 }
 
 /* leaflet map attribution */
 .leaflet-touch .leaflet-control-attribution {
-    font-size: 11px;
+    font-size: x-small;
 }
 
 /* leaflet map zoom buttons */
 .leaflet-touch .leaflet-bar a {
     background: var(--bg-color);
+    color: var(--color-primary);
     font-family: basteleurbold;
     line-height: 35px;
 }
