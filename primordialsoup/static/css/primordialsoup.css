@@ -268,7 +268,8 @@ nav.footer a {
 /* tab */
 
 nav.tabs:last-child {
-    padding-bottom: 25px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 @media only screen and (max-width: 599px) {
@@ -276,6 +277,8 @@ nav.tabs:last-child {
         width: 100%;
         overflow-x: auto;
         white-space: nowrap;
+        scrollbar-color: var(--color-primary) var(--bg-color);
+        scrollbar-width: thin;
     }
 
     nav.tabs > a {
