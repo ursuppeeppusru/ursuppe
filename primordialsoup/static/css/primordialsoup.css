@@ -175,10 +175,6 @@ header {
     }
 }
 
-header img.logo {
-
-}
-
 @media only screen and (min-width: 599px) {
     .darkmode-btn {
         position: absolute;
@@ -373,10 +369,6 @@ span.helptext {
     font-size: smaller;
 }
 
-label {
-
-}
-
 .button, [type=button], [type=reset], [type=submit], button {
     width: 100% !important;
     background: var(--color-primary);
@@ -516,10 +508,6 @@ a.event-project-title-link:hover~img.event-submission-image-list { display: bloc
 
 /* detail */
 
-div.submission-image-detail-wrapper {
-
-}
-
 .submission-image-detail-cover {
     width: 100%;
     object-fit: cover;
@@ -611,7 +599,6 @@ div.submission-image-detail-wrapper {
     text-align: center; 
     vertical-align: middle;
     min-height: 300px; 
-    display: block;
 }
 
 hr.map {
@@ -834,10 +821,6 @@ img.submission-image-list {
     object-position: center center;
     border-radius: var(--list-img-border);
     margin-top: 10px;
-}
-
-img.submission-image-list:hover {
-
 }
 
 @media only screen and (max-width: 599px) {
