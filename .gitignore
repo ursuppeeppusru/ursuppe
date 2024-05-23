@@ -125,3 +125,7 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# texts
+.primordialsoup/templates/text-solidarity.html
+.primordialsoup/templates/text.html
