@@ -17,7 +17,7 @@
   --list-img-border: 50%;
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
-  --header-font: basteleur;
+  --header-font: BasteleurMoonlight;
   --date-color-scheme: light;
 }
 
@@ -39,7 +39,8 @@
   --list-img-border: 50%;
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
-  --header-font: basteleur;
+  --header-font: BasteleurMoonlight;
+  --header-font-secondary: BasteleurBold;
   --date-color-scheme: dark;
 }
 
@@ -61,12 +62,12 @@ body {
 }
 
 @font-face {
-    font-family: basteleur;
+    font-family: BasteleurMoonlight;
     src: url(/static/font/Basteleur-Moonlight.otf);
 }
 
 @font-face {
-    font-family: basteleurbold;
+    font-family: BasteleurBold;
     src: url(/static/font/Basteleur-Bold.otf);
     font-weight: bold;
 }
@@ -682,7 +683,7 @@ hr.map-event-detail-top {
 .leaflet-touch .leaflet-bar a {
     background: var(--bg-color);
     color: var(--color-primary);
-    font-family: basteleurbold;
+    font-family: var(--header-font-secondary);
     line-height: 35px;
 }
 
