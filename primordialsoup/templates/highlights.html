@@ -98,7 +98,13 @@
         {% for submission in highlighted_submissions %}
         <a class="tab-link {% if forloop.first %}active{% endif %}" href="javascript:void(0);" data-target="{{ submission.project_title }}">
             <small class="submission-image-text text-center">
-                <b>{{ submission.project_title }}</b><br/>{{ submission.artists }}<br/>{{ submission.exhibition_opening }}
+                <b>{{ submission.project_title }}</b><br/>
+                {% if ',' in submission.artists %}
+                Group exhibition<br/>
+                {% else %}
+                {{ submission.artists }}<br/>
+                {% endif %}
+                {{ submission.exhibition_opening }}
             </small>
         </a>
         {% endfor %}

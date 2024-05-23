@@ -25,6 +25,10 @@ ALLOWED_HOSTS = list(env('ALLOWED_HOSTS'))
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+# Timezone and language
+TIME_ZONE = env('TIME_ZONE')
+LANGUAGE_CODE = env('LANGUAGE_CODE')
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
