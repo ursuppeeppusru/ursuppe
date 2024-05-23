@@ -187,6 +187,18 @@ map.on('popupclose', function() {
     eventDetailBlankPlaceholder.style.display = 'block';
 });
 
+// Toggle map layer. 'Show/hide upcoming events'
+const toggleMapLayers = document.getElementById('toggle-map-layers');
+toggleMapLayers.addEventListener('click', function() {
+  if (map.hasLayer(currentEvents)) {
+    map.removeLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show current and upcoming </br> events`;
+} else {
+    map.addLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show only current events`;
+  }
+});
+
 // Marker and cluster icon is defined in CSS
 const soupIcon = L.divIcon({
     className: 'soup',
