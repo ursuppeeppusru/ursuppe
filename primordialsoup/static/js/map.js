@@ -32,10 +32,18 @@ const clusterSettings = {
     maxClusterRadius: 30,
 }
 
-// Cluster groups
+// Layer groups
 const allEvents = L.markerClusterGroup(clusterSettings);
+const upcomingEvents = L.featureGroup.subGroup(allEvents);
 const currentEvents = L.featureGroup.subGroup(allEvents);
+allEvents.addTo(map);
 
+// Layer control 
+const control = L.control.layers(null, null, { collapsed: false});
+control.addOverlay(upcomingEvents, "Upcoming events");
+control.addOverlay(currentEvents, "Current events");
+control.addTo(map);
+  
 // Fetch JSON
 const jsonUrl = '/events/json';
 fetch(jsonUrl).then(response => response.json()).then(data => {
@@ -48,19 +56,21 @@ fetch(jsonUrl).then(response => response.json()).then(data => {
             const marker = L.marker([latitude, longitude], {icon: soupIcon});
             
             marker.bindPopup(`<img style="border-radius: 50%;" src="/media/${image}">`);
-            
-            if (new Date(eventOpening) >= new Date()) {
-                currentEvents.addLayer(marker);
+
+            if (new Date(eventOpening) > new Date()) {
+                upcomingEvents.addLayer(marker);
+                console.log('Marker added to upcoming events!')
             } else {
-                allEvents.addLayer(marker);
+                currentEvents.addLayer(marker);
+                console.log('Marker added to current events!')
             };
             
             marker.on('click', function() {
                 showEventDetails(event);
             });
 
-            map.addLayer(currentEvents);
-            map.addLayer(allEvents);
+            upcomingEvents.addTo(map);
+            currentEvents.addTo(map);
         });
     })
     .catch(error => {
@@ -68,7 +78,7 @@ fetch(jsonUrl).then(response => response.json()).then(data => {
 });
 
 // Formating JSON date for event details
-const formatJsonDate = (jsonDate) => {
+function formatJsonDate(jsonDate) {
     const date = new Date(jsonDate);
     const options = {
         year: 'numeric',
@@ -175,18 +185,6 @@ map.on('popupclose', function() {
     // Toggle display
     eventDetailsDiv.style.display = 'none';
     eventDetailBlankPlaceholder.style.display = 'block';
-});
-
-// Toggle map layer. 'Show/hide upcoming events'
-const toggleMapLayers = document.getElementById('toggle-map-layers');
-toggleMapLayers.addEventListener('click', function() {
-  if (map.hasLayer(currentEvents)) {
-    map.removeLayer(currentEvents);
-    toggleMapLayers.innerHTML = `Show current and upcoming </br> events`;
-} else {
-    map.addLayer(currentEvents);
-    toggleMapLayers.innerHTML = `Show only current events`;
-  }
 });
 
 // Marker and cluster icon is defined in CSS
