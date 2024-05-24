@@ -59,10 +59,8 @@ fetch(jsonUrl).then(response => response.json()).then(data => {
 
             if (new Date(eventOpening) > new Date()) {
                 upcomingEvents.addLayer(marker);
-                console.log('Marker added to upcoming events!')
             } else {
                 currentEvents.addLayer(marker);
-                console.log('Marker added to current events!')
             };
             
             marker.on('click', function() {
