@@ -54,7 +54,7 @@ fetch(jsonUrl).then(response => response.json()).then(data => {
             const latitude = parseFloat(event.calendar__latitude);
             const longitude = parseFloat(event.calendar__longitude);
             const marker = L.marker([latitude, longitude], {icon: soupIcon});
-            
+                
             marker.bindPopup(`<img style="border-radius: 50%;" src="/media/${image}">`);
 
             if (new Date(eventOpening) > new Date()) {
@@ -94,9 +94,15 @@ function showEventDetails(event) {
     const vernissage = formatJsonDate(event.calendar__opening);
     const eventDetailsDiv = document.getElementById('event-details');
     const eventDetailBlankPlaceholder = document.getElementById('event-details-placeholder');
-    if (new Date(eventEnd) <= new Date(Date.now() + 12096e5) && new Date(eventOpening) < new Date()) {
+
+    const today = new Date().setHours(0,0,0,0);
+    const twoWeeks = new Date(Date.now() + 12096e5).setHours(0,0,0,0);    
+    
+    if (new Date(eventOpening).getTime() == today) {
+        eventStatus = "OPENING TODAY";
+    } else if (new Date(eventOpening) < today && new Date(eventEnd) < twoWeeks) {
         eventStatus = "CLOSING SOON";
-    } else if (new Date(eventOpening) < new Date()) {
+    } else if (new Date(eventOpening) < today) {
         eventStatus = "CURRENT";
     } else {
         eventStatus = "UPCOMING";

@@ -25,8 +25,10 @@
     <div class="events-index-row" id="events-index-row">
         {% for event_submission in all_current_event_submissions %}
         <span class="events-index-row-card">
-            {% if event_submission.exhibition_end <= today_plus_2w %}
-            <span class="event-status-label">CLOSING SOON</span>
+            {% if event_submission.exhibition_opening == today %}
+            <span class="event-status-label">OPENING TODAY</span>
+            {% elif event_submission.exhibition_end < today_plus_2w %}
+            <span class="event-status-label"><a>CLOSING SOON</span>
             {% endif %}
             <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
             {% if ',' in event_submission.artists %}
@@ -65,6 +67,8 @@
         <span class="events-index-row-card">
             {% if event_submission.exhibition_opening > today %}
             <span class="event-status-label">UPCOMING</span>
+            {% elif event_submission.exhibition_opening == today %}
+            <span class="event-status-label">OPENING TODAY</span>
             {% endif %}
             <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
             {% if ',' in event_submission.artists %}
@@ -145,7 +149,9 @@
     <!-- calendar highlights goes here -->
     {% for event_submission in highlighted_event_submissions %}
         <span class="highlight-events-index-row-card">
-            {% if event_submission.exhibition_end <= today_plus_2w and submission.exhibition_opening < today %}
+            {% if event_submission.exhibition_opening == today %}
+            <span class="event-status-label">OPENING TODAY</span>
+            {% elif event_submission.exhibition_end < today_plus_2w %}
             <span class="event-status-label">CLOSING SOON</span>
             {% elif event_submission.exhibition_opening <= today %}
             <span class="event-status-label">CURRENT</span>

@@ -41,12 +41,10 @@ def calendar_submission_create(request):
     })
 
 def today():
-    today = timezone.now().date()
-    return today
+    return timezone.now().date()
 
 def today_plus_2w():    
-    today_plus_2w = today() + timedelta(weeks=2)
-    return today_plus_2w
+    return today() + timedelta(weeks=2)
 
 # Current events
 @cache_page(60 * 60)
@@ -59,7 +57,7 @@ def event_list(request):
 @cache_page(60 * 60)
 def event_list_upcoming(request):
     # Only objects which are marked as published, where end date has not exceeded and opening date has NOT started
-    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__gte=today()).order_by('exhibition_opening')
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_opening__gte=today()).order_by('exhibition_opening')
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
 
 # Past events
