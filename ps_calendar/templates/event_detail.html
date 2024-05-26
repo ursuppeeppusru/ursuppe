@@ -16,12 +16,11 @@
     <div class="col-4">
         {% if event.exhibition_end < today %}
         <span class="event-detail-status-label">PAST</span>
-
         {% elif event.exhibition_opening == today %}
         <span class="event-detail-status-label">OPENING TODAY</span>
-
         {% elif event.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
+        {% elif event.exhibition_opening <= today %}
         {% elif event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
         {% elif event.exhibition_opening > today %}
@@ -62,6 +61,7 @@
 <hr/>
 <div class="col-12 text-center"> 
 
+    <h5><a id="downloadICS" href="#/"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a></h5>
     <h5><a id="downloadICS" href="#/"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a></h5>
 </div>
 <hr/>
