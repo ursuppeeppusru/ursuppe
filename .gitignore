@@ -127,5 +127,5 @@ GitHub.sublime-settings
 .history
 
 # texts
-.primordialsoup/templates/text-solidarity.html
-.primordialsoup/templates/text.html
+primordialsoup/templates/text-solidarity.html
+primordialsoup/templates/text.html
