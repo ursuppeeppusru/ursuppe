@@ -16,6 +16,8 @@
     <div class="col-4">
         {% if event.exhibition_end < today %}
         <span class="event-detail-status-label">PAST</span>
+        {% elif event.exhibition_opening == today %}
+        <span class="event-detail-status-label">OPENING TODAY</span>
         {% elif event.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif event.exhibition_opening <= today %}
