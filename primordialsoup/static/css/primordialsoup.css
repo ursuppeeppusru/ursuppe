@@ -565,7 +565,7 @@ a.event-project-title-link:hover~img.event-submission-image-list { display: bloc
 .circle {
     width: 40px;
     height: 40px;
-    line-height: 36px;
+    line-height: 40px;
     border-radius: 50%;
     background-color: var(--bg-color);
     border: solid 1px var(--color-primary);
