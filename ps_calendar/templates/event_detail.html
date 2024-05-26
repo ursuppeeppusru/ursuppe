@@ -21,7 +21,6 @@
         {% elif event.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif event.exhibition_opening <= today %}
-        {% elif event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
         {% elif event.exhibition_opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
