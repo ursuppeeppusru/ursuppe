@@ -54,7 +54,7 @@ fetch(jsonUrl).then(response => response.json()).then(data => {
             const latitude = parseFloat(event.calendar__latitude);
             const longitude = parseFloat(event.calendar__longitude);
             const marker = L.marker([latitude, longitude], {icon: soupIcon});
-                
+
             marker.bindPopup(`<img style="border-radius: 50%;" src="/media/${image}">`);
 
             if (new Date(eventOpening) > new Date()) {
@@ -94,7 +94,6 @@ function showEventDetails(event) {
     const vernissage = formatJsonDate(event.calendar__opening);
     const eventDetailsDiv = document.getElementById('event-details');
     const eventDetailBlankPlaceholder = document.getElementById('event-details-placeholder');
-
     const today = new Date().setHours(0,0,0,0);
     const twoWeeks = new Date(Date.now() + 12096e5).setHours(0,0,0,0);    
     
@@ -189,6 +188,18 @@ map.on('popupclose', function() {
     // Toggle display
     eventDetailsDiv.style.display = 'none';
     eventDetailBlankPlaceholder.style.display = 'block';
+});
+
+// Toggle map layer. 'Show/hide upcoming events'
+const toggleMapLayers = document.getElementById('toggle-map-layers');
+toggleMapLayers.addEventListener('click', function() {
+  if (map.hasLayer(currentEvents)) {
+    map.removeLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show current and upcoming </br> events`;
+} else {
+    map.addLayer(currentEvents);
+    toggleMapLayers.innerHTML = `Show only current events`;
+  }
 });
 
 // Marker and cluster icon is defined in CSS
