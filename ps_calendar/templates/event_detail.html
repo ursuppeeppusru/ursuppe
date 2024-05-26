@@ -6,10 +6,8 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block extra_css %}
-
         <!-- leaflet.js stylesheet -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/leaflet.css' %}">
-
 {% endblock extra_css %}
 
 {% block content %}
@@ -18,9 +16,9 @@
     <div class="col-4">
         {% if event.exhibition_end < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif event.exhibition_end <= today_plus_2w and submission.exhibition_opening < today %}
+        {% elif event.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
-        {% elif event.exhibition_opening < today %}
+        {% elif event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
         {% elif event.exhibition_opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
@@ -60,7 +58,7 @@
 <hr/>
 <div class="col-12 text-center"> 
 
-    <a id="downloadICS" href="#/"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a>
+    <h5><a id="downloadICS" href="#/"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a></h5>
 </div>
 <hr/>
 <div class="row content">
