@@ -358,7 +358,6 @@ input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],
     color: var(--font-color);
     border-radius: 0px;
     /* margin-bottom: 20px; */
-    width: 100% !important;
 }
 
 input:hover, select:hover, textarea:hover, textarea[type=text]:hover {
@@ -371,7 +370,6 @@ span.helptext {
 }
 
 .button, [type=button], [type=reset], [type=submit], button {
-    width: 100% !important;
     background: var(--color-primary);
     border: 1px solid var(--font-color);
     border-radius: 0px;
@@ -685,6 +683,12 @@ hr.map-event-detail-top {
     color: var(--color-primary);
     font-family: var(--header-font-secondary);
     line-height: 35px;
+}
+
+/* leaflet map viewcenter button */
+.leaflet-viewcenter-icon {
+    fill: var(--color-primary);
+    background: var(--bg-color);
 }
 
 /* highlight index */

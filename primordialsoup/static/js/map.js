@@ -197,3 +197,47 @@ const soupIcon = L.divIcon({
     iconAnchor:   [20, 20], 
     popupAnchor:  [0, -40] 
 });
+
+// Map button 'Home'
+// https://github.com/pwldp/leaflet.viewcenter/blob/master/index.html
+// https://leafletjs.com/examples/extending/extending-3-controls.html
+L.Control.ViewCenter = L.Control.extend({
+    options: {
+        position: 'topleft',
+        title: 'Zoom to center',
+        forceSeparateButton: false,
+        vcLatLng: center,
+        vcZoom: zoom,
+    },
+
+    onAdd: function (map) {
+        const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        const button = L.DomUtil.create('a', 'leaflet-viewcenter', container);
+        button.innerHTML = `<img src="/static/image/viewcenter.svg" alt="View the whole map" class="leaflet-viewcenter-icon">`;
+        button.style.width = '30px';
+        L.DomEvent.disableClickPropagation(button);
+        L.DomEvent.on(button, 'click', function(){
+            console.log('click');
+            map.setView(center, zoom);
+        })
+
+
+        return container;
+    },
+
+    onRemove: function (map) {
+        // Nothing to do here
+    },
+});
+
+L.control.ViewCenter = function(options) {
+    return new L.Control.ViewCenter(options);
+}
+
+L.control.ViewCenter({
+}).addTo(map);
+
+//     ('<span class="home-icon">&#10023</span>', 
+//     function(btn, map){
+//         map.setView(center, zoom);
+// }).addTo(map);
