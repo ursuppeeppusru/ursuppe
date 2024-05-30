@@ -198,29 +198,29 @@ const soupIcon = L.divIcon({
     popupAnchor:  [0, -40] 
 });
 
-// Map button 'Home'
-// https://github.com/pwldp/leaflet.viewcenter/blob/master/index.html
-// https://leafletjs.com/examples/extending/extending-3-controls.html
+// Map view center of map and/or show all visible markers
 L.Control.ViewCenter = L.Control.extend({
     options: {
         position: 'topleft',
         title: 'Zoom to center',
         forceSeparateButton: false,
-        vcLatLng: center,
-        vcZoom: zoom,
     },
 
     onAdd: function (map) {
         const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
         const button = L.DomUtil.create('a', 'leaflet-viewcenter', container);
-        button.innerHTML = `<img src="/static/image/viewcenter.svg" alt="View the whole map" class="leaflet-viewcenter-icon">`;
-        button.style.width = '30px';
+        // button.innerHTML = `<img src="/static/image/viewcenter.svg" alt="View the whole map" class="leaflet-viewcenter-icon">`;
+        // other alternatives: &circledcirc; &bigcirc; &bigoplus; &target;
+        button.innerHTML = `<p style="line-height: 3px; position: relative; top: 9px;">&bigcirc; &bigcirc; &bigcirc;</p>`;
+       // TODO: move inline css to primordialsoup.css
+       
+        button.style = 'width: 30px;';
         L.DomEvent.disableClickPropagation(button);
         L.DomEvent.on(button, 'click', function(){
-            console.log('click');
-            map.setView(center, zoom);
+            // map.setView(center, zoom); // Set view to original view
+            map.fitBounds(allEvents.getBounds()); // Set view to all visible markers on map
+            console.log(zoom);
         })
-
 
         return container;
     },
@@ -236,8 +236,3 @@ L.control.ViewCenter = function(options) {
 
 L.control.ViewCenter({
 }).addTo(map);
-
-//     ('<span class="home-icon">&#10023</span>', 
-//     function(btn, map){
-//         map.setView(center, zoom);
-// }).addTo(map);

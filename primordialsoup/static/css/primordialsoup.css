@@ -685,11 +685,10 @@ hr.map-event-detail-top {
     line-height: 35px;
 }
 
-/* leaflet map viewcenter button */
-.leaflet-viewcenter-icon {
-    fill: var(--color-primary);
-    background: var(--bg-color);
-}
+/* leaflet map viewcenter button 
+   TODO: move inline CSS from map.js to here
+*/
+
 
 /* highlight index */
 
