@@ -208,8 +208,8 @@ L.Control.ViewAll = L.Control.extend({
     onAdd: function(map) {
         const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
         const button = L.DomUtil.create('a', 'leaflet-view-all', container);
-        button.title = 'Show all markers';
-        button.innerHTML = `<a>&bigcirc; <br> &bigcirc; <br> &bigcirc;</a>`;       
+        button.title = 'Show all events';
+        button.innerHTML = `<a>☀</a>`;       
         L.DomEvent.disableClickPropagation(button);
         L.DomEvent.on(button, 'click', function(){
             map.fitBounds(allEvents.getBounds());
