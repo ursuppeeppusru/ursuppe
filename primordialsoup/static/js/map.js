@@ -18,7 +18,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const clusterSettings = {
     iconCreateFunction: function (cluster) {
         const markers = cluster.getAllChildMarkers();
-        const html = '<div class="circle">' + markers.length + '</div>';
+        const html = '<div class="circle"><p>' + markers.length + '</p></div>';
         return L.divIcon({ 
             html: html,
             className: 'mycluster', 
@@ -199,18 +199,17 @@ const soupIcon = L.divIcon({
 });
 
 // Map view center of map and/or show all visible markers
-L.Control.ViewCenter = L.Control.extend({
+L.Control.ViewAll = L.Control.extend({
     options: {
         position: 'topleft',
-        title: 'Zoom to center',
         forceSeparateButton: false,
     },
 
-    onAdd: function (map) {
+    onAdd: function(map) {
         const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
         const button = L.DomUtil.create('a', 'leaflet-view-all', container);
-        button.innerHTML = `<p>&bigcirc; &bigcirc; &bigcirc;</p>`;       
-        button.style = 'width: 30px;';
+        button.title = 'Show all markers';
+        button.innerHTML = `<a>&bigcirc; <br> &bigcirc; <br> &bigcirc;</a>`;       
         L.DomEvent.disableClickPropagation(button);
         L.DomEvent.on(button, 'click', function(){
             map.fitBounds(allEvents.getBounds());
@@ -225,9 +224,9 @@ L.Control.ViewCenter = L.Control.extend({
     },
 });
 
-L.control.ViewCenter = function(options) {
-    return new L.Control.ViewCenter(options);
+L.control.ViewAll = function(options) {
+    return new L.Control.ViewAll(options);
 }
 
-L.control.ViewCenter({
+L.control.ViewAll({
 }).addTo(map);
