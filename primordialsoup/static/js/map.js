@@ -208,17 +208,12 @@ L.Control.ViewCenter = L.Control.extend({
 
     onAdd: function (map) {
         const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-        const button = L.DomUtil.create('a', 'leaflet-viewcenter', container);
-        // button.innerHTML = `<img src="/static/image/viewcenter.svg" alt="View the whole map" class="leaflet-viewcenter-icon">`;
-        // other alternatives: &circledcirc; &bigcirc; &bigoplus; &target;
-        button.innerHTML = `<p style="line-height: 3px; position: relative; top: 9px;">&bigcirc; &bigcirc; &bigcirc;</p>`;
-       // TODO: move inline css to primordialsoup.css
-       
+        const button = L.DomUtil.create('a', 'leaflet-view-all', container);
+        button.innerHTML = `<p>&bigcirc; &bigcirc; &bigcirc;</p>`;       
         button.style = 'width: 30px;';
         L.DomEvent.disableClickPropagation(button);
         L.DomEvent.on(button, 'click', function(){
-            // map.setView(center, zoom); // Set view to original view
-            map.fitBounds(allEvents.getBounds()); // Set view to all visible markers on map
+            map.fitBounds(allEvents.getBounds());
             console.log(zoom);
         })
 

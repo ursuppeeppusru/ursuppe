@@ -685,10 +685,12 @@ hr.map-event-detail-top {
     line-height: 35px;
 }
 
-/* leaflet map viewcenter button 
-   TODO: move inline CSS from map.js to here
-*/
-
+/* leaflet map 'view all markers button */
+div.leaflet-bar.leaflet-control a.leaflet-view-all p {
+    line-height: 3px; 
+    position: relative; 
+    top: 9px;
+}
 
 /* highlight index */
 
