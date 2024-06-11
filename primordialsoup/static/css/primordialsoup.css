@@ -18,6 +18,7 @@
   --font-family-sans: sans-serif;
   --font-family-mono: monaco, "Consolas", "Lucida Console", monospace;
   --header-font: BasteleurMoonlight;
+  --header-font-secondary: BasteleurBold;
   --date-color-scheme: light;
 }
 
@@ -358,7 +359,6 @@ input:not([type=checkbox],[type=radio],[type=submit],[type=color],[type=button],
     color: var(--font-color);
     border-radius: 0px;
     /* margin-bottom: 20px; */
-    width: 100% !important;
 }
 
 input:hover, select:hover, textarea:hover, textarea[type=text]:hover {
@@ -371,7 +371,6 @@ span.helptext {
 }
 
 .button, [type=button], [type=reset], [type=submit], button {
-    width: 100% !important;
     background: var(--color-primary);
     border: 1px solid var(--font-color);
     border-radius: 0px;
@@ -562,19 +561,24 @@ a.event-project-title-link:hover~img.event-submission-image-list { display: bloc
     margin-bottom: -10px;
 }
 
-.circle {
+/* leaflet map marker */
+div.circle {
     width: 40px;
     height: 40px;
-    line-height: 40px;
     border-radius: 50%;
     background-color: var(--bg-color);
     border: solid 1px var(--color-primary);
+}
+
+div.circle p {
     text-align: center;
     color: var(--color-primary);
+    line-height: 40px;
     font-size: 20px;
     font-weight: 300;
 }
 
+/* leaflet map popup */
 .leaflet-popup-content-wrapper {
     border-radius: 50%;
     font-size: 12px;
@@ -602,20 +606,6 @@ a.event-project-title-link:hover~img.event-submission-image-list { display: bloc
     min-height: 300px; 
 }
 
-hr.map {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid var(--color-primary);
-    padding: 0;
-    width: 100%;
-    margin: 0px auto 10px;
-}
-
-hr.map-event-detail-top {
-    margin: 0;
-}
-
 /* leaflet map layers control */
 .leaflet-touch .leaflet-control-layers, 
 .leaflet-touch .leaflet-bar {
@@ -635,7 +625,7 @@ hr.map-event-detail-top {
     font-size: small;
 }
 
-/* checkboxes */
+/* checkboxes (stars) */
 .leaflet-control-layers-overlays {
     align-items: center;    
 }
@@ -685,6 +675,39 @@ hr.map-event-detail-top {
     color: var(--color-primary);
     font-family: var(--header-font-secondary);
     line-height: 35px;
+}
+
+/* leaflet map 'view all markers button */
+div.leaflet-bar.leaflet-control a.leaflet-view-all {
+    width: 30px;
+}
+
+div.leaflet-bar.leaflet-control a.leaflet-view-all a {
+    position: relative; 
+    background: transparent;
+    font-size: 24px;
+}
+
+@media only screen and (max-width: 599px) {
+    div.leaflet-bar.leaflet-control a.leaflet-view-all a {
+        top: 1px;
+    }
+}
+
+
+/* custom hr for map page */
+hr.map {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid var(--color-primary);
+    padding: 0;
+    width: 100%;
+    margin: 0px auto 10px;
+}
+
+hr.map-event-detail-top {
+    margin: 0;
 }
 
 /* highlight index */

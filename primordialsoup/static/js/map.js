@@ -18,7 +18,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const clusterSettings = {
     iconCreateFunction: function (cluster) {
         const markers = cluster.getAllChildMarkers();
-        const html = '<div class="circle">' + markers.length + '</div>';
+        const html = '<div class="circle"><p>' + markers.length + '</p></div>';
         return L.divIcon({ 
             html: html,
             className: 'mycluster', 
@@ -197,3 +197,36 @@ const soupIcon = L.divIcon({
     iconAnchor:   [20, 20], 
     popupAnchor:  [0, -40] 
 });
+
+// Map view center of map and/or show all visible markers
+L.Control.ViewAll = L.Control.extend({
+    options: {
+        position: 'topleft',
+        forceSeparateButton: false,
+    },
+
+    onAdd: function(map) {
+        const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        const button = L.DomUtil.create('a', 'leaflet-view-all', container);
+        button.title = 'Show all events';
+        button.innerHTML = `<a>☀</a>`;       
+        L.DomEvent.disableClickPropagation(button);
+        L.DomEvent.on(button, 'click', function(){
+            map.fitBounds(allEvents.getBounds());
+            console.log(zoom);
+        })
+
+        return container;
+    },
+
+    onRemove: function (map) {
+        // Nothing to do here
+    },
+});
+
+L.control.ViewAll = function(options) {
+    return new L.Control.ViewAll(options);
+}
+
+L.control.ViewAll({
+}).addTo(map);
