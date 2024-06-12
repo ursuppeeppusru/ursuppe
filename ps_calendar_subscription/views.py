@@ -3,6 +3,7 @@ from django_ical.views import ICalFeed
 from django.utils import timezone
 from django.urls import reverse
 from django.views.decorators.cache import cache_page
+from django.db.models import Q
 
 from ps_calendar.models import CalendarSubmission
 
@@ -31,7 +32,7 @@ class EventFeed(ICalFeed):
     file_name = "ursuppe_current-and-upcoming.ics"
 
     def items(self):
-        return CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today())
+        return CalendarSubmission.objects.filter(published=True).filter(Q(exhibition_end__gte=today()) | Q(opening__gte=today()))
 
     def item_title(self, item):
         title = item.event_type + ': ' + item.project_title
@@ -41,10 +42,16 @@ class EventFeed(ICalFeed):
         return item.description
 
     def item_start_datetime(self, item):
-        return item.exhibition_opening
+        if item.one_day_event == True:
+            return item.opening
+        else:
+            return item.exhibition_opening
 
     def item_end_datetime(self, item):
-        return item.exhibition_end
+        if item.one_day_event == True:
+            return item.opening
+        else:
+            return item.exhibition_end
 
     def item_location(self, item):
     	location = item.location + ' (' + item.location_address + ')'

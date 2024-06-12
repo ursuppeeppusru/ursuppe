@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.utils import timezone
 from django.http import JsonResponse
 from datetime import date, timedelta
+from django.db.models import Q
 
 from .forms import CalendarSubmissionForm, CalendarImagesForm
 from .models import CalendarImages, CalendarSubmission
@@ -49,22 +50,22 @@ def today_plus_2w():
 # Current events
 @cache_page(60 * 60)
 def event_list(request):
-    # Only objects which are marked as published, where end date has not exceeded and opening date has started
-    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).filter(exhibition_opening__lte=today()).order_by('exhibition_end')
+    # Only objects which are marked as published, where end date has not exceeded and opening date has started, as well as opening date for one-day events
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(Q(exhibition_end__gte=today()) | Q(opening__contains=today())).filter(Q(exhibition_opening__lte=today()) | Q(opening__contains=today())).order_by('exhibition_end')
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
 
 # Upcoming events
 @cache_page(60 * 60)
 def event_list_upcoming(request):
-    # Only objects which are marked as published, where end date has not exceeded and opening date has NOT started
-    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_opening__gte=today()).order_by('exhibition_opening')
+    # Only objects which are marked as published, where end date has not exceeded and opening date has NOT started, as well as NOT started for opening date for one-day events
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(Q(exhibition_opening__gte=today()) | Q(opening__gt=today())).order_by('exhibition_opening')
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
 
 # Past events
 @cache_page(60 * 60)
 def event_list_past(request):
-    # Only objects which are marked as published and where end date has exceeded
-    event_submissions = CalendarSubmission.objects.filter(published=True).filter(exhibition_end__lt=today()).order_by('exhibition_end')
+    # Only objects which are marked as published and where end date has exceeded, as well as opening date for one-day events
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(Q(exhibition_end__lt=today()) | Q(opening__lt=today())).order_by('exhibition_end')
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
 
 # Closing soon (2 weeks)
@@ -107,6 +108,7 @@ def json_event_list(request):
         'calendar__latitude',
         'calendar__longitude',
         'calendar__admission',
+        'calendar__one_day_event',
         'calendar__exhibition_opening',
         'calendar__exhibition_end',
         'calendar__opening_hours',
@@ -115,9 +117,10 @@ def json_event_list(request):
         'calendar__description',
         'calendar__slug',
         'image'
-        ).filter(calendar__published=True).filter(calendar__exhibition_end__gte=today()).order_by('calendar__exhibition_end')
+        ).filter(calendar__published=True).filter(Q(calendar__exhibition_end__gte=today()) | Q(calendar__opening__gte=today())).order_by('calendar__exhibition_end')
     return JsonResponse({"event_submissions": list(event_submissions)})
 
+# Event detail
 @cache_page(60 * 60)
 def event_detail(request, event_id, event_project_title):
     event = get_object_or_404(CalendarSubmission, id=event_id)

@@ -3,7 +3,7 @@
 
 {% load static %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}highlights{% endblock %}
 
 {% block extra_css %}
 
@@ -23,9 +23,10 @@
 </div>
 <div class="scroll-container" id="scroll-containerOne">
     <div class="events-index-row" id="events-index-row">
+        {% if all_current_event_submissions %}
         {% for event_submission in all_current_event_submissions %}
         <span class="events-index-row-card">
-            {% if event_submission.exhibition_opening == today %}
+            {% if event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
             {% elif event_submission.exhibition_end < today_plus_2w %}
             <span class="event-status-label"><a>CLOSING SOON</span>
@@ -43,9 +44,20 @@
             <br/>
             <h5>{{ event_submission.location }}</h5>
             <br/>
+            {% if not event_submission.one_day_event %}
             <small>→ {{ event_submission.exhibition_end }}</small>
+            {% else %}
+            <small>{{ event_submission.opening }}</small>
+            {% endif %}
         </span>
         {% endfor %}
+        {% else %}
+        <div class="row content">
+            <div class="col-12">
+                <p><small>No event(s)</small></p>            
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 <hr/>
@@ -63,11 +75,12 @@
 </div>
 <div class="scroll-container" id="scroll-containerTwo">
     <div class="events-index-row" id="events-index-row">
+        {% if all_upcoming_event_submissions %}
         {% for event_submission in all_upcoming_event_submissions %}
         <span class="events-index-row-card">
-            {% if event_submission.exhibition_opening > today %}
+            {% if event_submission.exhibition_opening > today or event_submission.one_day_event and event_submission.opening > today %}
             <span class="event-status-label">UPCOMING</span>
-            {% elif event_submission.exhibition_opening == today %}
+            {% elif event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
             {% endif %}
             <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
@@ -83,9 +96,20 @@
             <br/>
             <h5>{{ event_submission.location }}</h5>
             <br/>
+            {% if not event_submission.one_day_event %}
             <small>{{ event_submission.exhibition_opening }} → {{ event_submission.exhibition_end }} </small>
+            {% else %}    
+            <small>{{ event_submission.opening }}</small>
+            {% endif %}
         </span>
         {% endfor %}
+        {% else %}
+        <div class="row content">
+            <div class="col-12">
+                <p><small>No event(s)</small></p>            
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 <hr/>
@@ -147,15 +171,18 @@
 <div class="scroll-container" id="scroll-containerThree">
     <div class="events-index-row">
     <!-- calendar highlights goes here -->
+    {% if highlighted_event_submissions %}
     {% for event_submission in highlighted_event_submissions %}
-        <span class="highlight-events-index-row-card">
-            {% if event_submission.exhibition_opening == today %}
+            <span class="highlight-events-index-row-card">
+            {% if event_submission.exhibition_end < today or event_submission.one_day_event and event_submission.opening < today %}
+            <span class="event-status-label">PAST</span>
+            {% elif event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
-            {% elif event_submission.exhibition_end < today_plus_2w %}
+            {% elif event_submission.exhibition_end <= today_plus_2w and event_submission.exhibition_opening <= today %}
             <span class="event-status-label">CLOSING SOON</span>
             {% elif event_submission.exhibition_opening <= today %}
             <span class="event-status-label">CURRENT</span>
-            {% else %}
+            {% elif event_submission.exhibition_opening > today or event_submission.one_day_event and event_submission.opening > today %}
             <span class="event-status-label">UPCOMING</span>
             {% endif %}
             <p>{{ event_submission.artists }}</p>
@@ -169,12 +196,25 @@
             <p>Curated by {{ event_submission.curators }}</p>
             <br/>
             {% endif %}
+            {% if not event_submission.one_day_event %}
             <h4>{{ event_submission.exhibition_opening }} → {{ event_submission.exhibition_end }}</h4>
+            {% else %}    
+            <h4>{{ event_submission.opening }}</h4>
+            <small>One-day event</small>
+            <br/>
+            {% endif %}
             <br/>
             <h4>{{ event_submission.location }}</h4>
             <p><small>{{ event_submission.location_address }}</small></p>
         </span>
     {% endfor %}
+    {% else ‰}
+    <div class="row content">
+        <div class="col-12">
+            <p><small>No event(s)</small></p>            
+        </div>
+    </div>
+    {% endif %}
     </div>
 </div>
 {% endblock content %}

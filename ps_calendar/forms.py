@@ -2,7 +2,7 @@
 from django import forms
 from .models import CalendarSubmission, CalendarImages
 
-class CalendarSubmissionForm(forms.ModelForm):
+class CalendarSubmissionForm(forms.ModelForm):    
     class Meta:
         model = CalendarSubmission
         fields = '__all__'  # You can customize this based on your requirements

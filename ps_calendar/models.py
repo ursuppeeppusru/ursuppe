@@ -26,7 +26,7 @@ class CalendarSubmission(models.Model):
     event_type = models.CharField(
         verbose_name="Type",
         help_text="Required *",
-        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Screening", "Screening"), ("Fundraiser", "Fundraiser"), ("Other", "Other")],
+        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Workshop", "Workshop"), ("Screening", "Screening"), ("Fundraiser", "Fundraiser"), ("Other", "Other")],
         default="Exhibition",
         max_length=500,
         blank=False
@@ -49,20 +49,23 @@ class CalendarSubmission(models.Model):
     admission = models.CharField(
         max_length=255, verbose_name="Admission", help_text="Required *<br/><br/>Format:<br/>[value] [valuta] or free<br/><br/>Examples:<br/>- 80 DKK<br/>- Free", blank=False, null=True
     )
+    one_day_event = models.BooleanField(verbose_name="One-day event", help_text="<br/>Check this box if the event is not on for multiple days", default=False)
     exhibition_opening = models.DateField(
-        verbose_name="Activity start date", help_text="Required *<br/><br/>e.g., 14/10/2023", blank=False
+        verbose_name="Activity start date", help_text="Required *<br/><br/>e.g., 14/10/2023", blank=True, null=True
     )
     exhibition_end = models.DateField(
-        verbose_name="Activity end date",  help_text="Required *<br/><br/>e.g., 16/10/2023", blank=False
+        verbose_name="Activity end date",  help_text="Required *<br/><br/>e.g., 16/10/2023", blank=True, null=True
     )
     opening_hours = models.TextField(
-        verbose_name="Weekly opening hours", help_text="Required *<br/><br/>Format:<br/>[weekday(s) and interval]: [timeslot]<br/><br/>Examples:<br/>- Wednesday-Saturday, except Thursday: 16:00-20:00<br/>- Thursday, Friday: 19:00-22:00<br/>- By appointment, Saturday: 12:00-16:00<br/>- Wednesday-Friday: 16:00-20:00,<br/>  Saturday: 12:00-17:00,<br/>  Sunday: 12:00-14:00,<br/>  Closed from 30.12.23 until 06.01.24", blank=False, null=True
+        verbose_name="Weekly opening hours", help_text="Required *<br/><br/>Format:<br/>[weekday(s) and interval]: [timeslot]<br/><br/>Examples:<br/>- Wednesday-Saturday, except Thursday: 16:00-20:00<br/>- Thursday, Friday: 19:00-22:00<br/>- By appointment, Saturday: 12:00-16:00<br/>- Wednesday-Friday: 16:00-20:00,<br/>  Saturday: 12:00-17:00,<br/>  Sunday: 12:00-14:00,<br/>  Closed from 30.12.23 until 06.01.24", blank=True, null=True
     )
     opening = models.DateField(
-        verbose_name="Opening/vernissage date",  help_text="Required *<br/><br/>e.g., 13/10/2023", blank=False, null=True
+        verbose_name="Opening/vernissage date", help_text="Required *<br/><br/>e.g., 13/10/2023", blank=False, null=True
     )
     opening_hours_for_opening_date = models.CharField(
-        max_length=255, verbose_name="Opening hours for opening/vernissage", help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False, null=True
+        max_length=255, verbose_name="Opening hours for opening/vernissage",
+        help_text="Required *<br/><br/>Format:<br/>[timeslot]<br/><br/>Examples:<br/>- 17:00-20:00", blank=False,
+        null=True
     )
     description = models.TextField(
         verbose_name="Text/Description/Press Release", help_text="Required *", blank=False
@@ -104,10 +107,11 @@ class CalendarSubmission(models.Model):
         return self.project_title
 
     def clean(self):
-        if self.exhibition_end < self.exhibition_opening:
-            raise ValidationError(
-                _("Activity end date should not be before the opening date")
-            )
+        if self.exhibition_end and self.exhibition_opening:
+            if self.exhibition_end < self.exhibition_opening:
+                raise ValidationError(
+                    _("Activity end date should not be before the opening date")
+                )
 
     def get_absolute_url(self):
         return f"/events/{self.slug}/"
