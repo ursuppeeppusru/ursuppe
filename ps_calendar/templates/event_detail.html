@@ -6,14 +6,8 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block extra_css %}
-
         <!-- leaflet.js stylesheet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/>
-        <!-- leaflet.js markerclustering stylesheet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-
+        <link rel="stylesheet" type="text/css" href="{% static 'css/leaflet.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
@@ -22,9 +16,11 @@
     <div class="col-4">
         {% if event.exhibition_end < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif event.exhibition_end <= today_plus_2w %}
+        {% elif event.exhibition_opening == today %}
+        <span class="event-detail-status-label">OPENING TODAY</span>
+        {% elif event.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
-        {% elif event.exhibition_opening < today %}
+        {% elif event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
         {% elif event.exhibition_opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
@@ -64,7 +60,7 @@
 <hr/>
 <div class="col-12 text-center"> 
 
-    <a id="downloadICS" href="#/"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a>
+    <h5><a id="downloadICS" href="#/"><b>Add to calendar (.ics)</b></a> or <a href="{% url 'feed_information' %}"><b>subscribe to feed</b></a></h5>
 </div>
 <hr/>
 <div class="row content">
@@ -94,12 +90,8 @@
 
 
 {% block extra_js %}
-<!-- leaflet.js-->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<!-- leaflet.markercluster.js -->
-<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-<!-- local map.js -->
-<script type="text/javascript" src="{% static 'js/leaflet-sleep.js' %}"></script> 
+<script type="text/javascript" src="{% static 'js/leaflet.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/leaflet.sleep.js' %}"></script>
 
 <script>
     /* ICS file generator */
@@ -116,12 +108,9 @@
     });
 
     // Leaflet map
-    // Define position of map
     const zoom = 13;
     const center = [{{event.latitude}}, {{event.longitude}}];
-    // Declaring map
     const map = L.map('map', {center: center, zoom: zoom,
-        // Stop zoom interferring with scroll on mobile
         dragging: !L.Browser.mobile,
         tap: !L.Browser.mobile,
     });
@@ -141,5 +130,22 @@
 
     // Marker based on coordinates
     const marker = L.marker([{{event.latitude}}, {{event.longitude}}], {icon: soupIcon}).addTo(map);
+
+    // Zoom when clicked function
+    function markerZoom(e) {
+        if (map.getZoom() <= 17) {
+            map.flyTo(e.latlng, 18, {
+                animate: true,
+                duration: 0.5, // Duration in seconds
+            });
+        } else {
+            map.flyTo(e.latlng, 13, {
+                animate: true,
+                duration: 0.5, // Duration in seconds
+            });
+        };
+    }
+
+    marker.on('click', markerZoom);
 </script>
 {% endblock %}

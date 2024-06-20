@@ -5,7 +5,9 @@ from django.core.cache import cache
 
 
 class PinBoard(models.Model):
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateField(
+        verbose_name="Created", auto_now_add=True, editable=False
+    )
     title = models.CharField(
         max_length=255, verbose_name="Title", help_text="Required *", blank=False
     )
@@ -24,7 +26,7 @@ class PinBoard(models.Model):
         default="Exhibition",
         max_length=500,
         blank=False
-    )
+    ) 
     location = models.CharField(
         max_length=255, verbose_name="Location", help_text="Required *. E.g. city name or region", blank=False
     )

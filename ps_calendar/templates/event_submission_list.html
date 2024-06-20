@@ -16,7 +16,7 @@
         <h5><b>EVENTS</b></h5>
     </div>
     <div class="col-6 subscribe-text text-right">
-        <p><a href="{% url 'feed_information' %}"><b>Subscribe</b> to the events calendar feeds for automatic updates</a></p>
+        <h5><a href="{% url 'feed_information' %}"><b>Subscribe</b> to the events calendar feeds for automatic updates</a></h5>
     </div>
 </div>
 <div>
@@ -40,9 +40,11 @@
     <div class="col-4 ">
         {% if submission.exhibition_end < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif submission.exhibition_end <= today_plus_2w %}
+        {% elif submission.exhibition_opening == today %}
+        <span class="event-detail-status-label">OPENING TODAY</span>
+        {% elif submission.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
-        {% elif submission.exhibition_opening < today %}
+        {% elif submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
         {% elif submission.exhibition_opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>

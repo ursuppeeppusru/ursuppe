@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,20 +17,19 @@
         <base target="_blank">
         {% endif %}
 
+        {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/chota.css' %}">
 	    <link rel="stylesheet" type="text/css" href="{% static 'css/primordialsoup.css' %}">
 
-        {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
+
 
         <link rel="shortcut icon" type="image/png" href="{% static 'image/favicon.png' %}"/>
     </head>
 
     <body onload="startTime()">
-        {% wagtailuserbar %}
-
         <header class="row">
             <div class="col-9">
                      <a href="/">
