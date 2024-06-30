@@ -161,7 +161,7 @@
     <div class="events-index-row">
     <!-- calendar highlights goes here -->
     {% for event_submission in highlighted_event_submissions %}
-            <span class="highlight-events-index-row-card">
+        <span class="highlight-events-index-row-card">
             {% if event_submission.exhibition_end < today or event_submission.one_day_event and event_submission.opening < today %}
             <span class="event-status-label">PAST</span>
             {% elif event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
