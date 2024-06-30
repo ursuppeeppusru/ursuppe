@@ -119,7 +119,7 @@ if(document.body.classList.contains('event-detail')) {
 
 /* index horisontal sliders */
 // Only for Highlights/index page
-if(document.body.classList.contains('highlights')) {
+if (document.body.classList.contains('highlights')) {
     // Cache DOM elements
     var eventsRow = document.getElementById('events-index-row');
     var buttonOne = document.getElementById('slideOne');
@@ -130,25 +130,26 @@ if(document.body.classList.contains('highlights')) {
     var backThree = document.getElementById('slideBackThree');
 
     // Calculate width once
-    var width = eventsRow.offsetWidth - 50;
+    var width = eventsRow ? eventsRow.offsetWidth - 50 : 0;
 
     // Consolidated event handler function
     function setupSliderEvents(button, back, containerId) {
-        button.onclick = function () {
-            var container = document.getElementById(containerId);
-            smoothScroll(container, 'right', width);
-        };
+        var container = document.getElementById(containerId);
+        if (container) {
+            button.onclick = function () {
+                smoothScroll(container, 'right', width);
+            };
 
-        back.onclick = function () {
-            var container = document.getElementById(containerId);
-            smoothScroll(container, 'left', width);
-        };
+            back.onclick = function () {
+                smoothScroll(container, 'left', width);
+            };
+        }
     }
 
     // Setup event listeners
-    setupSliderEvents(buttonOne, backOne, 'scroll-containerOne');
-    setupSliderEvents(buttonTwo, backTwo, 'scroll-containerTwo');
-    setupSliderEvents(buttonThree, backThree, 'scroll-containerThree');
+    if (buttonOne && backOne) setupSliderEvents(buttonOne, backOne, 'scroll-containerOne');
+    if (buttonTwo && backTwo) setupSliderEvents(buttonTwo, backTwo, 'scroll-containerTwo');
+    if (buttonThree && backThree) setupSliderEvents(buttonThree, backThree, 'scroll-containerThree');
 
     // Easing function
     function easeInOutQuad(t) {

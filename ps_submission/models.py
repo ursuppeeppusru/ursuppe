@@ -5,9 +5,12 @@ from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
-
+from django.utils import timezone
 
 class ExhibitionSubmission(models.Model):
+    created_at = models.DateField(
+        verbose_name="Created", default=timezone.now(), blank=False
+    )
     project_title = models.CharField(
         max_length=255, verbose_name="Title", help_text="Required *", blank=False
     )
