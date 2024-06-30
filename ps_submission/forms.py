@@ -6,7 +6,7 @@ class ExhibitionSubmissionForm(forms.ModelForm):
     class Meta:
         model = ExhibitionSubmission
         fields = '__all__'  # You can customize this based on your requirements
-        exclude = ['published', 'highlight', 'slug'] 
+        exclude = ['published', 'highlight', 'slug', 'created_at'] 
         widgets = {
             'exhibition_opening': forms.DateInput(
                 attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}

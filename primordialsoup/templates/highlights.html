@@ -10,6 +10,7 @@
 {% endblock extra_css %}
 
 {% block content %}
+{% if all_current_event_submissions %}
 <div class="row content index-row-header">
     <div class="col-12">
         <h5><b>WHAT'S ON</b></h5>
@@ -23,7 +24,6 @@
 </div>
 <div class="scroll-container" id="scroll-containerOne">
     <div class="events-index-row" id="events-index-row">
-        {% if all_current_event_submissions %}
         {% for event_submission in all_current_event_submissions %}
         <span class="events-index-row-card">
             {% if event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
@@ -51,17 +51,12 @@
             {% endif %}
         </span>
         {% endfor %}
-        {% else %}
-        <div class="row content">
-            <div class="col-12">
-                <p><small>No event(s)</small></p>            
-            </div>
-        </div>
-        {% endif %}
     </div>
 </div>
 <hr/>
 <br/>
+{% endif %}
+{% if all_upcoming_event_submissions %}
 <div class="row content index-row-header">
     <div class="col-12 index-row-header-col">
         <h5><b>WHAT'S COMING</b></h5>
@@ -75,7 +70,6 @@
 </div>
 <div class="scroll-container" id="scroll-containerTwo">
     <div class="events-index-row" id="events-index-row">
-        {% if all_upcoming_event_submissions %}
         {% for event_submission in all_upcoming_event_submissions %}
         <span class="events-index-row-card">
             {% if event_submission.exhibition_opening > today or event_submission.one_day_event and event_submission.opening > today %}
@@ -103,17 +97,11 @@
             {% endif %}
         </span>
         {% endfor %}
-        {% else %}
-        <div class="row content">
-            <div class="col-12">
-                <p><small>No event(s)</small></p>            
-            </div>
-        </div>
-        {% endif %}
     </div>
 </div>
 <hr/>
 <br/>
+{% endif %}
 <div class="row content index-row-header">
     <div class="col-12 index-row-header-col">
         <h5><b>ARCHIVE HIGHLIGHTS</b></h5>
@@ -153,6 +141,7 @@
         {% endfor %}
     </div>
 </div>
+{% if highlighted_event_submissions %}
 <hr/>
 <br/>
 <div class="row content index-row-header-col">
@@ -171,7 +160,6 @@
 <div class="scroll-container" id="scroll-containerThree">
     <div class="events-index-row">
     <!-- calendar highlights goes here -->
-    {% if highlighted_event_submissions %}
     {% for event_submission in highlighted_event_submissions %}
             <span class="highlight-events-index-row-card">
             {% if event_submission.exhibition_end < today or event_submission.one_day_event and event_submission.opening < today %}
@@ -208,14 +196,8 @@
             <p><small>{{ event_submission.location_address }}</small></p>
         </span>
     {% endfor %}
-    {% else ‰}
-    <div class="row content">
-        <div class="col-12">
-            <p><small>No event(s)</small></p>            
-        </div>
-    </div>
-    {% endif %}
     </div>
 </div>
+{% endif %}
 {% endblock content %}
 
