@@ -24,13 +24,13 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/chota.css' %}">
 	    <link rel="stylesheet" type="text/css" href="{% static 'css/primordialsoup.css' %}">
 
-
-
         <link rel="shortcut icon" type="image/png" href="{% static 'image/favicon.png' %}"/>
     </head>
 
     <body onload="startTime()" class="{% block body_class %}{% endblock %}">
-        <header class="row">
+        
+<div class="mobile-top-section">        
+<header class="row">
             <div class="col-9">
                      <a href="/">
                         <div class="rain-body">
@@ -183,7 +183,7 @@
                         <p><b>SEARCH</b></p>
                         <hr/>
                     </a>
-                    <a href="#/" class="darkmode-btn"><small>Toggle darkmode</small></a>
+                    <a href="javascript:void(0);" class="mode-btn"><small>Switch color mode</small></a>
             </div>
         </header>
 
@@ -216,18 +216,235 @@
             </div>
         </nav>
         <hr/>
+</div>
 
-        {% include 'messages.html' %}
+<div class="desktop-nav-section">
+    <div class="row">
+        <div class="col-12">
+                 <a href="/">
+            <div class="rain-body">
+                <div class="rain-container">
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
 
-        {% block content %}{% endblock %}
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/primordialsoup.js' %}"></script>
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
 
-        {% block extra_js %}
-        {# Override this in templates to add extra javascript #}
-        {% endblock %}
-        
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <div class="rain">
+                            <div class="drop"></div>
+                            <div class="waves">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="splash"></div>
+                            <div class="particles">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <!-- <img src="{% static 'svg/ursuppe-3-fill.svg' %}" /> -->
+         </a>
+        </div>
+    </div>
+
+    {% if settings.HEADER_TEXT %}
+    <a href="/about"><p class="header-text">{{ settings.HEADER_TEXT }}</p></a>
+    {% endif %}
+    <br/>
+
+    <a href="javascript:void(0);" class="mode-btn"><small>Switch color mode</small></a>
+
+    <hr>
+
+    <nav>
+        <ul class="row">
+            <span class="col-6">
+                <a href="{% url 'event_list' %}"><h5>EVENTS</h5></a>
+            </span>
+            <span class="col-6">
+                <a href="{% url 'calendar_submission_create' %}"><li>CREATE</li></a>
+                <a href="{% url 'event_map' %}"><li>MAP</li></a>
+                <a href="{% url 'event_list' %}"><li>LIST</li></a>
+            </span>
+        </ul>
+        <ul class="row">
+            <span class="col-6">
+                <a href="{% url 'exhibition_list' %}"><h5>ARCHIVE</h5></a>
+            </span>
+            <span class="col-6">
+                <a href="{% url 'exhibition_submission_create' %}"><li>CREATE</li></a>
+                <a href="{% url 'exhibition_list_highlights' %}"><li>HIGHLIGHTS</li></a>
+                <a href="{% url 'exhibition_list' %}"><li>LIST</li></a>
+            </span>
+        </ul>
+        <ul class="row">
+            <span class="col-6">
+                <h5>CATALOG</h5>
+            </span>
+            <span class="col-6">
+                <a href="{% url 'list_current_artists' %}"><li>ARTISTS</li></a>
+                <a href="{% url 'list_current_curators' %}"><li>CURATORS</li></a>
+                <a href="{% url 'list_photographers' %}"><li>PHOTOGRAPHERS</li></a>
+                <a href="{% url 'list_current_locations' %}"><li>LOCATIONS</li></a>
+            </span>
+        </ul>
+        <ul class="row">
+            <span class="col-6">
+                <a href="{% url 'pinboard_list' %}"><h5>PINBOARD</h5></a>
+            </span>
+            <span class="col-6">
+                <a href="{% url 'pinboard_post' %}"><li>CREATE</li></a>
+                <a href="{% url 'pinboard_list' %}"><li>LIST</li></a>
+            </span>
+        </ul>
+        <ul class="row">
+            <span class="col-6">
+            <a href="/about"><h5>ABOUT</h5></a>
+            </span>
+            <span class="col-6"></span>
+        </ul>
+    </nav>
+
+    <div class="search">
+        <a href="/search">
+            <p><b>SEARCH</b></p>
+            <hr/>
+        </a>
+    </div>
+
+</div>
+
+<div class="main-section">
+    {% include 'messages.html' %}
+
+    {% block content %}{% endblock %}
+
+    {# Global javascript #}
+    <script type="text/javascript" src="{% static 'js/primordialsoup.js' %}"></script>
+
+    {% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+    
+    <div class="desktop-footer-nav-section">
         <hr/>
 
         <nav class="row nav-left footer">
@@ -238,23 +455,25 @@
                 <a href="{% url 'pinboard_list' %}">pinboard</a>
                 <a href="/about">about</a>
         </nav>
+    </div>
 
-        <hr/>
+    <hr/>
 
-        <footer class="row">
-            <div class="col-4">
-                {% now 'Y' %} {{ settings.SITE_NAME }}. Licenses: CNPLv7<br/><br/>
-            </div>
-            <div class="col-4 text-center">
-                {% now "M d" %} <span id="time"></span>
-                <br/>
-                {% if settings.FOOTER_TEXT %}
-                <br/><p class="text-center"><small>{{ settings.FOOTER_TEXT }}</small></p><br/>
-                {% endif %}
-            </div>
-            <div class="col-4 text-right">
-                <a target="_blank" href="{{ settings.SOCIAL_MEDIA_URL }}">{{ settings.SOCIAL_MEDIA }}</a>
-            </div>
-        </footer>
+    <footer class="row">
+        <div class="col-4">
+            {% now 'Y' %} {{ settings.SITE_NAME }}. Licenses: CNPLv7<br/><br/>
+        </div>
+        <div class="col-4 text-center">
+            {% now "M d" %} <span id="time"></span>
+            <br/>
+            {% if settings.FOOTER_TEXT %}
+            <br/><p class="text-center"><small>{{ settings.FOOTER_TEXT }}</small></p><br/>
+            {% endif %}
+        </div>
+        <div class="col-4 text-right">
+            <a target="_blank" href="{{ settings.SOCIAL_MEDIA_URL }}">{{ settings.SOCIAL_MEDIA }}</a>
+        </div>
+    </footer>
+</div>
     </body>
 </html>

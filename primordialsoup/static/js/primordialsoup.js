@@ -16,31 +16,38 @@ function checkTime(i) {
     return i;
 }
 
-
-/* darkmode */
-const darkBtn = document.querySelector('.darkmode-btn');
+/* colormode  */
+const modeBtns = document.querySelectorAll('.mode-btn');
 const bodyEl = document.querySelector('body');
 
-const darkMode = () => {
-    bodyEl.classList.toggle('dark')
+const toggleMode = () => {
+    let currentMode = localStorage.getItem('mode');
+
+    if(currentMode === 'dark') {
+        bodyEl.classList.remove('dark');
+        bodyEl.classList.add('origin');
+        localStorage.setItem('mode', 'origin');
+    } else if(currentMode === 'origin') {
+        bodyEl.classList.remove('origin');
+        localStorage.setItem('mode', 'light');
+    } else {
+        bodyEl.classList.add('dark');
+        localStorage.setItem('mode', 'dark');
+    }
 }
 
-darkBtn.addEventListener('click', () => {
-    setDarkMode = localStorage.getItem('dark');
-
-    if(setDarkMode !== "on") {
-        darkMode();
-        setDarkMode = localStorage.setItem('dark', 'on');
-    } else {
-        darkMode();
-        setDarkMode = localStorage.setItem('dark', null);
-    }
+modeBtns.forEach(modeBtn => {
+    modeBtn.addEventListener('click', () => {
+        toggleMode();
+    });
 });
 
-let setDarkMode = localStorage.getItem('dark');
+let setMode = localStorage.getItem('mode');
 
-if(setDarkMode === 'on') {
-    darkMode();
+if(setMode === 'dark') {
+    bodyEl.classList.add('dark');
+} else if(setMode === 'origin') {
+    bodyEl.classList.add('origin');
 }
 
 /* ICS file generator */
