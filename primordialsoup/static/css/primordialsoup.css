@@ -621,8 +621,25 @@ img.event-submission-image-list {
     left: 50%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
-    width: 40%;
+    width: 35%;
     border-radius: var(--list-img-border);
+}
+
+@media only screen and (min-width: 961px) {
+    img.event-submission-image-list {
+        z-index: -99;
+        display: none;
+
+        opacity: 0.9;
+
+        position: fixed;
+        top: 63%; 
+        left: 64%;
+        transform: translate(-63%, -64%);
+        -webkit-transform: translate(-63%, -64%);
+        width: 35%;
+        border-radius: var(--list-img-border);
+    }
 }
 
 a.event-project-title-link {
