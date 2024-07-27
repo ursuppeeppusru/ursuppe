@@ -83,7 +83,7 @@ function formatJsonDate(jsonDate) {
         month: 'short',
         day: 'numeric'
     };
-    const formattedDate = date.toLocaleDateString('en-US', options);
+    const formattedDate = date.toLocaleDateString('en-GB', options);
     return formattedDate;
 };
 
@@ -108,9 +108,8 @@ function showEventDetails(event) {
     };
 
     // Event Details card
-    // For one-day events
     if (event.calendar__one_day_event == true) {
-         if (event.calendar__curators) {
+        if (event.calendar__curators) {
             eventDetailsDiv.innerHTML = `
             <div class="row content events-list-card">
                 <div class="col-4">
@@ -126,9 +125,9 @@ function showEventDetails(event) {
                     <br/>
                 </div>
                 <div class="col-4">
-                    <h4>Opening/Vernissage: </h4>
+                    <h4>${vernissage}</h4>
                     <br/>
-                    <p>${vernissage}, ${event.calendar__opening_hours_for_opening_date}</p>
+                    <p>One-day event: ${event.calendar__opening_hours_for_opening_date}</p>
                     <br/>
                 </div>
                 <div class="col-4">
@@ -151,11 +150,12 @@ function showEventDetails(event) {
                     </a>
                     <br/>
                     <p><small>${event.calendar__event_type}</small></p>
+                    </br>
                 </div>
                 <div class="col-4">
-                    <h4>Opening/Vernissage: </h4>
+                    <h4>${vernissage}</h4>
                     <br/>
-                    <p>${vernissage}, ${event.calendar__opening_hours_for_opening_date}</p>
+                    <p>One-day event: ${event.calendar__opening_hours_for_opening_date}</p>
                     <br/>
                 </div>
                 <div class="col-4">
@@ -189,7 +189,7 @@ function showEventDetails(event) {
                     <br/>
                     <p>${event.calendar__opening_hours}</p>
                     <br/>
-                    <h4>Opening/Vernissage: </h4>
+                    <h4>Opening/vernissage: </h4>
                     <br/>
                     <p>${vernissage}, ${event.calendar__opening_hours_for_opening_date}</p>
                     <br/>
@@ -214,6 +214,7 @@ function showEventDetails(event) {
                     </a>
                     <br/>
                     <p><small>${event.calendar__event_type}</small></p>
+                    <br/>
                 </div>
                 <div class="col-4">
                     <h4>${eventOpening} → ${eventEnd}</h4>
