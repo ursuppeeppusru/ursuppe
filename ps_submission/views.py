@@ -68,6 +68,16 @@ def exhibition_list(request):
     return render(request, 'submission_list.html', {'submissions': submissions, 'years': years})
 
 @cache_page(60 * 60)
+def exhibition_list_highlights(request):
+    # Only object which are marked as published and highlight
+    submissions = ExhibitionSubmission.objects.filter(published=True, highlight=True).order_by('-exhibition_end')
+
+    # Get unique years and pass to template
+    years = ExhibitionSubmission.objects.filter(published=True).values_list('exhibition_opening__year', flat=True).distinct()
+
+    return render(request, 'submission_list.html', {'submissions': submissions, 'years': years})
+
+@cache_page(60 * 60)
 def exhibition_list_year(request, year):
     # Only object which are marked as published sorted by year
     submissions = ExhibitionSubmission.objects.filter(published=True, exhibition_opening__year=year).order_by('-exhibition_end')

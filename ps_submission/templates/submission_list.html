@@ -20,6 +20,7 @@
     <nav class="tabs text-uppercase is-full">
         <!-- TODO: add highlighting -->
         <a class="{% if request.path == '/archive/' %}active{% endif %}"href="{% url 'exhibition_list' %}">All</a>
+        <a class="{% if request.path == '/archive/highlights/' %}active{% endif %}"href="{% url 'exhibition_list_highlights' %}">Highlights</a>
         {% for year in years reversed %}
         <a class="{% if year|lower in request.path %}active{% endif %}" href="{% url 'exhibition_list' %}{{ year }}">{{ year }}</a>
         {% endfor %}
