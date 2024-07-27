@@ -26,7 +26,7 @@ class CalendarSubmission(models.Model):
     event_type = models.CharField(
         verbose_name="Type",
         help_text="Required *",
-        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Workshop", "Workshop"), ("Screening", "Screening"), ("Release", "Release"), ("Talk", "Talk"), ("Fundraiser", "Fundraiser"), ("Other", "Other")],
+        choices=[("Exhibition", "Exhibition"), ("Performance", "Performance"), ("Workshop", "Workshop"), ("Screening", "Screening"), ("Release", "Release"), ("Talk", "Talk"), ("Walk", "Walk"), ("Fundraiser", "Fundraiser"), ("Other", "Other")],
         default="Exhibition",
         max_length=500,
         blank=False
