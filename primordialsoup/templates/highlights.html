@@ -70,7 +70,7 @@
             {% if event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
             {% elif event_submission.exhibition_end < today_plus_2w %}
-            <span class="event-status-label"><a>CLOSING SOON</span>
+            <span class="event-status-label">CLOSING SOON</span>
             {% endif %}
             {% if ',' in event_submission.artists %}
             <small>Group exhibition</small>

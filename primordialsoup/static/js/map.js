@@ -97,11 +97,11 @@ function showEventDetails(event) {
     const today = new Date().setHours(0,0,0,0);
     const twoWeeks = new Date(Date.now() + 12096e5).setHours(0,0,0,0);    
     
-    if (new Date(eventOpening).getTime() == today) {
+    if (new Date(eventOpening).getTime() == today || new Date(vernissage).getTime() == today) {
         eventStatus = "OPENING TODAY";
-    } else if (new Date(eventOpening) < today && new Date(eventEnd) < twoWeeks) {
+    } else if (event.calendar__one_day_event != true && new Date(eventOpening) < today && new Date(eventEnd) < twoWeeks) {
         eventStatus = "CLOSING SOON";
-    } else if (new Date(eventOpening) < today) {
+    } else if (event.calendar__one_day_event != true && new Date(eventOpening) < today) {
         eventStatus = "CURRENT";
     } else {
         eventStatus = "UPCOMING";
