@@ -12,14 +12,18 @@
 {% block content %}
 
 <div class="row content">
-    <div class="col-6">
+    <div class="col-4">
         <h5><b>EVENTS</b></h5>
     </div>
-    <div class="col-6 subscribe-text text-right">
+    <div class="col-8 subscribe-text text-right">
         <h5><a href="{% url 'feed_information' %}"><b>Subscribe</b> to the events calendar feeds for automatic updates</a></h5>
     </div>
 </div>
 <div>
+    <nav class="tabs text-uppercase is-full">
+            <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
+            <a href="{% url 'event_map' %}">map</a>
+    </nav>
     <nav class="tabs text-uppercase is-full">
             <a class="{% if request.path == '/events/' %}active{% endif %}" href="{% url 'event_list' %}">current</a>
             <a class="{% if request.path == '/events/upcoming' %}active{% endif %}" href="{% url 'event_list_upcoming' %}">upcoming</a>
@@ -29,24 +33,20 @@
     <nav class="tabs tabs-last text-uppercase is-full">
             <a class="{% if '/events/openings' in request.path %}active{% endif %}" href="{% url 'event_list_openings_this_week' %}">Openings/vernissages this week</a>
     </nav>
-    <nav class="tabs tabs-last text-uppercase is-full">
-            <a class="{% if '/events/' in request.path %}active{% endif %}" href="{% url 'event_list' %}">list</a>
-            <a href="{% url 'event_map' %}">map</a>
-    </nav>
 </div>
 {% if event_submissions %}
 {% for submission in event_submissions %}
 <div class="row content events-list-card">
     <div class="col-4 ">
-        {% if submission.exhibition_end < today %}
+        {% if submission.exhibition_end < today  or submission.one_day_event and submission.opening < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif submission.exhibition_opening == today %}
+        {% elif submission.exhibition_opening == today or submission.one_day_event and submission.opening == today %}
         <span class="event-detail-status-label">OPENING TODAY</span>
         {% elif submission.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
-        {% elif submission.exhibition_opening > today %}
+        {% elif submission.exhibition_opening > today or submission.one_day_event and submission.opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
         {% endif %}
         <p>{{ submission.artists }}</p>
@@ -63,13 +63,21 @@
         <br/>
     </div>
     <div class="col-4">
+        {% if not submission.one_day_event %}
         <h4>{{ submission.exhibition_opening }} → {{ submission.exhibition_end }}</h4>
         <br/>
         <p>{{ submission.opening_hours|linebreaks }}</p>
         <br/>
-        <h4>Opening/vernissage: {{ submission.opening }}</h4>
+        <h4>Opening/vernissage:</h4>
         <br/>
-        <p>{{ submission.opening_hours_for_opening_date }}</p>
+        <p>{{ submission.opening }}, {{ submission.opening_hours_for_opening_date }}</p>
+        {% endif %}
+        {% if submission.one_day_event %}
+        <h4>{{ submission.opening }}</h4>
+        <br/>
+        <p>One-day event: {{ submission.opening_hours_for_opening_date }}</p>
+        {% endif %}
+        <br/>
     </div>
     <div class="col-4">
         <h4>{{ submission.location }}</h4>

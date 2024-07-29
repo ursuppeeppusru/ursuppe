@@ -14,7 +14,7 @@ class PinBoard(models.Model):
     category = models.CharField(
         verbose_name="Category",
         help_text="Required *",
-        choices=[("open-call", "Open call"),
+        choices=[("open call", "Open call"),
                  ("news", "News"),
                  ("education", "Education"),
                  ("residency", "Residency"),

@@ -18,7 +18,7 @@ class ExhibitionImagesInline(admin.TabularInline):  # or admin.StackedInline for
 class ExhibitionSubmissionAdmin(admin.ModelAdmin):
     form = ExhibitionSubmissionAdminForm
     inlines = [ExhibitionImagesInline]
-    list_display = ["project_title", "published", "highlight"]
+    list_display = ["project_title", "published", "highlight", "created_at"]
     search_fields = ["project_title"]
 
 

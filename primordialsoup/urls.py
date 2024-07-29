@@ -2,6 +2,7 @@ from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
 from django.views.generic.base import TemplateView
+from django.views.defaults import page_not_found, server_error
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
@@ -16,12 +17,18 @@ from search import views as search_views
 
 from .views import highlights
 
+
+# custom error pages
+def custom_page_not_found(request):
+    return page_not_found(request, None)
+
+def custom_server_error(request):
+    return server_error(request)
+
+
+# urlpatterns
 urlpatterns = [
     path('', highlights, name="highlights"),
-    path("soup-auto/", TemplateView.as_view(template_name="soup-auto-redirect-to-text.html")),
-    path("soup/", TemplateView.as_view(template_name="soup.html")),
-    path("text/", TemplateView.as_view(template_name="text.html")),
-    path("text-solidarity/", TemplateView.as_view(template_name="text-solidarity.html")),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
@@ -31,6 +38,10 @@ urlpatterns = [
     path('feed/', include(events_subscription_urls)),
     path('list/', include(list_urls)),
     path('pinboard/', include(pinboard_urls)),
+
+    # custom error pages
+    path("404/", custom_page_not_found),
+    path("500/", custom_server_error),
 ]
 
 
