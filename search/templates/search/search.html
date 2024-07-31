@@ -19,6 +19,14 @@
     </div>
 </div>
 
+{% if search_query and not archive_results and not events_results %} 
+<div class="row content">
+    <div class="col-12">
+        <h5><b>NOTHING FOUND. TRY AGAIN.</b></h5>
+    </div>
+</div>
+{% endif %}
+
 {% if archive_results %}
 <div class="row content">
     <div class="col-12">

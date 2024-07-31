@@ -3,7 +3,7 @@
 
 {% load static %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}event-detail{% endblock %}
 
 {% block extra_css %}
         <!-- leaflet.js stylesheet -->
@@ -14,15 +14,15 @@
 <div class="row content events-detail-card">
     <div class="col-12"></div>
     <div class="col-4">
-        {% if event.exhibition_end < today %}
+        {% if event.exhibition_end < today or event.one_day_event and event.opening < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif event.exhibition_opening == today %}
+        {% elif event.exhibition_opening == today or event.one_day_event and event.opening == today %}
         <span class="event-detail-status-label">OPENING TODAY</span>
-        {% elif event.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
+        {% elif event.exhibition_end <= today_plus_2w and event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
-        {% elif event.exhibition_opening > today %}
+        {% elif event.exhibition_opening > today or event.one_day_event and event.opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
         {% endif %}
         <p>{{ event.artists }}</p>
@@ -38,14 +38,21 @@
         <br/>
     </div>
     <div class="col-4">
+        {% if not event.one_day_event %}
         <h4>{{ event.exhibition_opening }} → {{ event.exhibition_end }}</h4>
         <br/>
         <p>{{ event.opening_hours|linebreaks }}</p>
         <br/>
-        <h4>Opening/vernissage: {{ event.opening }}</h4>
+        <h4>Opening/vernissage:</h4>
         <br/>
-        <p>{{ event.opening_hours_for_opening_date }}</p>
-        <p style="display: none;">{{ event.id }}</p>
+        <p>{{ event.opening }}, {{ event.opening_hours_for_opening_date }}</p>
+        {% endif %}
+        {% if event.one_day_event %}
+        <h4>{{ event.opening }}</h4>
+        <br/>
+        <p>One-day event: {{ event.opening_hours_for_opening_date }}</p>
+        {% endif %}
+        <br/>
     </div>
     <div class="col-4">
         <h4>{{ event.location }}</h4>

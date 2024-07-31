@@ -3,7 +3,7 @@
 
 {% load static %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}highlights{% endblock %}
 
 {% block extra_css %}
 
@@ -11,96 +11,16 @@
 
 {% block content %}
 <div class="row content index-row-header">
-    <div class="col-12">
-        <h5><b>WHAT'S ON</b></h5>
-        <small>Current events</small>
-        
-        <span class="slide-arrows-container">
-            <a class="slide-arrows" id="slideBackOne"><</a>
-            <a class="slide-arrows" id="slideOne">></a>        
-        </span>
-    </div>
-</div>
-<div class="scroll-container" id="scroll-containerOne">
-    <div class="events-index-row" id="events-index-row">
-        {% for event_submission in all_current_event_submissions %}
-        <span class="events-index-row-card">
-            {% if event_submission.exhibition_opening == today %}
-            <span class="event-status-label">OPENING TODAY</span>
-            {% elif event_submission.exhibition_end < today_plus_2w %}
-            <span class="event-status-label"><a>CLOSING SOON</span>
-            {% endif %}
-            <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
-            {% if ',' in event_submission.artists %}
-            <small>Group exhibition</small>
-            {% else %}
-            <small>{{ event_submission.artists }}</small>
-            {% endif %}
-            <h5 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h5>
-            </a>
-            <img class="event-submission-image-list-highlight" id="event-submission-image-list-highlight" src="{{ event_submission.images.all.0.image.url }}" alt="{{ event_submission.images.all.0.image.caption }}">
-            <p><small>{{ event_submission.event_type }}</small></p>
-            <br/>
-            <h5>{{ event_submission.location }}</h5>
-            <br/>
-            <small>→ {{ event_submission.exhibition_end }}</small>
-        </span>
-        {% endfor %}
-    </div>
-</div>
-<hr/>
-<br/>
-<div class="row content index-row-header">
-    <div class="col-12 index-row-header-col">
-        <h5><b>WHAT'S COMING</b></h5>
-        <small>Upcoming events</small>
-    </div>
-
-    <span class="slide-arrows-container">
-        <a class="slide-arrows" id="slideBackTwo"><</a>
-        <a class="slide-arrows" id="slideTwo">></a>        
-    </span>
-</div>
-<div class="scroll-container" id="scroll-containerTwo">
-    <div class="events-index-row" id="events-index-row">
-        {% for event_submission in all_upcoming_event_submissions %}
-        <span class="events-index-row-card">
-            {% if event_submission.exhibition_opening > today %}
-            <span class="event-status-label">UPCOMING</span>
-            {% elif event_submission.exhibition_opening == today %}
-            <span class="event-status-label">OPENING TODAY</span>
-            {% endif %}
-            <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
-            {% if ',' in event_submission.artists %}
-            <small>Group exhibition</small>
-            {% else %}
-            <small>{{ event_submission.artists }}</small>
-            {% endif %}
-            <h5 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h5>
-            </a>
-            <img class="event-submission-image-list-highlight" src="{{ event_submission.images.all.0.image.url }}" alt="{{ event_submission.images.all.0.image.caption }}">
-            <p><small>{{ event_submission.event_type }}</small></p>
-            <br/>
-            <h5>{{ event_submission.location }}</h5>
-            <br/>
-            <small>{{ event_submission.exhibition_opening }} → {{ event_submission.exhibition_end }} </small>
-        </span>
-        {% endfor %}
-    </div>
-</div>
-<hr/>
-<br/>
-<div class="row content index-row-header">
     <div class="col-12 index-row-header-col">
         <h5><b>ARCHIVE HIGHLIGHTS</b></h5>
-        <small>5 latest highlights sorted by end date</small>
+        <small>5 latest highlights</small>
     </div>
 </div>
 <br/>
 <div>
     <nav class="tabs is-full">
         {% for submission in highlighted_submissions %}
-        <a class="tab-link {% if forloop.first %}active{% endif %}" href="javascript:void(0);" data-target="{{ submission.project_title }}">
+        <a class="tab-link {% if forloop.first %}active{% endif %}" href="{% url 'exhibition_submission_detail' submission_id=submission.id submission_project_title=submission.slug %}" data-target="{{ submission.project_title }}">
             <small class="submission-image-text text-center">
                 <b>{{ submission.project_title }}</b><br/>
                 {% if ',' in submission.artists %}
@@ -121,7 +41,7 @@
         <div id="{{ submission.project_title }}" class="image-container-list {% if forloop.first %}active{% endif %}">
             {% for image in submission.images.all %}
                 {% if image.cover_image %} 
-                <img class="submission-image-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
+                <img class="submission-image-highlight-list" src="{{ image.image.url }}" alt="{{ image.image.caption }}">
                 {% endif %}
             {% endfor %}
         </div>
@@ -131,6 +51,99 @@
 </div>
 <hr/>
 <br/>
+{% if all_current_event_submissions %}
+<div class="row content index-row-header">
+    <div class="col-12">
+        <h5><b>WHAT'S ON</b></h5>
+        <small>Current events</small>
+        
+        <span class="slide-arrows-container">
+            <a class="slide-arrows" id="slideBackOne"><</a>
+            <a class="slide-arrows" id="slideOne">></a>        
+        </span>
+    </div>
+</div>
+<div class="scroll-container" id="scroll-containerOne">
+    <div class="events-index-row" id="events-index-row">
+        {% for event_submission in all_current_event_submissions %}
+        <span class="events-index-row-card">
+            {% if event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
+            <span class="event-status-label">OPENING TODAY</span>
+            {% elif event_submission.exhibition_end < today_plus_2w %}
+            <span class="event-status-label">CLOSING SOON</span>
+            {% endif %}
+            {% if ',' in event_submission.artists %}
+            <small>Group exhibition</small>
+            {% else %}
+            <small>{{ event_submission.artists }}</small>
+            {% endif %}
+            <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
+            <h5 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h5>
+            </a>
+            <img class="event-submission-image-list-highlight" id="event-submission-image-list-highlight" src="{{ event_submission.images.all.0.image.url }}" alt="{{ event_submission.images.all.0.image.caption }}">
+            <p><small>{{ event_submission.event_type }}</small></p>
+            <br/>
+            <h5>{{ event_submission.location }}</h5>
+            <br/>
+            {% if not event_submission.one_day_event %}
+            <small>→ {{ event_submission.exhibition_end }}</small>
+            {% else %}
+            <small>{{ event_submission.opening }}</small>
+            {% endif %}
+        </span>
+        {% endfor %}
+    </div>
+</div>
+<hr/>
+<br/>
+{% endif %}
+{% if all_upcoming_event_submissions %}
+<div class="row content index-row-header">
+    <div class="col-12 index-row-header-col">
+        <h5><b>WHAT'S COMING</b></h5>
+        <small>Upcoming events</small>
+    </div>
+
+    <span class="slide-arrows-container">
+        <a class="slide-arrows" id="slideBackTwo"><</a>
+        <a class="slide-arrows" id="slideTwo">></a>        
+    </span>
+</div>
+<div class="scroll-container" id="scroll-containerTwo">
+    <div class="events-index-row" id="events-index-row">
+        {% for event_submission in all_upcoming_event_submissions %}
+        <span class="events-index-row-card">
+            {% if event_submission.exhibition_opening > today or event_submission.one_day_event and event_submission.opening > today %}
+            <span class="event-status-label">UPCOMING</span>
+            {% elif event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
+            <span class="event-status-label">OPENING TODAY</span>
+            {% endif %}
+            {% if ',' in event_submission.artists %}
+            <small>Group exhibition</small>
+            {% else %}
+            <small>{{ event_submission.artists }}</small>
+            {% endif %}
+            <a class="event-project-title-link" href="{% url 'event_detail' event_id=event_submission.id event_project_title=event_submission.slug %}">
+            <h5 class="text-uppercase is-large event_project_title">{{ event_submission.project_title }}</h5>
+            </a>
+            <img class="event-submission-image-list-highlight" src="{{ event_submission.images.all.0.image.url }}" alt="{{ event_submission.images.all.0.image.caption }}">
+            <p><small>{{ event_submission.event_type }}</small></p>
+            <br/>
+            <h5>{{ event_submission.location }}</h5>
+            <br/>
+            {% if not event_submission.one_day_event %}
+            <small>{{ event_submission.exhibition_opening }} → {{ event_submission.exhibition_end }} </small>
+            {% else %}    
+            <small>{{ event_submission.opening }}</small>
+            {% endif %}
+        </span>
+        {% endfor %}
+    </div>
+</div>
+<hr/>
+<br/>
+{% endif %}
+{% if highlighted_event_submissions %}
 <div class="row content index-row-header-col">
     <div class="col-12 events-highlight">
         <div class="text-left">
@@ -149,13 +162,15 @@
     <!-- calendar highlights goes here -->
     {% for event_submission in highlighted_event_submissions %}
         <span class="highlight-events-index-row-card">
-            {% if event_submission.exhibition_opening == today %}
+            {% if event_submission.exhibition_end < today or event_submission.one_day_event and event_submission.opening < today %}
+            <span class="event-status-label">PAST</span>
+            {% elif event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
-            {% elif event_submission.exhibition_end < today_plus_2w %}
+            {% elif event_submission.exhibition_end <= today_plus_2w and event_submission.exhibition_opening <= today %}
             <span class="event-status-label">CLOSING SOON</span>
             {% elif event_submission.exhibition_opening <= today %}
             <span class="event-status-label">CURRENT</span>
-            {% else %}
+            {% elif event_submission.exhibition_opening > today or event_submission.one_day_event and event_submission.opening > today %}
             <span class="event-status-label">UPCOMING</span>
             {% endif %}
             <p>{{ event_submission.artists }}</p>
@@ -169,7 +184,13 @@
             <p>Curated by {{ event_submission.curators }}</p>
             <br/>
             {% endif %}
+            {% if not event_submission.one_day_event %}
             <h4>{{ event_submission.exhibition_opening }} → {{ event_submission.exhibition_end }}</h4>
+            {% else %}    
+            <h4>{{ event_submission.opening }}</h4>
+            <small>One-day event</small>
+            <br/>
+            {% endif %}
             <br/>
             <h4>{{ event_submission.location }}</h4>
             <p><small>{{ event_submission.location_address }}</small></p>
@@ -177,5 +198,6 @@
     {% endfor %}
     </div>
 </div>
+{% endif %}
 {% endblock content %}
 
