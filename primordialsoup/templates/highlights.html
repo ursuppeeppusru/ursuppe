@@ -67,7 +67,7 @@
     <div class="events-index-row" id="events-index-row">
         {% for event_submission in all_current_event_submissions %}
         <span class="events-index-row-card">
-            {% if event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
+            {% if event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
             {% elif event_submission.exhibition_end < today_plus_2w %}
             <span class="event-status-label">CLOSING SOON</span>
@@ -115,7 +115,7 @@
         <span class="events-index-row-card">
             {% if event_submission.exhibition_opening > today or event_submission.one_day_event and event_submission.opening > today %}
             <span class="event-status-label">UPCOMING</span>
-            {% elif event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
+            {% elif event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
             {% endif %}
             {% if ',' in event_submission.artists %}
@@ -164,13 +164,13 @@
         <span class="highlight-events-index-row-card">
             {% if event_submission.exhibition_end < today or event_submission.one_day_event and event_submission.opening < today %}
             <span class="event-status-label">PAST</span>
-            {% elif event_submission.exhibition_opening == today or event_submission.one_day_event and event_submission.opening == today %}
+            {% elif event_submission.opening == today %}
             <span class="event-status-label">OPENING TODAY</span>
             {% elif event_submission.exhibition_end <= today_plus_2w and event_submission.exhibition_opening <= today %}
             <span class="event-status-label">CLOSING SOON</span>
             {% elif event_submission.exhibition_opening <= today %}
             <span class="event-status-label">CURRENT</span>
-            {% elif event_submission.exhibition_opening > today or event_submission.one_day_event and event_submission.opening > today %}
+            {% elif event_submission.opening > today %}
             <span class="event-status-label">UPCOMING</span>
             {% endif %}
             <p>{{ event_submission.artists }}</p>
