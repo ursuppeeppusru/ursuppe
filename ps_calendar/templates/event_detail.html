@@ -16,13 +16,13 @@
     <div class="col-4">
         {% if event.exhibition_end < today or event.one_day_event and event.opening < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif event.exhibition_opening == today or event.one_day_event and event.opening == today %}
+        {% elif event.opening == today %}
         <span class="event-detail-status-label">OPENING TODAY</span>
         {% elif event.exhibition_end <= today_plus_2w and event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif event.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
-        {% elif event.exhibition_opening > today or event.one_day_event and event.opening > today %}
+        {% elif event.opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
         {% endif %}
         <p>{{ event.artists }}</p>

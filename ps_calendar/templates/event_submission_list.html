@@ -40,13 +40,13 @@
     <div class="col-4 ">
         {% if submission.exhibition_end < today  or submission.one_day_event and submission.opening < today %}
         <span class="event-detail-status-label">PAST</span>
-        {% elif submission.exhibition_opening == today or submission.one_day_event and submission.opening == today %}
+        {% elif submission.opening == today %}
         <span class="event-detail-status-label">OPENING TODAY</span>
         {% elif submission.exhibition_end <= today_plus_2w and submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CLOSING SOON</span>
         {% elif submission.exhibition_opening <= today %}
         <span class="event-detail-status-label">CURRENT</span>
-        {% elif submission.exhibition_opening > today or submission.one_day_event and submission.opening > today %}
+        {% elif submission.opening > today %}
         <span class="event-detail-status-label">UPCOMING</span>
         {% endif %}
         <p>{{ submission.artists }}</p>
