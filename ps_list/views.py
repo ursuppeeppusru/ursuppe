@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.utils import timezone
+from django.db.models import Q
 from itertools import chain
 
 from ps_submission.models import ExhibitionSubmission
@@ -66,7 +67,7 @@ def compile_list(list_type):
 # Current and upcoming
 def compile_list_current(list_type):
     # submissions = (ExhibitionSubmission.objects.filter(published=True).values(list_type))
-    events = (CalendarSubmission.objects.filter(published=True).filter(exhibition_end__gte=today()).values(list_type))
+    events = (CalendarSubmission.objects.filter(published=True).filter(Q(exhibition_end__gte=today()) | Q(opening=today())).values(list_type))
     combined = list(events)
 
     result = []
