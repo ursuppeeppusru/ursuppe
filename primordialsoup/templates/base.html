@@ -175,7 +175,7 @@
             </div>
             <div class="col-3 text-right">
                     {% if settings.HEADER_TEXT %}
-                    <a href="/about"><h3 class="header-text">{{ settings.HEADER_TEXT }}</h3></a>
+                    <a href="/"><h3 class="header-text">{{ settings.HEADER_TEXT }}</h3></a>
                     {% endif %}
                     <br/>
                     <a href="/search">
@@ -191,16 +191,16 @@
         <nav class="nav-map">
             <a href="{% url 'event_map' %}">
                 <div class="map-circle">
-                    <span class="text-uppercase">map</span></br>
+                    <span class="text-uppercase">MAP</span></br>
                 </div>
             </a>
         </nav>
         <nav class="row nav-left main">
             <div class="col-6 link">
-                <a href="{% url 'exhibition_list' %}">archive</a>                
+                <a href="{% url 'exhibition_list' %}">ARCHIVE</a>                
             </div>
             <div class="col-6 text-right link">
-                <a href="{% url 'exhibition_submission_create' %}">create</a>                
+                <a href="{% url 'exhibition_submission_create' %}">CREATE</a>                
             </div>
         </nav>
 
@@ -208,10 +208,10 @@
 
         <nav class="row nav-left main">
             <div class="col-6 link">
-                <a href="{% url 'event_list' %}">events</a>                
+                <a href="{% url 'event_list' %}">EVENTS</a>                
             </div>
             <div class="col-6 text-right link">
-                <a href="{% url 'calendar_submission_create' %}">create</a>                
+                <a href="{% url 'calendar_submission_create' %}">CREATE</a>                
             </div>
         </nav>
         <hr/>
@@ -364,7 +364,7 @@
     </div>
 
     {% if settings.HEADER_TEXT %}
-    <a href="/about"><p class="header-text">{{ settings.HEADER_TEXT }}</p></a>
+    <a href="/"><p class="header-text">{{ settings.HEADER_TEXT }}</p></a>
     {% endif %}
     <br/>
 
@@ -446,12 +446,20 @@
         <hr/>
 
         <nav class="row nav-left footer">
-                <a href="{% url 'list_current_artists' %}">artists</a>
-                <a href="{% url 'list_current_curators' %}">curators</a>
-                <a href="{% url 'list_photographers' %}">photographers</a>
-                <a href="{% url 'list_current_locations' %}">locations</a>
-                <a href="{% url 'pinboard_list' %}">pinboard</a>
-                <a href="/about">about</a>
+                <a href="{% url 'pinboard_list' %}">PINBOARD</a>
+        </nav>
+        <hr/>
+
+        <nav class="row nav-left footer">
+                <a href="{% url 'list_current_artists' %}">ARTISTS</a>
+                <a href="{% url 'list_current_curators' %}">CURATORS</a>
+                <a href="{% url 'list_photographers' %}">PHOTOGRAPHERS</a>
+                <a href="{% url 'list_current_locations' %}">LOCATIONS</a>
+        </nav>
+        <hr/>
+
+        <nav class="row nav-left footer">
+                <a href="/about">ABOUT</a>
         </nav>
     </div>
 
