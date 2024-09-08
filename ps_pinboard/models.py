@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 from django.core.cache import cache
 
 
-class PinBoard(models.Model):
+class Pinboard(models.Model):
     created_at = models.DateField(
         verbose_name="Created", auto_now_add=True, editable=False
     )
@@ -38,6 +38,7 @@ class PinBoard(models.Model):
         help_text="Required *. E.g., phone number or/and e-mail. Be aware this will be exposed on the pinboard",
         blank=False,
     )
+
     consent_to_collect_info = models.BooleanField(
         verbose_name="Do you consent to having collected and expose your contact information?",
         help_text="Required *",
@@ -62,3 +63,31 @@ class PinBoard(models.Model):
 
     def __str__(self):
         return self.title
+
+def get_image_filename(instance, filename):
+    pinboard_post_title = instance.pinboard.title
+    slug = slugify(pinboard_post_title)
+    return f"pinboard_images/{slug}-{filename}"
+
+def validate_image_size(value):
+    # Limit image size to 3MB
+    limit = 3 * 1024 * 1024  # 3MB in bytes
+    if value.size > limit:
+        raise ValidationError("File size too large. Max size is 3 MB.")
+
+def validate_image_extension(value):
+    valid_extensions = ['png', 'jpg', 'jpeg', 'webp']
+    extension = value.name.split('.')[-1].lower()
+    if extension not in valid_extensions:
+        raise ValidationError("Invalid file extension. Allowed extensions are: png, jpg, jpeg, webp.")
+
+class PinboardImages(models.Model):
+    pinboard = models.ForeignKey(
+        Pinboard, on_delete=models.CASCADE, related_name="images"
+    )
+    image = models.ImageField(
+        upload_to=get_image_filename, 
+        verbose_name="Post Image",
+        validators=[validate_image_size, validate_image_extension],
+        help_text="Optional. Upload max filesize: 3 MB.<br/>"
+    )

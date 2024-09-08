@@ -31,6 +31,12 @@
       {% csrf_token %}
       {{ pinboard_post.as_p }}
 
+      {{ formset.management_form }}
+      {% for form in formset %}
+        {{ form.as_table }}
+        <br/>
+      {% endfor %}
+
       <button type="submit" class="btn-submit">Submit post</button>
     </form>
   </div>

@@ -26,8 +26,6 @@
     {% for pinboard_categories in pinboard_categories %}
     <a class="{% if pinboard_categories in request.path %}active{% endif %}" href="/pinboard/category/{{ pinboard_categories }}">{{ pinboard_categories }}</a>
     {% endfor %}
-
-
 </nav>
 </div>
 {% if pinboard_posts %}
@@ -41,7 +39,10 @@
                 <small>Posted {{ pinboard_post.created_at|timesince }} ago</small><br/><br/>
                 <p class="text-uppercase">{{ pinboard_post.get_category_display }}</p><br/>
                 <p>{{ pinboard_post.description|slice:":250" }} [...]</p><br/>
-                <p>{{ pinboard_post.location }}</p>
+                <p>{{ pinboard_post.location }}</p><br/>
+                {% if pinboard_post.images.all.0.image.url %} 
+                <p>&#128206;</p>
+                {% endif %}
             </a>
         </div>
 {% endfor %}
