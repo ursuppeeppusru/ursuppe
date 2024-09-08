@@ -154,6 +154,8 @@ class CalendarImages(models.Model):
     image = models.ImageField(
         upload_to=get_image_filename, 
         verbose_name="Event Image",
-        validators=[validate_image_size, validate_image_extension]
+        validators=[validate_image_size, validate_image_extension],
+        help_text="Optional. Max uploaded size is 3 MB.<br/><br/>"
+
     )
     caption = models.CharField(max_length=255, verbose_name='Image Caption', help_text='')

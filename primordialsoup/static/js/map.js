@@ -50,14 +50,15 @@ fetch(jsonUrl).then(response => response.json()).then(data => {
         data.event_submissions.forEach(event => {
             const id = event.calendar__id; 
             const image = event.image;
-            const eventOpening = formatJsonDate(event.calendar__exhibition_opening);
+            const eventStart = formatJsonDate(event.calendar__exhibition_opening);
+            const eventOpening = formatJsonDate(event.calendar__opening);
             const latitude = parseFloat(event.calendar__latitude);
             const longitude = parseFloat(event.calendar__longitude);
             const marker = L.marker([latitude, longitude], {icon: soupIcon});
 
             marker.bindPopup(`<img style="border-radius: 50%;" src="/media/${image}">`);
 
-            if (new Date(eventOpening) > new Date()) {
+            if (new Date(eventStart) > new Date() || event.calendar__one_day_event && new Date(eventOpening) > new Date()) {
                 upcomingEvents.addLayer(marker);
             } else {
                 currentEvents.addLayer(marker);

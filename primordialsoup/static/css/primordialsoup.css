@@ -276,13 +276,14 @@ header {
 
 @media only screen and (max-width: 599px) {
     header .header-text {
+        font-size: 1.2em;
         text-align: center;
     }
 }
 
 @media only screen and (min-width: 599px) {
     header .header-text {
-        font-size: 0.9em;
+        font-size: 1.2em;
     }
 }
 
@@ -1038,6 +1039,10 @@ div.pinboard-post-card {
     padding: 20px;
 }
 
+div.pinboard-post-card h3 {
+    font-size: 1.1em;
+}
+
 small.posted {
     position:absolute;
     top: 20px;
@@ -1053,7 +1058,7 @@ small.posted {
 }
 
 .rain-body{
-    height: 300px;
+    height: 200px;
     width: 100%;
     margin: 0px;
     display: flex;

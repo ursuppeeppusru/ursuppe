@@ -28,3 +28,8 @@ class CalendarImagesForm(forms.ModelForm):
     class Meta:
         model = CalendarImages
         fields = ['image','caption']  # Assuming you only want to upload an image
+        widgets = {
+            'caption': forms.TextInput(
+                attrs={'placeholder': 'Required if image is uploaded *'}
+            ),
+        }

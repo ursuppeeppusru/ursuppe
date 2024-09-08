@@ -58,7 +58,7 @@ def event_list(request):
 @cache_page(60 * 60)
 def event_list_upcoming(request):
     # Only objects which are marked as published, where end date has not exceeded and opening date has NOT started, as well as NOT started for opening date for one-day events
-    event_submissions = CalendarSubmission.objects.filter(published=True).filter(Q(exhibition_opening__gte=today()) | Q(opening__gt=today())).order_by('exhibition_opening')
+    event_submissions = CalendarSubmission.objects.filter(published=True).filter(Q(opening__gte=today())).order_by('exhibition_opening')
     return render(request, 'event_submission_list.html', {'event_submissions': event_submissions, 'today': today(), 'today_plus_2w': today_plus_2w()})
 
 # Past events
