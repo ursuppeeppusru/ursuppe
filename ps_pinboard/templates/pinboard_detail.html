@@ -37,8 +37,11 @@
             <p class="text-uppercase">{{ post.get_category_display }}</p><br/>
 	    <p>{{ post.description|linebreaksbr }}</p><br/>
             <p>{{ post.location }}</p><br/>
-            <p>{{ post.contact_information }}</p><br/>
+            <p>{{ post.contact_information }}</p>
+            {% if post.images.all.0.image.url %} 
+            <br/>
             <a target="_blank" href="{{ post.images.all.0.image.url }}"><p>&#128206; Click here to open image attachment</p></a>
+            {% endif %}
         </div>
         <div class="col-2"></div>
 </div>
