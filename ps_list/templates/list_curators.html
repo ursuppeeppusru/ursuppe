@@ -32,7 +32,7 @@
     <div class="col-12">
         {% for curator in list %}
             {% ifchanged %}<br/><h4>{{ curator.0 }}</h4><br/>{% endifchanged %}
-            <a href="/search/?query={{ curator }}">{{ curator }}</a><br/>
+            <a href="/search/?query={{ curator|urlencode }}">{{ curator }}</a><br/>
         {% endfor %}
     </div>
 </div>

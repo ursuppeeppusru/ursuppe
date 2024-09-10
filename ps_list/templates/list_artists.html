@@ -31,7 +31,7 @@
     <div class="col-12">
         {% for artist in list %}
             {% ifchanged %}<br/><h4>{{ artist.0 }}</h4><br/>{% endifchanged %}
-            <a href="/search/?query={{ artist }}">{{ artist }}</a><br/>
+            <a href="/search/?query={{ artist|urlencode }}">{{ artist }}</a><br/>
         {% endfor %}
     </div>
 </div>
