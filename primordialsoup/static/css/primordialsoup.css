@@ -281,15 +281,7 @@ header {
 
 @media only screen and (min-width: 599px) {
     header .header-text {
-        font-size: 1.2em;
-    }
-}
-
-@media only screen and (min-width: 599px) {
-    .mode-btn {
-        position: absolute;
-        right: 35px;
-        bottom: 10px;
+        font-size: 1em;
     }
 }
 
@@ -343,15 +335,13 @@ div.map-circle span {
 
 @media only screen and (max-width: 599px) {
     div.map-circle {
-        top: 38px;
         left: 43%;
     }
 }
 
 @media only screen and (max-width: 435px) {
     div.map-circle {
-        top: 38px;
-        left: 40%;
+        left: 41%;
     }
 }
 
